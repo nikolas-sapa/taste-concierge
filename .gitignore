@@ -1,0 +1,10 @@
+node_modules/
+.next/
+.env*
+!.env.example
+.superpowers/
+*.tsbuildinfo
+playwright-report/
+test-results/
+private-evidence/
+coverage/

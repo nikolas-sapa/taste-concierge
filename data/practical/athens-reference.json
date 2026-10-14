@@ -1,0 +1,24 @@
+{
+  "entityId": "Q1524",
+  "label": "Athens",
+  "coordinate": {
+    "latitude": 37.98416666666667,
+    "longitude": 23.728055555555557,
+    "altitude": null,
+    "precisionDegrees": 0.0002777777777777778,
+    "globeEntity": "Q2"
+  },
+  "statement": {
+    "property": "P625",
+    "rank": "normal",
+    "snakType": "value",
+    "deprecatedOrPreferred": false,
+    "referenceUrls": []
+  },
+  "sourceUrl": "https://www.wikidata.org/wiki/Special:EntityData/Q1524.json",
+  "sourceRevision": "2552739950",
+  "sourceModifiedAt": "2026-10-03T19:47:36Z",
+  "retrievedAt": "2026-10-10T12:50:53Z",
+  "license": "CC0",
+  "interpretation": "Single non-deprecated P625 coordinate statement retrieved. Source-reported point only; not verified city centroid, boundary, walking origin, or coverage proof."
+}

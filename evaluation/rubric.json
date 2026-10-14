@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "sourceProtocol": "outputs/EVALUATION.md",
+  "dimensions": [
+    {
+      "id": "tasteExplanationClarity",
+      "scale": {"min": 0, "max": 2},
+      "anchors": {
+        "0": "Ignores supplied tastes or contradicts them",
+        "1": "Partial or vague connection",
+        "2": "Clear, bounded connection to explicit tastes without causal or individual-probability claims"
+      }
+    },
+    {
+      "id": "itineraryCoherence",
+      "scale": {"min": 0, "max": 2},
+      "anchors": {
+        "0": "Contradictory or unusable sequence",
+        "1": "Usable with substantial interpretation",
+        "2": "Compact, readable sequence with limits clearly attached"
+      }
+    },
+    {
+      "id": "alternativesUsefulness",
+      "scale": {"min": 0, "max": 2},
+      "anchors": {
+        "0": "No useful alternative or impossible substitution",
+        "1": "Alternative present, rationale unclear",
+        "2": "Understandable alternative and trade-off, same supported constraints"
+      }
+    }
+  ],
+  "minimumImprovementRequired": 0,
+  "minimumIndependentHumanEvaluators": 1,
+  "missingOutputRating": null,
+  "failureHandling": "Failures remain in completion denominators; absent-output ratings are missing and not scored as zero.",
+  "randomizationClaim": false
+}

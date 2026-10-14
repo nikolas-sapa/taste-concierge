@@ -1,0 +1,227 @@
+{
+  "source": "Wikidata structured entity data only",
+  "license": "CC0",
+  "records": [
+    {
+      "fixtureId": "wd_Q135971462",
+      "sourceEntityId": "Q135971462",
+      "name": "Spondi",
+      "coordinates": {
+        "latitude": 37.965109,
+        "longitude": 23.743065
+      },
+      "category": "dining",
+      "cityId": "athens",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q135971462",
+      "sourceRevision": "2396892677",
+      "retrievedAt": "2026-10-08T11:03:05Z",
+      "license": "CC0",
+      "verification": "source-reported"
+    },
+    {
+      "fixtureId": "wd_Q12879005",
+      "sourceEntityId": "Q12879005",
+      "name": "Athénée Athens",
+      "coordinates": {
+        "latitude": 37.9772,
+        "longitude": 23.7359
+      },
+      "category": "dining",
+      "cityId": "athens",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q12879005",
+      "sourceRevision": "1236140778",
+      "retrievedAt": "2026-10-08T11:03:05Z",
+      "license": "CC0",
+      "verification": "source-reported"
+    },
+    {
+      "fixtureId": "wd_Q1977544",
+      "sourceEntityId": "Q1977544",
+      "name": "Neon",
+      "coordinates": {
+        "latitude": 37.98460556,
+        "longitude": 23.72864444
+      },
+      "category": "dining",
+      "cityId": "athens",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q1977544",
+      "sourceRevision": "1236143008",
+      "retrievedAt": "2026-10-08T11:03:05Z",
+      "license": "CC0",
+      "verification": "source-reported"
+    },
+    {
+      "fixtureId": "wd_Q73501916",
+      "sourceEntityId": "Q73501916",
+      "name": "Sonia Cafe",
+      "coordinates": {
+        "latitude": 37.98996,
+        "longitude": 23.74148
+      },
+      "category": "dining",
+      "cityId": "athens",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q73501916",
+      "sourceRevision": "1976496902",
+      "retrievedAt": "2026-10-08T11:03:05Z",
+      "license": "CC0",
+      "verification": "source-reported"
+    },
+    {
+      "fixtureId": "wd_Q2383284",
+      "sourceEntityId": "Q2383284",
+      "name": "Museum of the Ancient Agora",
+      "coordinates": {
+        "latitude": 37.975,
+        "longitude": 23.724166666666665
+      },
+      "category": "attractions",
+      "cityId": "athens",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q2383284",
+      "sourceRevision": "2383877398",
+      "retrievedAt": "2026-10-08T11:03:05Z",
+      "license": "CC0",
+      "verification": "source-reported"
+    },
+    {
+      "fixtureId": "wd_Q1018775",
+      "sourceEntityId": "Q1018775",
+      "name": "Byzantine and Christian Museum",
+      "coordinates": {
+        "latitude": 37.97507,
+        "longitude": 23.74452
+      },
+      "category": "attractions",
+      "cityId": "athens",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q1018775",
+      "sourceRevision": "2522324016",
+      "retrievedAt": "2026-10-08T11:03:05Z",
+      "license": "CC0",
+      "verification": "source-reported"
+    },
+    {
+      "fixtureId": "wd_Q3038298",
+      "sourceEntityId": "Q3038298",
+      "name": "National Museum of Contemporary Art",
+      "coordinates": null,
+      "category": "attractions",
+      "cityId": "athens",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q3038298",
+      "sourceRevision": "2516699537",
+      "retrievedAt": "2026-10-08T11:03:05Z",
+      "license": "CC0",
+      "verification": "source-reported"
+    },
+    {
+      "fixtureId": "wd_Q33119180",
+      "sourceEntityId": "Q33119180",
+      "name": "Basil & Elise Goulandris Foundation Museum, Athens",
+      "coordinates": {
+        "latitude": 37.969722222222224,
+        "longitude": 23.74277777777778
+      },
+      "category": "attractions",
+      "cityId": "athens",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q33119180",
+      "sourceRevision": "2483871056",
+      "retrievedAt": "2026-10-08T11:03:05Z",
+      "license": "CC0",
+      "verification": "source-reported"
+    },
+    {
+      "fixtureId": "wd_Q2732854",
+      "sourceEntityId": "Q2732854",
+      "name": "Epigraphical Museum",
+      "coordinates": {
+        "latitude": 37.98855556,
+        "longitude": 23.73230556
+      },
+      "category": "attractions",
+      "cityId": "athens",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q2732854",
+      "sourceRevision": "2499338026",
+      "retrievedAt": "2026-10-08T11:03:05Z",
+      "license": "CC0",
+      "verification": "source-reported"
+    },
+    {
+      "fixtureId": "wd_Q16331957",
+      "sourceEntityId": "Q16331957",
+      "name": "Loverdos Museum",
+      "coordinates": {
+        "latitude": 37.982611111111,
+        "longitude": 23.734111111111
+      },
+      "category": "attractions",
+      "cityId": "athens",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q16331957",
+      "sourceRevision": "2484622694",
+      "retrievedAt": "2026-10-08T11:03:05Z",
+      "license": "CC0",
+      "verification": "source-reported"
+    },
+    {
+      "fixtureId": "wd_Q822101",
+      "sourceEntityId": "Q822101",
+      "name": "National Historical Museum",
+      "coordinates": {
+        "latitude": 37.9775,
+        "longitude": 23.73277778
+      },
+      "category": "attractions",
+      "cityId": "athens",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q822101",
+      "sourceRevision": "2522324023",
+      "retrievedAt": "2026-10-08T11:03:05Z",
+      "license": "CC0",
+      "verification": "source-reported"
+    },
+    {
+      "fixtureId": "wd_Q395367",
+      "sourceEntityId": "Q395367",
+      "name": "Ancient Agora of Athens",
+      "coordinates": {
+        "latitude": 37.975,
+        "longitude": 23.7225
+      },
+      "category": "attractions",
+      "cityId": "athens",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q395367",
+      "sourceRevision": "2516429496",
+      "retrievedAt": "2026-10-08T11:03:05Z",
+      "license": "CC0",
+      "verification": "source-reported"
+    },
+    {
+      "fixtureId": "wd_Q1125096",
+      "sourceEntityId": "Q1125096",
+      "name": "Pnyx",
+      "coordinates": {
+        "latitude": 37.971666666667,
+        "longitude": 23.719444444444
+      },
+      "category": "attractions",
+      "cityId": "athens",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q1125096",
+      "sourceRevision": "2550328290",
+      "retrievedAt": "2026-10-08T11:03:05Z",
+      "license": "CC0",
+      "verification": "source-reported"
+    },
+    {
+      "fixtureId": "wd_Q38279507",
+      "sourceEntityId": "Q38279507",
+      "name": "Acropolis Western Hills",
+      "coordinates": {
+        "latitude": 37.971124,
+        "longitude": 23.720727
+      },
+      "category": "attractions",
+      "cityId": "athens",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q38279507",
+      "sourceRevision": "1568378333",
+      "retrievedAt": "2026-10-08T11:03:05Z",
+      "license": "CC0",
+      "verification": "source-reported"
+    }
+  ]
+}

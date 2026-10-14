@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 1,
+  "mode": "offline-preflight",
+  "acceptance": {
+    "passedTargets": 0,
+    "totalTargets": 7,
+    "executedTargets": 0,
+    "targets": [
+      {
+        "id": "T1",
+        "requiredCases": 10,
+        "observedCases": 0,
+        "passedCases": 0,
+        "failedCases": 0,
+        "blockedCases": 10,
+        "status": "blocked",
+        "reason": "Missing verified live Qloo profile receipts and private response linkage."
+      },
+      {
+        "id": "T2",
+        "requiredCases": 20,
+        "observedCases": 0,
+        "passedCases": 0,
+        "failedCases": 0,
+        "blockedCases": 20,
+        "status": "blocked",
+        "reason": "Missing frozen real-response candidate bindings and expected/actual private decisions."
+      },
+      {
+        "id": "T3",
+        "requiredCases": 3,
+        "observedCases": 0,
+        "passedCases": 0,
+        "failedCases": 0,
+        "blockedCases": 3,
+        "status": "blocked",
+        "reason": "Missing real application journey receipts for both categories."
+      },
+      {
+        "id": "T4",
+        "requiredCases": 10,
+        "observedCases": 0,
+        "passedCases": 0,
+        "failedCases": 0,
+        "blockedCases": 10,
+        "status": "blocked",
+        "reason": "Missing paired treatment/baseline outputs, shared-pool proof, and independent human ratings."
+      },
+      {
+        "id": "T5",
+        "requiredCases": 5,
+        "observedCases": 0,
+        "passedCases": 0,
+        "failedCases": 0,
+        "blockedCases": 5,
+        "status": "blocked",
+        "reason": "Missing before/after application state and dependency receipts."
+      },
+      {
+        "id": "T6",
+        "requiredCases": 5,
+        "observedCases": 0,
+        "passedCases": 0,
+        "failedCases": 0,
+        "blockedCases": 5,
+        "status": "blocked",
+        "reason": "Missing frozen published release and anonymous browser-session receipts."
+      },
+      {
+        "id": "T7",
+        "requiredCases": 5,
+        "observedCases": 0,
+        "passedCases": 0,
+        "failedCases": 0,
+        "blockedCases": 5,
+        "status": "blocked",
+        "reason": "Missing labeled fault-injection receipts and safe-output assertions."
+      }
+    ]
+  },
+  "statement": "Preflight only. All seven acceptance targets are blocked for missing evidence; none were executed or assessed as failed. Unit-test results are separate and do not count as acceptance."
+}

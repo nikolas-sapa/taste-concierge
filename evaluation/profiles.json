@@ -1,0 +1,239 @@
+{
+  "schemaVersion": 1,
+  "sourceProtocol": "outputs/EVALUATION.md",
+  "profileCount": 10,
+  "profiles": [
+    {
+      "id": "P01",
+      "brief": {
+        "cityId": "athens",
+        "seeds": [
+          {
+            "kind": "movie",
+            "text": "The Grand Budapest Hotel"
+          }
+        ],
+        "diningPreference": "Quiet dining",
+        "attractionPreference": "architecture",
+        "constraints": {
+          "radiusMeters": 3000,
+          "excludedVenueRefs": []
+        }
+      },
+      "categories": [
+        "dining",
+        "attractions"
+      ]
+    },
+    {
+      "id": "P02",
+      "brief": {
+        "cityId": "athens",
+        "seeds": [
+          {
+            "kind": "movie",
+            "text": "Spirited Away"
+          }
+        ],
+        "diningPreference": "Casual dining",
+        "attractionPreference": "nature",
+        "constraints": {
+          "radiusMeters": 3000,
+          "excludedVenueRefs": []
+        }
+      },
+      "categories": [
+        "dining",
+        "attractions"
+      ]
+    },
+    {
+      "id": "P03",
+      "brief": {
+        "cityId": "athens",
+        "seeds": [
+          {
+            "kind": "movie",
+            "text": "In the Mood for Love"
+          }
+        ],
+        "diningPreference": "Quiet dining",
+        "attractionPreference": "visual art",
+        "constraints": {
+          "radiusMeters": 3000,
+          "excludedVenueRefs": []
+        }
+      },
+      "categories": [
+        "dining",
+        "attractions"
+      ]
+    },
+    {
+      "id": "P04",
+      "brief": {
+        "cityId": "athens",
+        "seeds": [
+          {
+            "kind": "movie",
+            "text": "Amelie"
+          }
+        ],
+        "diningPreference": "Local-food preference",
+        "attractionPreference": "neighborhood exploration",
+        "constraints": {
+          "radiusMeters": 3000,
+          "excludedVenueRefs": []
+        }
+      },
+      "categories": [
+        "dining",
+        "attractions"
+      ]
+    },
+    {
+      "id": "P05",
+      "brief": {
+        "cityId": "athens",
+        "seeds": [
+          {
+            "kind": "artist",
+            "text": "Radiohead"
+          }
+        ],
+        "diningPreference": "Casual dining",
+        "attractionPreference": "contemporary art",
+        "constraints": {
+          "radiusMeters": 3000,
+          "excludedVenueRefs": []
+        }
+      },
+      "categories": [
+        "dining",
+        "attractions"
+      ]
+    },
+    {
+      "id": "P06",
+      "brief": {
+        "cityId": "athens",
+        "seeds": [
+          {
+            "kind": "artist",
+            "text": "Nina Simone"
+          }
+        ],
+        "diningPreference": "Quiet dining",
+        "attractionPreference": "history",
+        "constraints": {
+          "radiusMeters": 3000,
+          "excludedVenueRefs": []
+        }
+      },
+      "categories": [
+        "dining",
+        "attractions"
+      ]
+    },
+    {
+      "id": "P07",
+      "brief": {
+        "cityId": "athens",
+        "seeds": [
+          {
+            "kind": "artist",
+            "text": "Khruangbin"
+          }
+        ],
+        "diningPreference": "Casual dining",
+        "attractionPreference": "outdoor preference",
+        "constraints": {
+          "radiusMeters": 3000,
+          "excludedVenueRefs": []
+        }
+      },
+      "categories": [
+        "dining",
+        "attractions"
+      ]
+    },
+    {
+      "id": "P08",
+      "brief": {
+        "cityId": "athens",
+        "seeds": [
+          {
+            "kind": "movie",
+            "text": "Moonrise Kingdom"
+          },
+          {
+            "kind": "artist",
+            "text": "Khruangbin"
+          }
+        ],
+        "diningPreference": "Quiet dining",
+        "attractionPreference": "architecture",
+        "constraints": {
+          "radiusMeters": 3000,
+          "excludedVenueRefs": []
+        }
+      },
+      "categories": [
+        "dining",
+        "attractions"
+      ]
+    },
+    {
+      "id": "P09",
+      "brief": {
+        "cityId": "athens",
+        "seeds": [
+          {
+            "kind": "movie",
+            "text": "Spirited Away"
+          },
+          {
+            "kind": "artist",
+            "text": "Nina Simone"
+          }
+        ],
+        "diningPreference": "Vegetarian menu preference",
+        "attractionPreference": "visual art",
+        "constraints": {
+          "radiusMeters": 3000,
+          "excludedVenueRefs": []
+        }
+      },
+      "categories": [
+        "dining",
+        "attractions"
+      ]
+    },
+    {
+      "id": "P10",
+      "brief": {
+        "cityId": "athens",
+        "seeds": [
+          {
+            "kind": "place",
+            "text": "Cafe de Flore"
+          },
+          {
+            "kind": "artist",
+            "text": "Radiohead"
+          }
+        ],
+        "diningPreference": "Cafe preference",
+        "attractionPreference": "history",
+        "constraints": {
+          "radiusMeters": 3000,
+          "excludedVenueRefs": []
+        }
+      },
+      "categories": [
+        "dining",
+        "attractions"
+      ]
+    }
+  ]
+}

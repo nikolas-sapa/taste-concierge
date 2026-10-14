@@ -1,0 +1,777 @@
+{
+  "schemaVersion": 1,
+  "sourceProtocol": "outputs/EVALUATION.md",
+  "constraints": [
+    {
+      "id": "C01",
+      "predicate": "city equals approved city",
+      "expectedFromProtocol": "0 recommendations from another city",
+      "requiredAssertion": "all included items satisfy source-backed approved-city classification; at least one valid item",
+      "input": {
+        "cityId": "athens",
+        "category": null,
+        "radiusMeters": null,
+        "origin": null,
+        "excludedFixtureRefs": null,
+        "sourceFieldState": null,
+        "budgetEur": null,
+        "openingLocalTime": null
+      },
+      "requiresRealQlooCandidateBinding": true,
+      "positiveRequiresAtLeastOneResult": true,
+      "fixtureBinding": null,
+      "testClock": "not-required-by-case",
+      "status": "not-executed",
+      "bindingStatus": "needs-live-binding"
+    },
+    {
+      "id": "C02",
+      "predicate": "category equals dining",
+      "expectedFromProtocol": "0 wrong-category recommendations",
+      "requiredAssertion": "all included items dining; at least one valid item",
+      "input": {
+        "cityId": "athens",
+        "category": "dining",
+        "radiusMeters": null,
+        "origin": null,
+        "excludedFixtureRefs": null,
+        "sourceFieldState": null,
+        "budgetEur": null,
+        "openingLocalTime": null
+      },
+      "requiresRealQlooCandidateBinding": true,
+      "positiveRequiresAtLeastOneResult": true,
+      "fixtureBinding": null,
+      "testClock": "not-required-by-case",
+      "status": "not-executed",
+      "bindingStatus": "needs-live-binding"
+    },
+    {
+      "id": "C03",
+      "predicate": "category equals attractions",
+      "expectedFromProtocol": "0 wrong-category recommendations",
+      "requiredAssertion": "all included items attractions; at least one valid item",
+      "input": {
+        "cityId": "athens",
+        "category": "attractions",
+        "radiusMeters": null,
+        "origin": null,
+        "excludedFixtureRefs": null,
+        "sourceFieldState": null,
+        "budgetEur": null,
+        "openingLocalTime": null
+      },
+      "requiresRealQlooCandidateBinding": true,
+      "positiveRequiresAtLeastOneResult": true,
+      "fixtureBinding": null,
+      "testClock": "not-required-by-case",
+      "status": "not-executed",
+      "bindingStatus": "needs-live-binding"
+    },
+    {
+      "id": "C04",
+      "predicate": "origin-to-venue straight-line distance <= 1,000 m",
+      "expectedFromProtocol": "Every included item within bound or no valid result",
+      "requiredAssertion": "all included items within 1000m; at least one valid item",
+      "input": {
+        "cityId": "athens",
+        "category": null,
+        "radiusMeters": 1000,
+        "origin": null,
+        "excludedFixtureRefs": null,
+        "sourceFieldState": null,
+        "budgetEur": null,
+        "openingLocalTime": null
+      },
+      "requiresRealQlooCandidateBinding": true,
+      "positiveRequiresAtLeastOneResult": true,
+      "fixtureBinding": null,
+      "testClock": "not-required-by-case",
+      "status": "not-executed",
+      "bindingStatus": "needs-live-binding"
+    },
+    {
+      "id": "C05",
+      "predicate": "distance <= 3,000 m",
+      "expectedFromProtocol": "Every included item within bound or no valid result",
+      "requiredAssertion": "all included items within 3000m; at least one valid item",
+      "input": {
+        "cityId": "athens",
+        "category": null,
+        "radiusMeters": 3000,
+        "origin": null,
+        "excludedFixtureRefs": null,
+        "sourceFieldState": null,
+        "budgetEur": null,
+        "openingLocalTime": null
+      },
+      "requiresRealQlooCandidateBinding": true,
+      "positiveRequiresAtLeastOneResult": true,
+      "fixtureBinding": null,
+      "testClock": "not-required-by-case",
+      "status": "not-executed",
+      "bindingStatus": "needs-live-binding"
+    },
+    {
+      "id": "C06",
+      "predicate": "distance <= 5,000 m",
+      "expectedFromProtocol": "Every included item within bound or no valid result",
+      "requiredAssertion": "all included items within 5000m; at least one valid item",
+      "input": {
+        "cityId": "athens",
+        "category": null,
+        "radiusMeters": 5000,
+        "origin": null,
+        "excludedFixtureRefs": null,
+        "sourceFieldState": null,
+        "budgetEur": null,
+        "openingLocalTime": null
+      },
+      "requiresRealQlooCandidateBinding": true,
+      "positiveRequiresAtLeastOneResult": true,
+      "fixtureBinding": null,
+      "testClock": "not-required-by-case",
+      "status": "not-executed",
+      "bindingStatus": "needs-live-binding"
+    },
+    {
+      "id": "C07",
+      "predicate": "distance <= 0 m",
+      "expectedFromProtocol": "Only exact-origin candidate eligible; otherwise no valid result",
+      "requiredAssertion": "frozen set with no exact-origin candidate returns no-valid-result",
+      "input": {
+        "cityId": "athens",
+        "category": null,
+        "radiusMeters": 0,
+        "origin": null,
+        "excludedFixtureRefs": null,
+        "sourceFieldState": null,
+        "budgetEur": null,
+        "openingLocalTime": null
+      },
+      "requiresRealQlooCandidateBinding": true,
+      "positiveRequiresAtLeastOneResult": false,
+      "fixtureBinding": null,
+      "testClock": "not-required-by-case",
+      "status": "not-executed",
+      "bindingStatus": "needs-live-binding"
+    },
+    {
+      "id": "C08",
+      "predicate": "distance <= 1,000 m, coordinate unknown",
+      "expectedFromProtocol": "0 included candidates with unknown coordinates",
+      "requiredAssertion": "unknown-coordinate candidate excluded; no compliant-result claim from it",
+      "input": {
+        "cityId": "athens",
+        "category": null,
+        "radiusMeters": 1000,
+        "origin": null,
+        "excludedFixtureRefs": null,
+        "sourceFieldState": "coordinate-unknown",
+        "budgetEur": null,
+        "openingLocalTime": null
+      },
+      "requiresRealQlooCandidateBinding": true,
+      "positiveRequiresAtLeastOneResult": false,
+      "fixtureBinding": null,
+      "testClock": "not-required-by-case",
+      "status": "not-executed",
+      "bindingStatus": "needs-live-binding"
+    },
+    {
+      "id": "C09",
+      "predicate": "distance <= 3,000 m, origin unknown",
+      "expectedFromProtocol": "Explicit insufficient-data state, 0 compliant-result claims",
+      "requiredAssertion": "reject constrained result and report insufficient data",
+      "input": {
+        "cityId": "athens",
+        "category": null,
+        "radiusMeters": 3000,
+        "origin": "unknown",
+        "excludedFixtureRefs": null,
+        "sourceFieldState": null,
+        "budgetEur": null,
+        "openingLocalTime": null
+      },
+      "requiresRealQlooCandidateBinding": false,
+      "positiveRequiresAtLeastOneResult": false,
+      "fixtureBinding": null,
+      "testClock": "not-required-by-case",
+      "status": "not-executed",
+      "bindingStatus": "source-or-runtime-binding-needed"
+    },
+    {
+      "id": "C10",
+      "predicate": "radius = -1 m",
+      "expectedFromProtocol": "Input validation failure, 0 upstream calls",
+      "requiredAssertion": "reject before upstream call",
+      "input": {
+        "cityId": "athens",
+        "category": null,
+        "radiusMeters": -1,
+        "origin": null,
+        "excludedFixtureRefs": null,
+        "sourceFieldState": null,
+        "budgetEur": null,
+        "openingLocalTime": null
+      },
+      "requiresRealQlooCandidateBinding": false,
+      "positiveRequiresAtLeastOneResult": false,
+      "fixtureBinding": null,
+      "testClock": "not-required-by-case",
+      "status": "not-executed",
+      "bindingStatus": "source-or-runtime-binding-needed"
+    },
+    {
+      "id": "C11",
+      "predicate": "exclude one real fixture-linked candidate",
+      "expectedFromProtocol": "0 excluded candidate IDs in output",
+      "requiredAssertion": "excluded candidate absent; at least one valid remaining item",
+      "input": {
+        "cityId": "athens",
+        "category": null,
+        "radiusMeters": null,
+        "origin": null,
+        "excludedFixtureRefs": {
+          "requiredCount": {
+            "C11": 1,
+            "C12": 2,
+            "C13": "all-retrieved"
+          },
+          "values": null
+        },
+        "sourceFieldState": null,
+        "budgetEur": null,
+        "openingLocalTime": null
+      },
+      "requiresRealQlooCandidateBinding": true,
+      "positiveRequiresAtLeastOneResult": true,
+      "fixtureBinding": null,
+      "testClock": "not-required-by-case",
+      "status": "not-executed",
+      "bindingStatus": "needs-live-binding"
+    },
+    {
+      "id": "C12",
+      "predicate": "exclude two real fixture-linked candidates",
+      "expectedFromProtocol": "0 excluded candidate IDs in output",
+      "requiredAssertion": "both excluded candidates absent; at least one valid remaining item",
+      "input": {
+        "cityId": "athens",
+        "category": null,
+        "radiusMeters": null,
+        "origin": null,
+        "excludedFixtureRefs": {
+          "requiredCount": {
+            "C11": 1,
+            "C12": 2,
+            "C13": "all-retrieved"
+          },
+          "values": null
+        },
+        "sourceFieldState": null,
+        "budgetEur": null,
+        "openingLocalTime": null
+      },
+      "requiresRealQlooCandidateBinding": true,
+      "positiveRequiresAtLeastOneResult": true,
+      "fixtureBinding": null,
+      "testClock": "not-required-by-case",
+      "status": "not-executed",
+      "bindingStatus": "needs-live-binding"
+    },
+    {
+      "id": "C13",
+      "predicate": "exclude all retrieved candidates",
+      "expectedFromProtocol": "Explicit no-valid-result, 0 invented replacements",
+      "requiredAssertion": "return no-valid-result without replacement candidates",
+      "input": {
+        "cityId": "athens",
+        "category": null,
+        "radiusMeters": null,
+        "origin": null,
+        "excludedFixtureRefs": {
+          "requiredCount": {
+            "C11": 1,
+            "C12": 2,
+            "C13": "all-retrieved"
+          },
+          "values": null
+        },
+        "sourceFieldState": null,
+        "budgetEur": null,
+        "openingLocalTime": null
+      },
+      "requiresRealQlooCandidateBinding": true,
+      "positiveRequiresAtLeastOneResult": false,
+      "fixtureBinding": null,
+      "testClock": "not-required-by-case",
+      "status": "not-executed",
+      "bindingStatus": "needs-live-binding"
+    },
+    {
+      "id": "C14",
+      "predicate": "radius 1,000 m plus dining category",
+      "expectedFromProtocol": "All included items satisfy both predicates",
+      "requiredAssertion": "all items dining and within 1000m; at least one valid item",
+      "input": {
+        "cityId": "athens",
+        "category": null,
+        "radiusMeters": 1000,
+        "origin": null,
+        "excludedFixtureRefs": null,
+        "sourceFieldState": null,
+        "budgetEur": null,
+        "openingLocalTime": null
+      },
+      "requiresRealQlooCandidateBinding": true,
+      "positiveRequiresAtLeastOneResult": true,
+      "fixtureBinding": null,
+      "testClock": "not-required-by-case",
+      "status": "not-executed",
+      "bindingStatus": "needs-live-binding"
+    },
+    {
+      "id": "C15",
+      "predicate": "radius 3,000 m plus attractions category",
+      "expectedFromProtocol": "All included items satisfy both predicates",
+      "requiredAssertion": "all items attractions and within 3000m; at least one valid item",
+      "input": {
+        "cityId": "athens",
+        "category": null,
+        "radiusMeters": 3000,
+        "origin": null,
+        "excludedFixtureRefs": null,
+        "sourceFieldState": null,
+        "budgetEur": null,
+        "openingLocalTime": null
+      },
+      "requiresRealQlooCandidateBinding": true,
+      "positiveRequiresAtLeastOneResult": true,
+      "fixtureBinding": null,
+      "testClock": "not-required-by-case",
+      "status": "not-executed",
+      "bindingStatus": "needs-live-binding"
+    },
+    {
+      "id": "C16",
+      "predicate": "source field expires 1 second before test clock",
+      "expectedFromProtocol": "Stale constrained field treated as unknown",
+      "requiredAssertion": "withhold stale field; value/test clock need live source binding",
+      "input": {
+        "cityId": "athens",
+        "category": null,
+        "radiusMeters": null,
+        "origin": null,
+        "excludedFixtureRefs": null,
+        "sourceFieldState": {
+          "state": "expires-one-second-before-test-clock",
+          "field": null,
+          "timestamp": null,
+          "testClock": null
+        },
+        "budgetEur": null,
+        "openingLocalTime": null
+      },
+      "requiresRealQlooCandidateBinding": false,
+      "positiveRequiresAtLeastOneResult": false,
+      "fixtureBinding": null,
+      "testClock": null,
+      "status": "not-executed",
+      "bindingStatus": "source-or-runtime-binding-needed"
+    },
+    {
+      "id": "C17",
+      "predicate": "source verification timestamp missing",
+      "expectedFromProtocol": "0 verified-fact labels for that field",
+      "requiredAssertion": "withhold verified-fact label",
+      "input": {
+        "cityId": "athens",
+        "category": null,
+        "radiusMeters": null,
+        "origin": null,
+        "excludedFixtureRefs": null,
+        "sourceFieldState": {
+          "state": "verification-timestamp-missing",
+          "field": null
+        },
+        "budgetEur": null,
+        "openingLocalTime": null
+      },
+      "requiresRealQlooCandidateBinding": false,
+      "positiveRequiresAtLeastOneResult": false,
+      "fixtureBinding": null,
+      "testClock": null,
+      "status": "not-executed",
+      "bindingStatus": "source-or-runtime-binding-needed"
+    },
+    {
+      "id": "C18",
+      "predicate": "conflicting independently sourced category facts",
+      "expectedFromProtocol": "Candidate withheld pending clarification, 0 guessed category assignments",
+      "requiredAssertion": "withhold candidate until category conflict resolved",
+      "input": {
+        "cityId": "athens",
+        "category": null,
+        "radiusMeters": null,
+        "origin": null,
+        "excludedFixtureRefs": null,
+        "sourceFieldState": {
+          "state": "conflicting-independent-category-facts",
+          "facts": null
+        },
+        "budgetEur": null,
+        "openingLocalTime": null
+      },
+      "requiresRealQlooCandidateBinding": false,
+      "positiveRequiresAtLeastOneResult": false,
+      "fixtureBinding": null,
+      "testClock": "not-required-by-case",
+      "status": "not-executed",
+      "bindingStatus": "source-or-runtime-binding-needed"
+    },
+    {
+      "id": "C19",
+      "predicate": "hard budget <= EUR 20, no permitted price evidence",
+      "expectedFromProtocol": "Explicit unsupported/insufficient-data result, 0 affordability assurances",
+      "requiredAssertion": "reject/mark unsupported, no affordability claim",
+      "input": {
+        "cityId": "athens",
+        "category": null,
+        "radiusMeters": null,
+        "origin": null,
+        "excludedFixtureRefs": null,
+        "sourceFieldState": null,
+        "budgetEur": 20,
+        "openingLocalTime": null
+      },
+      "requiresRealQlooCandidateBinding": false,
+      "positiveRequiresAtLeastOneResult": false,
+      "fixtureBinding": null,
+      "testClock": "not-required-by-case",
+      "status": "not-executed",
+      "bindingStatus": "source-or-runtime-binding-needed"
+    },
+    {
+      "id": "C20",
+      "predicate": "requested opening time 18:00 local, no verified dated hours",
+      "expectedFromProtocol": "Explicit unsupported/insufficient-data result, 0 opening/availability assurances",
+      "requiredAssertion": "reject/mark unsupported, no opening/availability claim",
+      "input": {
+        "cityId": "athens",
+        "category": null,
+        "radiusMeters": null,
+        "origin": null,
+        "excludedFixtureRefs": null,
+        "sourceFieldState": null,
+        "budgetEur": null,
+        "openingLocalTime": "18:00"
+      },
+      "requiresRealQlooCandidateBinding": false,
+      "positiveRequiresAtLeastOneResult": false,
+      "fixtureBinding": null,
+      "testClock": "not-required-by-case",
+      "status": "not-executed",
+      "bindingStatus": "source-or-runtime-binding-needed"
+    }
+  ],
+  "realJourneys": [
+    {
+      "id": "R01",
+      "journey": "film input → dining and attractions → constrained compact itinerary",
+      "requires": [
+        "real seed resolution",
+        "nonempty Qloo results in both categories",
+        "assembled compact itinerary",
+        "private source linkage"
+      ],
+      "categoryOutputs": [
+        "dining",
+        "attractions"
+      ],
+      "inputDomain": "film",
+      "status": "not-executed",
+      "liveBindingStatus": "needs-live-binding"
+    },
+    {
+      "id": "R02",
+      "journey": "artist input → dining and attractions → constrained compact itinerary",
+      "requires": [
+        "real seed resolution",
+        "nonempty Qloo results in both categories",
+        "assembled compact itinerary",
+        "private source linkage"
+      ],
+      "categoryOutputs": [
+        "dining",
+        "attractions"
+      ],
+      "inputDomain": "artist",
+      "status": "not-executed",
+      "liveBindingStatus": "needs-live-binding"
+    },
+    {
+      "id": "R03",
+      "journey": "combined film/artist input → both categories → edit one preference and regenerate",
+      "requires": [
+        "real seed resolution",
+        "nonempty Qloo results in both categories",
+        "assembled compact itinerary",
+        "private source linkage"
+      ],
+      "categoryOutputs": [
+        "dining",
+        "attractions"
+      ],
+      "inputDomain": "combined",
+      "status": "not-executed",
+      "liveBindingStatus": "needs-live-binding"
+    }
+  ],
+  "preferenceEdits": [
+    {
+      "id": "E01",
+      "edit": "P01 film → Moonrise Kingdom",
+      "requiredAssertions": [
+        "input resolves anew",
+        "both potentially affected categories reevaluated",
+        "constraints unchanged"
+      ],
+      "inputDelta": null,
+      "beforeStateBinding": null,
+      "status": "not-executed",
+      "bindingStatus": "needs-application-state"
+    },
+    {
+      "id": "E02",
+      "edit": "P05 artist → Nina Simone",
+      "requiredAssertions": [
+        "input resolves anew",
+        "both potentially affected categories reevaluated",
+        "constraints unchanged"
+      ],
+      "inputDelta": null,
+      "beforeStateBinding": null,
+      "status": "not-executed",
+      "bindingStatus": "needs-application-state"
+    },
+    {
+      "id": "E03",
+      "edit": "P01 quiet → casual dining preference",
+      "requiredAssertions": [
+        "dining dependency refreshed",
+        "unrelated attraction dependency preserved if no shared signal changed"
+      ],
+      "inputDelta": null,
+      "beforeStateBinding": null,
+      "status": "not-executed",
+      "bindingStatus": "needs-application-state"
+    },
+    {
+      "id": "E04",
+      "edit": "P01 attraction preference architecture → history",
+      "requiredAssertions": [
+        "attraction dependency refreshed",
+        "dining dependency preserved if no shared signal changed"
+      ],
+      "inputDelta": null,
+      "beforeStateBinding": null,
+      "status": "not-executed",
+      "bindingStatus": "needs-application-state"
+    },
+    {
+      "id": "E05",
+      "edit": "P08 remove Khruangbin seed",
+      "requiredAssertions": [
+        "both categories reevaluated",
+        "constraints unchanged"
+      ],
+      "inputDelta": null,
+      "beforeStateBinding": null,
+      "status": "not-executed",
+      "bindingStatus": "needs-application-state"
+    }
+  ],
+  "outages": [
+    {
+      "id": "O01",
+      "fault": "auth failure",
+      "requiredAssertions": [
+        "service-unavailable state",
+        "0 fabricated fresh Qloo results",
+        "0 secret exposure",
+        "bounded attempts"
+      ],
+      "status": "not-executed",
+      "faultInjectionBinding": null,
+      "requiresLabeledFaultInjection": true
+    },
+    {
+      "id": "O02",
+      "fault": "timeout",
+      "requiredAssertions": [
+        "service-unavailable state",
+        "0 fabricated fresh Qloo results",
+        "0 secret exposure",
+        "bounded attempts"
+      ],
+      "status": "not-executed",
+      "faultInjectionBinding": null,
+      "requiresLabeledFaultInjection": true
+    },
+    {
+      "id": "O03",
+      "fault": "HTTP 429",
+      "requiredAssertions": [
+        "service-unavailable state",
+        "0 fabricated fresh Qloo results",
+        "0 secret exposure",
+        "bounded attempts"
+      ],
+      "status": "not-executed",
+      "faultInjectionBinding": null,
+      "requiresLabeledFaultInjection": true
+    },
+    {
+      "id": "O04",
+      "fault": "HTTP 5xx",
+      "requiredAssertions": [
+        "service-unavailable state",
+        "0 fabricated fresh Qloo results",
+        "0 secret exposure",
+        "bounded attempts"
+      ],
+      "status": "not-executed",
+      "faultInjectionBinding": null,
+      "requiresLabeledFaultInjection": true
+    },
+    {
+      "id": "O05",
+      "fault": "network/DNS failure",
+      "requiredAssertions": [
+        "service-unavailable state",
+        "0 fabricated fresh Qloo results",
+        "0 secret exposure",
+        "bounded attempts"
+      ],
+      "status": "not-executed",
+      "faultInjectionBinding": null,
+      "requiresLabeledFaultInjection": true
+    }
+  ],
+  "anonymousJourneys": [
+    {
+      "id": "J01",
+      "profileId": "P01",
+      "context": "fresh anonymous browser context",
+      "requiredFlow": [
+        "input",
+        "live disambiguation",
+        "genuine itinerary in both categories",
+        "truthful baseline comparison",
+        "one preference edit"
+      ],
+      "requiresFrozenPublishedRelease": true,
+      "status": "not-executed",
+      "releaseBinding": null
+    },
+    {
+      "id": "J02",
+      "profileId": "P05",
+      "context": "fresh anonymous browser context",
+      "requiredFlow": [
+        "input",
+        "live disambiguation",
+        "genuine itinerary in both categories",
+        "truthful baseline comparison",
+        "one preference edit"
+      ],
+      "requiresFrozenPublishedRelease": true,
+      "status": "not-executed",
+      "releaseBinding": null
+    },
+    {
+      "id": "J03",
+      "profileId": "P08",
+      "context": "fresh anonymous browser context",
+      "requiredFlow": [
+        "input",
+        "live disambiguation",
+        "genuine itinerary in both categories",
+        "truthful baseline comparison",
+        "one preference edit"
+      ],
+      "requiresFrozenPublishedRelease": true,
+      "status": "not-executed",
+      "releaseBinding": null
+    },
+    {
+      "id": "J04",
+      "profileId": "P09",
+      "context": "fresh anonymous browser context",
+      "requiredFlow": [
+        "input",
+        "live disambiguation",
+        "genuine itinerary in both categories",
+        "truthful baseline comparison",
+        "one preference edit"
+      ],
+      "requiresFrozenPublishedRelease": true,
+      "status": "not-executed",
+      "releaseBinding": null
+    },
+    {
+      "id": "J05",
+      "profileId": "P10",
+      "context": "fresh anonymous browser context",
+      "requiredFlow": [
+        "input",
+        "live disambiguation",
+        "genuine itinerary in both categories",
+        "truthful baseline comparison",
+        "one preference edit"
+      ],
+      "requiresFrozenPublishedRelease": true,
+      "status": "not-executed",
+      "releaseBinding": null
+    }
+  ],
+  "ablation": {
+    "profiles": [
+      "P01",
+      "P02",
+      "P03",
+      "P04",
+      "P05",
+      "P06",
+      "P07",
+      "P08",
+      "P09",
+      "P10"
+    ],
+    "pairedConditions": [
+      "Qloo treatment",
+      "generic LLM baseline"
+    ],
+    "predeclaredGenerationOrder": "P01–P10; treatment first odd profiles, baseline first even profiles",
+    "humanPresentationTreatmentLeft": [
+      "P02",
+      "P03",
+      "P06",
+      "P08",
+      "P09"
+    ],
+    "humanPresentationTreatmentRight": [
+      "P01",
+      "P04",
+      "P05",
+      "P07",
+      "P10"
+    ],
+    "randomizationClaim": false,
+    "minimumImprovementRequired": 0,
+    "status": "not-executed",
+    "modelSettingsFixtureAndOutputs": null,
+    "independentHumanRatings": null
+  }
+}
