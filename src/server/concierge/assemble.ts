@@ -8,15 +8,17 @@ import { QlooError } from '../qloo/errors';
 import type { FixtureBinding } from '../qloo/normalize';
 import { recommendWithClient } from '../qloo/recommend';
 import { resolveWithClient } from '../qloo/resolve';
+import type { ModelService, RankedFixture } from '../model/responses';
+import { renderModelInterpretation } from '../model/interpretation';
 
 export type ConciergeDependencies = { client: QlooClient; fixtures: readonly PracticalFixture[];
-  bindings: readonly FixtureBinding[] };
+  bindings: readonly FixtureBinding[]; model?: ModelService };
 const configurationKey = Symbol.for('taste-concierge.dependencies');
 const shared = globalThis as unknown as Record<symbol, ConciergeDependencies | undefined>;
 
 export function configureConcierge(deps: ConciergeDependencies): void {
   if (shared[configurationKey]) throw new Error('Concierge already configured');
-  shared[configurationKey] = { client: deps.client, fixtures: structuredClone([...deps.fixtures]), bindings: structuredClone([...deps.bindings]) };
+  shared[configurationKey] = { client: deps.client, fixtures: structuredClone([...deps.fixtures]), bindings: structuredClone([...deps.bindings]), model: deps.model };
 }
 
 function dependencies(): ConciergeDependencies {
@@ -60,7 +62,8 @@ async function execute(brief: Brief, session: SessionState, categories: readonly
   if (fields.length) return { state: 'unsupported-constraint', revision: session.revision + 1, fields };
   if (!validateExclusions(brief, session)) return { state: 'invalid-input', revision: session.revision + 1, fields: ['excludedVenueRefs'] };
   const deps = dependencies();
-  return deps.client.runOperation(async () => {
+  let accepted: RecommendationBatch | null = null;
+  const result = await deps.client.runOperation<ConciergeResult>(async () => {
     const resolved = await resolveSeeds(brief, session);
     if ('state' in resolved) return resolved;
     const batch = await recommendWithClient(resolved, brief, deps.client, deps.bindings, categories);
@@ -88,6 +91,7 @@ async function execute(brief: Brief, session: SessionState, categories: readonly
       return { state: 'no-valid-result', revision: session.revision + 1,
         reasons: excluded.size ? ['constraints-unsatisfied'] : ['no-practical-match'] };
     }
+    accepted = { byCategory: decision.byCategory };
     const items = {} as Extract<ConciergeResult, { state: 'ready' }>['items'];
     for (const category of ['dining', 'attractions'] as Category[]) {
       if (!categories.includes(category) && previousReady) { items[category] = structuredClone(previousReady.items[category]); continue; }
@@ -106,6 +110,44 @@ async function execute(brief: Brief, session: SessionState, categories: readonly
     return { state: 'ready', revision: session.revision + 1, items,
       baseline: { status: 'unavailable', reason: 'model-unavailable' } };
   }, signal);
+  if (result.state !== 'ready' || !deps.model || !accepted) return result;
+  // All signals below come from server-held, independently bound real candidates.
+  const batch = accepted as RecommendationBatch;
+  const ranked: RankedFixture[] = [];
+  for (const category of ['dining', 'attractions'] as Category[]) {
+    for (const candidate of batch.byCategory[category]) {
+      if (candidate.fixtureId && candidate.qlooRank !== undefined) {
+        ranked.push({ fixtureRef: candidate.fixtureId, category, rank: candidate.qlooRank });
+      }
+    }
+  }
+  const excludedFixtures = brief.constraints.excludedVenueRefs
+    .map(ref => session.venues.get(ref)?.fixtureId).filter((id): id is string => !!id);
+  const treatment = await deps.model.interpretTreatment(brief, deps.fixtures, ranked, signal, excludedFixtures);
+  if (treatment.status === 'ready') {
+    for (const category of categories) {
+      const choices = treatment.items.filter(item => item.category === category);
+      const primary = choices.find(item => item.role === 'primary');
+      const alternative = choices.find(item => item.role === 'alternative');
+      const render = (selection: typeof primary) => {
+        if (!selection) return null;
+        const candidate = batch.byCategory[category].find(item => item.fixtureId === selection.fixtureRef);
+        const fixture = deps.fixtures.find(item => item.fixtureId === selection.fixtureRef);
+        if (!candidate || !fixture) return null;
+        const venue = card(candidate, fixture, session);
+        venue.interpretation = renderModelInterpretation(selection.reasonCodes, 'qloo');
+        venue.limitations = venue.limitations.filter(limit => !limit.startsWith('Free-text preferences'));
+        return venue;
+      };
+      const renderedPrimary = render(primary);
+      if (renderedPrimary) result.items[category] = { primary: renderedPrimary, alternative: render(alternative) };
+    }
+  }
+  result.baseline = await deps.model.generateBaseline(brief, deps.fixtures, signal, excludedFixtures);
+  const retained = new Set([...brief.constraints.excludedVenueRefs,
+    ...Object.values(result.items).flatMap(item => [item.primary.ref, ...(item.alternative ? [item.alternative.ref] : [])])]);
+  for (const ref of session.venues.keys()) if (!retained.has(ref)) session.venues.delete(ref);
+  return result;
 }
 
 export async function assembleConcierge(brief: Brief, session: SessionState, signal?: AbortSignal): Promise<ConciergeResult> {

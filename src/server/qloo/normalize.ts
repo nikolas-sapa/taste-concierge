@@ -42,7 +42,7 @@ export function normalizeRecommendations(payload: unknown, category: Category, r
   config: PayloadPolicy, evidence: EvidenceRef, bindings: readonly FixtureBinding[]): InternalCandidate[] {
   if (!record(payload) || !record(payload.results) || !Array.isArray(payload.results.entities)) throw new QlooError('upstream');
   const result: InternalCandidate[] = [];
-  for (const row of payload.results.entities) {
+  for (const [index, row] of payload.results.entities.entries()) {
     if (!record(row) || !text(row.entity_id) || !text(row.name) || row.subtype !== 'urn:entity:place' ||
       !Array.isArray(row.tags) || !row.tags.some(t => record(t) && t.id === config.categoryTagIds[category]) ||
       !record(row.location) || typeof row.location.lat !== 'number' || !Number.isFinite(row.location.lat) ||
@@ -56,7 +56,7 @@ export function normalizeRecommendations(payload: unknown, category: Category, r
     if (!cityMatches || distance(config.origin, { latitude: row.location.lat, longitude: row.location.lon }) > radiusMeters) continue;
     const matches = bindings.filter(b => b.verified === true && b.evidenceRef.length > 0 && b.qlooEntityId === row.entity_id);
     result.push({ qlooEntityId: row.entity_id, name: row.name, category, evidence,
-      fixtureId: matches.length === 1 ? matches[0].fixtureId : null });
+      fixtureId: matches.length === 1 ? matches[0].fixtureId : null, qlooRank: index + 1 });
   }
   return [...new Map(result.map(r => [r.qlooEntityId, r])).values()];
 }

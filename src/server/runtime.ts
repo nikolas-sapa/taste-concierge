@@ -5,6 +5,7 @@ import { createQlooClient } from './qloo/client';
 import { configureConcierge } from './concierge/assemble';
 import { loadPracticalFixtures } from './practical';
 import { loadVerifiedBindings } from './qloo/bindings';
+import { createModelService } from './model/responses';
 
 async function createRuntime() {
   const client = createQlooClient({
@@ -19,7 +20,13 @@ async function createRuntime() {
   try {
     bindings = await loadVerifiedBindings(process.env.PRIVATE_EVIDENCE_DIR ?? '', resolve(/* turbopackIgnore: true */ process.cwd()), fixtures);
   } catch { bindingConfigurationValid = false; }
-  configureConcierge({ client, fixtures, bindings });
+  const model = createModelService({
+    keyFile: process.env.OPENAI_KEY_FILE ?? '',
+    maxSpendUsd: Number(process.env.MODEL_SPEND_LIMIT_USD ?? '0'),
+    evidenceDir: process.env.PRIVATE_EVIDENCE_DIR ?? '',
+    projectRoot: resolve(/* turbopackIgnore: true */ process.cwd()),
+  });
+  configureConcierge({ client, fixtures, bindings, model });
   return {
     client, bindingConfigurationValid, sessions: new SessionStore(), production: process.env.NODE_ENV === 'production',
     origin: process.env.APP_ORIGIN ?? (process.env.NODE_ENV === 'production' ? '' : 'http://localhost:3100'),

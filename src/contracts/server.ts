@@ -12,7 +12,7 @@ export type PracticalFixture = {
 };
 export type InternalCandidate = {
   qlooEntityId: string; name: string; category: Category;
-  evidence: EvidenceRef; fixtureId: string | null;
+  evidence: EvidenceRef; fixtureId: string | null; qlooRank?: number;
 };
 export type RecommendationBatch = {
   byCategory: Record<Category, InternalCandidate[]>;
