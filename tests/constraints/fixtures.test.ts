@@ -2,11 +2,11 @@ import { describe, expect, it } from 'vitest';
 import { loadPracticalFixtures } from '../../src/server/practical';
 
 describe('independent practical fixture source', () => {
-  it('loads only the 14 declared Wikidata records with provenance', () => {
+  it('loads only the 20 declared Wikidata records with provenance', () => {
     const fixtures = loadPracticalFixtures();
-    expect(fixtures).toHaveLength(14);
+    expect(fixtures).toHaveLength(20);
     expect(fixtures.filter((fixture) => fixture.category === 'dining')).toHaveLength(4);
-    expect(fixtures.filter((fixture) => fixture.category === 'attractions')).toHaveLength(10);
+    expect(fixtures.filter((fixture) => fixture.category === 'attractions')).toHaveLength(16);
     expect(fixtures.every((fixture) => fixture.license === 'CC0')).toBe(true);
     expect(fixtures.every((fixture) => fixture.sourceUrl.includes('wikidata.org'))).toBe(true);
     expect(fixtures.every((fixture) => fixture.sourceRevision && fixture.retrievedAt)).toBe(true);

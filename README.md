@@ -24,7 +24,7 @@ Copy `.env.example` to ignored `.env.local` for approved local configuration. Se
 
 ## Data and limitations
 
-The independent pool contains 14 CC0 Wikidata records: four dining and ten attractions. One conflicting coordinate stays unknown. Classification and city membership are source-reported metadata, not proof of current operation or municipal boundaries. Qloo's first supported category filters cover restaurants and museums. Distances are straight-line distances from the documented Athens reference point, not walking routes.
+The independent pool contains 20 CC0 Wikidata records: four dining and sixteen attractions. Six additional museum records retain direct Wikidata museum classification, city membership and coordinate provenance. One original conflicting coordinate stays unknown. Classification and city membership are source-reported metadata, not proof of current operation or municipal boundaries. Qloo's first supported category filters cover restaurants and museums. Distances are straight-line distances from the documented Athens reference point, not walking routes.
 
 Budget and opening-time requirements return unsupported. No booking, availability, accessibility, allergy or dietary-safety assurance. Raw Qloo responses, returned identifiers, scores and private identity bindings are excluded from public source and assets.
 

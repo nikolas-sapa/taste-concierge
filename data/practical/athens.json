@@ -222,6 +222,420 @@
       "retrievedAt": "2026-10-08T11:03:05Z",
       "license": "CC0",
       "verification": "source-reported"
+    },
+    {
+      "fixtureId": "wd_Q131350761",
+      "sourceEntityId": "Q131350761",
+      "name": "Alekos Fassianos Museum",
+      "coordinates": {
+        "latitude": 37.990713,
+        "longitude": 23.72247,
+        "precisionDegrees": 1e-06,
+        "globeEntity": "http://www.wikidata.org/entity/Q2"
+      },
+      "category": "attractions",
+      "cityId": "athens",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q131350761",
+      "sourceRevision": "2519951487",
+      "sourceModifiedAt": "2026-07-20T01:30:54Z",
+      "retrievedAt": "2026-10-15T03:37:56Z",
+      "source": "Wikidata structured entity data; English Wikipedia category membership",
+      "license": "CC0",
+      "verification": "source-reported",
+      "sourceClaims": {
+        "P31_instanceOf": [
+          "Q33506"
+        ],
+        "P131_locatedInAdministrativeEntity": [
+          "Q1524"
+        ],
+        "P625_coordinateStatements": [
+          {
+            "latitude": 37.990713,
+            "longitude": 23.72247,
+            "precisionDegrees": 1e-06,
+            "globeEntity": "http://www.wikidata.org/entity/Q2",
+            "rank": "normal"
+          }
+        ],
+        "P856_officialWebsiteClaims": [
+          "https://www.alekosfassianos.gr"
+        ]
+      },
+      "labels": {
+        "el": "Μουσείο Αλέκος Φασιανός",
+        "en": "Alekos Fassianos Museum"
+      },
+      "aliases": {
+        "en": [],
+        "el": []
+      },
+      "officialWebsites": [
+        "https://www.alekosfassianos.gr"
+      ],
+      "geography": {
+        "referenceEntityId": "Q1524",
+        "radiusKm": 6,
+        "derivedGreatCircleDistanceKm": 0.877,
+        "membershipRule": "single source-reported P625 within the predeclared 6 km circle; P131 directly claims Athens (Q1524) or Athens Municipality (Q1224979)"
+      },
+      "categoryEvidence": {
+        "source": "English Wikipedia API categorymembers",
+        "categoryTitle": "Category:Museums in Athens",
+        "categoryUrl": "https://en.wikipedia.org/wiki/Category:Museums_in_Athens",
+        "articleTitle": "Alekos Fassianos Museum",
+        "articlePageId": 83628666,
+        "articleUrl": "https://en.wikipedia.org/wiki/Alekos_Fassianos_Museum",
+        "retrievedAt": "2026-10-15T03:37:56Z",
+        "wikibaseItemLink": "https://www.wikidata.org/wiki/Q131350761"
+      }
+    },
+    {
+      "fixtureId": "wd_Q6941076",
+      "sourceEntityId": "Q6941076",
+      "name": "Museum of the City of Athens (Foundation Vourou-Eutaxia)",
+      "coordinates": {
+        "latitude": 37.97884722,
+        "longitude": 23.73152778,
+        "precisionDegrees": 2.77777777778e-06,
+        "globeEntity": "http://www.wikidata.org/entity/Q2"
+      },
+      "category": "attractions",
+      "cityId": "athens",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q6941076",
+      "sourceRevision": "2484641977",
+      "sourceModifiedAt": "2026-04-25T17:05:07Z",
+      "retrievedAt": "2026-10-15T03:37:56Z",
+      "source": "Wikidata structured entity data; English Wikipedia category membership",
+      "license": "CC0",
+      "verification": "source-reported",
+      "sourceClaims": {
+        "P31_instanceOf": [
+          "Q33506",
+          "Q3947"
+        ],
+        "P131_locatedInAdministrativeEntity": [
+          "Q1224979"
+        ],
+        "P625_coordinateStatements": [
+          {
+            "latitude": 37.97884722,
+            "longitude": 23.73152778,
+            "precisionDegrees": 2.77777777778e-06,
+            "globeEntity": "http://www.wikidata.org/entity/Q2",
+            "rank": "normal"
+          }
+        ],
+        "P856_officialWebsiteClaims": [
+          "http://www.athenscitymuseum.gr/"
+        ]
+      },
+      "labels": {
+        "en": "Museum of the City of Athens (Foundation Vourou-Eutaxia)",
+        "el": "Μουσείο της πόλεως των Αθηνών (Ίδρυμα Βούρου-Ευταξία)"
+      },
+      "aliases": {
+        "en": [
+          "Mouseion tēs poleōs tōn Athēnōn-Hidryma Vourou Eutaxia",
+          "City of Athens museum",
+          "Museum of the City of Athens Vouros - Eutaxias"
+        ],
+        "el": [
+          "Αρχοντικό Δεκόζη Βούρου",
+          "Ίδρυμα Βούρου-Ευταξία"
+        ]
+      },
+      "officialWebsites": [
+        "http://www.athenscitymuseum.gr/"
+      ],
+      "geography": {
+        "referenceEntityId": "Q1524",
+        "radiusKm": 6,
+        "derivedGreatCircleDistanceKm": 0.665,
+        "membershipRule": "single source-reported P625 within the predeclared 6 km circle; P131 directly claims Athens (Q1524) or Athens Municipality (Q1224979)"
+      },
+      "categoryEvidence": {
+        "source": "English Wikipedia API categorymembers",
+        "categoryTitle": "Category:Museums in Athens",
+        "categoryUrl": "https://en.wikipedia.org/wiki/Category:Museums_in_Athens",
+        "articleTitle": "Athens City Museum",
+        "articlePageId": 16811572,
+        "articleUrl": "https://en.wikipedia.org/wiki/Athens_City_Museum",
+        "retrievedAt": "2026-10-15T03:37:56Z",
+        "wikibaseItemLink": "https://www.wikidata.org/wiki/Q6941076"
+      }
+    },
+    {
+      "fixtureId": "wd_Q1163632",
+      "sourceEntityId": "Q1163632",
+      "name": "Hellenic Motor Museum",
+      "coordinates": {
+        "latitude": 37.99134,
+        "longitude": 23.73002,
+        "precisionDegrees": 1e-05,
+        "globeEntity": "http://www.wikidata.org/entity/Q2"
+      },
+      "category": "attractions",
+      "cityId": "athens",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q1163632",
+      "sourceRevision": "2540076093",
+      "sourceModifiedAt": "2026-09-04T12:34:20Z",
+      "retrievedAt": "2026-10-15T03:37:56Z",
+      "source": "Wikidata structured entity data; English Wikipedia category membership",
+      "license": "CC0",
+      "verification": "source-reported",
+      "sourceClaims": {
+        "P31_instanceOf": [
+          "Q33506"
+        ],
+        "P131_locatedInAdministrativeEntity": [
+          "Q1224979"
+        ],
+        "P625_coordinateStatements": [
+          {
+            "latitude": 37.99134,
+            "longitude": 23.73002,
+            "precisionDegrees": 1e-05,
+            "globeEntity": "http://www.wikidata.org/entity/Q2",
+            "rank": "normal"
+          }
+        ],
+        "P856_officialWebsiteClaims": [
+          "https://www.hellenicmotormuseum.gr/"
+        ]
+      },
+      "labels": {
+        "el": "Ελληνικό Μουσείο Αυτοκινήτου",
+        "en": "Hellenic Motor Museum"
+      },
+      "aliases": {
+        "en": [],
+        "el": []
+      },
+      "officialWebsites": [
+        "https://www.hellenicmotormuseum.gr/"
+      ],
+      "geography": {
+        "referenceEntityId": "Q1524",
+        "radiusKm": 6,
+        "derivedGreatCircleDistanceKm": 0.816,
+        "membershipRule": "single source-reported P625 within the predeclared 6 km circle; P131 directly claims Athens (Q1524) or Athens Municipality (Q1224979)"
+      },
+      "categoryEvidence": {
+        "source": "English Wikipedia API categorymembers",
+        "categoryTitle": "Category:Museums in Athens",
+        "categoryUrl": "https://en.wikipedia.org/wiki/Category:Museums_in_Athens",
+        "articleTitle": "Hellenic Motor Museum",
+        "articlePageId": 31171678,
+        "articleUrl": "https://en.wikipedia.org/wiki/Hellenic_Motor_Museum",
+        "retrievedAt": "2026-10-15T03:37:56Z",
+        "wikibaseItemLink": "https://www.wikidata.org/wiki/Q1163632"
+      }
+    },
+    {
+      "fixtureId": "wd_Q15051919",
+      "sourceEntityId": "Q15051919",
+      "name": "Ilias Lalaounis Jewelry Museum",
+      "coordinates": {
+        "latitude": 37.96913889,
+        "longitude": 23.7267,
+        "precisionDegrees": 2.77777777778e-06,
+        "globeEntity": "http://www.wikidata.org/entity/Q2"
+      },
+      "category": "attractions",
+      "cityId": "athens",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q15051919",
+      "sourceRevision": "2483338052",
+      "sourceModifiedAt": "2026-04-20T06:56:02Z",
+      "retrievedAt": "2026-10-15T03:37:56Z",
+      "source": "Wikidata structured entity data; English Wikipedia category membership",
+      "license": "CC0",
+      "verification": "source-reported",
+      "sourceClaims": {
+        "P31_instanceOf": [
+          "Q33506"
+        ],
+        "P131_locatedInAdministrativeEntity": [
+          "Q1224979"
+        ],
+        "P625_coordinateStatements": [
+          {
+            "latitude": 37.96913889,
+            "longitude": 23.7267,
+            "precisionDegrees": 2.77777777778e-06,
+            "globeEntity": "http://www.wikidata.org/entity/Q2",
+            "rank": "normal"
+          }
+        ],
+        "P856_officialWebsiteClaims": [
+          "http://www.lalaounis-jewelrymuseum.gr/en/"
+        ]
+      },
+      "labels": {
+        "en": "Ilias Lalaounis Jewelry Museum",
+        "el": "Μουσείο Κοσμήματος Ηλία Λαλαούνη"
+      },
+      "aliases": {
+        "en": [
+          "Lalaounis museum"
+        ],
+        "el": []
+      },
+      "officialWebsites": [
+        "http://www.lalaounis-jewelrymuseum.gr/en/"
+      ],
+      "geography": {
+        "referenceEntityId": "Q1524",
+        "radiusKm": 6,
+        "derivedGreatCircleDistanceKm": 1.675,
+        "membershipRule": "single source-reported P625 within the predeclared 6 km circle; P131 directly claims Athens (Q1524) or Athens Municipality (Q1224979)"
+      },
+      "categoryEvidence": {
+        "source": "English Wikipedia API categorymembers",
+        "categoryTitle": "Category:Museums in Athens",
+        "categoryUrl": "https://en.wikipedia.org/wiki/Category:Museums_in_Athens",
+        "articleTitle": "Ilias Lalaounis Jewelry Museum",
+        "articlePageId": 16811588,
+        "articleUrl": "https://en.wikipedia.org/wiki/Ilias_Lalaounis_Jewelry_Museum",
+        "retrievedAt": "2026-10-15T03:37:56Z",
+        "wikibaseItemLink": "https://www.wikidata.org/wiki/Q15051919"
+      }
+    },
+    {
+      "fixtureId": "wd_Q6940738",
+      "sourceEntityId": "Q6940738",
+      "name": "Museum of Anthropology, University of Athens",
+      "coordinates": {
+        "latitude": 37.9841,
+        "longitude": 23.7671,
+        "precisionDegrees": 0.011397313942963,
+        "globeEntity": "http://www.wikidata.org/entity/Q2"
+      },
+      "category": "attractions",
+      "cityId": "athens",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q6940738",
+      "sourceRevision": "2242580257",
+      "sourceModifiedAt": "2024-09-03T04:48:45Z",
+      "retrievedAt": "2026-10-15T03:37:56Z",
+      "source": "Wikidata structured entity data; English Wikipedia category membership",
+      "license": "CC0",
+      "verification": "source-reported",
+      "sourceClaims": {
+        "P31_instanceOf": [
+          "Q33506"
+        ],
+        "P131_locatedInAdministrativeEntity": [
+          "Q1524"
+        ],
+        "P625_coordinateStatements": [
+          {
+            "latitude": 37.9841,
+            "longitude": 23.7671,
+            "precisionDegrees": 0.011397313942963,
+            "globeEntity": "http://www.wikidata.org/entity/Q2",
+            "rank": "normal"
+          }
+        ],
+        "P856_officialWebsiteClaims": [
+          "http://www.anthropology.med.uoa.gr/"
+        ]
+      },
+      "labels": {
+        "en": "Museum of Anthropology, University of Athens",
+        "el": "Ανθρωπολογικό Μουσείο Πανεπιστημίου Αθηνών"
+      },
+      "aliases": {
+        "en": [],
+        "el": []
+      },
+      "officialWebsites": [
+        "http://www.anthropology.med.uoa.gr/"
+      ],
+      "geography": {
+        "referenceEntityId": "Q1524",
+        "radiusKm": 6,
+        "derivedGreatCircleDistanceKm": 3.422,
+        "membershipRule": "single source-reported P625 within the predeclared 6 km circle; P131 directly claims Athens (Q1524) or Athens Municipality (Q1224979)"
+      },
+      "categoryEvidence": {
+        "source": "English Wikipedia API categorymembers",
+        "categoryTitle": "Category:Museums in Athens",
+        "categoryUrl": "https://en.wikipedia.org/wiki/Category:Museums_in_Athens",
+        "articleTitle": "Museum of Anthropology, University of Athens",
+        "articlePageId": 16811825,
+        "articleUrl": "https://en.wikipedia.org/wiki/Museum_of_Anthropology,_University_of_Athens",
+        "retrievedAt": "2026-10-15T03:37:56Z",
+        "wikibaseItemLink": "https://www.wikidata.org/wiki/Q6940738"
+      }
+    },
+    {
+      "fixtureId": "wd_Q63561393",
+      "sourceEntityId": "Q63561393",
+      "name": "Criminology Museum of Athens",
+      "coordinates": {
+        "latitude": 37.9845124,
+        "longitude": 23.7669455,
+        "precisionDegrees": 1e-07,
+        "globeEntity": "http://www.wikidata.org/entity/Q2"
+      },
+      "category": "attractions",
+      "cityId": "athens",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q63561393",
+      "sourceRevision": "2248739974",
+      "sourceModifiedAt": "2024-09-16T05:25:34Z",
+      "retrievedAt": "2026-10-15T03:37:56Z",
+      "source": "Wikidata structured entity data; English Wikipedia category membership",
+      "license": "CC0",
+      "verification": "source-reported",
+      "sourceClaims": {
+        "P31_instanceOf": [
+          "Q33506"
+        ],
+        "P131_locatedInAdministrativeEntity": [
+          "Q1224979"
+        ],
+        "P625_coordinateStatements": [
+          {
+            "latitude": 37.9845124,
+            "longitude": 23.7669455,
+            "precisionDegrees": 1e-07,
+            "globeEntity": "http://www.wikidata.org/entity/Q2",
+            "rank": "normal"
+          }
+        ],
+        "P856_officialWebsiteClaims": [
+          "https://www.uoa.gr/to_panepistimio/moyseia/egklimatologiko/"
+        ]
+      },
+      "labels": {
+        "el": "Μουσείο Εγκληματολογίας ΕΚΠΑ",
+        "en": "Criminology Museum of Athens"
+      },
+      "aliases": {
+        "en": [],
+        "el": [
+          "Εγκληματολογικό Μουσείο"
+        ]
+      },
+      "officialWebsites": [
+        "https://www.uoa.gr/to_panepistimio/moyseia/egklimatologiko/"
+      ],
+      "geography": {
+        "referenceEntityId": "Q1524",
+        "radiusKm": 6,
+        "derivedGreatCircleDistanceKm": 3.409,
+        "membershipRule": "single source-reported P625 within the predeclared 6 km circle; P131 directly claims Athens (Q1524) or Athens Municipality (Q1224979)"
+      },
+      "categoryEvidence": {
+        "source": "English Wikipedia API categorymembers",
+        "categoryTitle": "Category:Museums in Athens",
+        "categoryUrl": "https://en.wikipedia.org/wiki/Category:Museums_in_Athens",
+        "articleTitle": "Museum of Criminology (Athens)",
+        "articlePageId": 73768853,
+        "articleUrl": "https://en.wikipedia.org/wiki/Museum_of_Criminology_(Athens)",
+        "retrievedAt": "2026-10-15T03:37:56Z",
+        "wikibaseItemLink": "https://www.wikidata.org/wiki/Q63561393"
+      }
     }
   ]
 }
