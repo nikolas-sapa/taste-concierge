@@ -636,6 +636,2210 @@
         "retrievedAt": "2026-10-15T03:37:56Z",
         "wikibaseItemLink": "https://www.wikidata.org/wiki/Q63561393"
       }
+    },
+    {
+      "fixtureId": "wd_Q421084",
+      "sourceEntityId": "Q421084",
+      "name": "Acropolis Museum",
+      "coordinates": {
+        "latitude": 37.968417,
+        "longitude": 23.728472,
+        "precisionDegrees": 1e-05,
+        "globeEntity": "http://www.wikidata.org/entity/Q2"
+      },
+      "category": "attractions",
+      "cityId": "athens",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q421084",
+      "sourceRevision": "2525357926",
+      "sourceModifiedAt": "2026-07-31T22:45:36Z",
+      "retrievedAt": "2026-10-15T03:46:57Z",
+      "source": "Wikidata structured entity data plus English Wikipedia category membership",
+      "license": "CC0",
+      "verification": "source-reported",
+      "labels": {
+        "el": "Μουσείο Ακρόπολης",
+        "en": "Acropolis Museum"
+      },
+      "aliases": {
+        "en": [
+          "New Acropolis Museum"
+        ],
+        "el": [
+          "Νέο Μουσείο Ακροπόλεως",
+          "Νέο Μουσείο Ακρόπολης",
+          "Μουσείο της Ακρόπολης",
+          "Μουσείο της Ακροπόλεως",
+          "Μουσείο Ακροπόλεως"
+        ]
+      },
+      "officialWebsites": [
+        "https://www.theacropolismuseum.gr/",
+        "http://www.theacropolismuseum.gr"
+      ],
+      "sourceClaims": {
+        "P31_instanceOf": [
+          "Q3329412",
+          "Q33506"
+        ],
+        "P131_locatedInAdministrativeEntity": [
+          "Q1224979"
+        ],
+        "P625_coordinateStatements": [
+          {
+            "latitude": 37.968417,
+            "longitude": 23.728472,
+            "precisionDegrees": 1e-05,
+            "globeEntity": "http://www.wikidata.org/entity/Q2",
+            "rank": "normal"
+          }
+        ],
+        "P856_officialWebsiteClaims": [
+          "https://www.theacropolismuseum.gr/",
+          "http://www.theacropolismuseum.gr"
+        ]
+      },
+      "categoryEvidence": [
+        {
+          "categoryTitle": "Category:Archaeological museums in Athens",
+          "categoryUrl": "https://en.wikipedia.org/wiki/Category:Archaeological_museums_in_Athens",
+          "articleTitle": "Acropolis Museum",
+          "articlePageId": 10944017,
+          "articleUrl": "https://en.wikipedia.org/wiki/Acropolis_Museum",
+          "wikibaseItem": "Q421084",
+          "retrievedAt": "2026-10-15T03:46:57Z"
+        }
+      ],
+      "wikidataTypeVerification": {
+        "targetClass": "Q33506",
+        "verified": true,
+        "P31Classes": [
+          {
+            "id": "Q3329412",
+            "label": "archaeological museum"
+          },
+          {
+            "id": "Q33506",
+            "label": "museum"
+          }
+        ],
+        "verifiedP279Paths": [
+          {
+            "path": [
+              "Q3329412",
+              "Q207694",
+              "Q33506"
+            ],
+            "proofEdges": [
+              {
+                "childEntityId": "Q3329412",
+                "parentEntityId": "Q207694",
+                "sourceClaimUrl": "https://www.wikidata.org/wiki/Q3329412#P279"
+              },
+              {
+                "childEntityId": "Q207694",
+                "parentEntityId": "Q33506",
+                "sourceClaimUrl": "https://www.wikidata.org/wiki/Q207694#P279"
+              }
+            ],
+            "proofType": "P31 start plus fetched P279 edges"
+          },
+          {
+            "path": [
+              "Q33506"
+            ],
+            "proofEdges": [],
+            "proofType": "direct P31=Q33506"
+          }
+        ],
+        "checkedClassGraphSource": "Wikidata wbgetentities batch, P279 statements; retrieval 2026-10-15",
+        "status": "verified"
+      },
+      "geography": {
+        "referenceEntityId": "Q1524",
+        "radiusKm": 6,
+        "derivedGreatCircleDistanceKm": 1.752,
+        "uniqueCoordinateAvailable": true,
+        "sourceAdministrativeEntities": [
+          "Q1224979"
+        ],
+        "recognizedDirectAthensMembership": true
+      },
+      "candidateEligibility": {
+        "eligible": true,
+        "type": "museum",
+        "reasons": []
+      }
+    },
+    {
+      "fixtureId": "wd_Q3555557",
+      "sourceEntityId": "Q3555557",
+      "name": "Athens University Museum",
+      "coordinates": {
+        "latitude": 37.97309722,
+        "longitude": 23.72679167,
+        "precisionDegrees": 2.77777777778e-06,
+        "globeEntity": "http://www.wikidata.org/entity/Q2"
+      },
+      "category": "attractions",
+      "cityId": "athens",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q3555557",
+      "sourceRevision": "2430533579",
+      "sourceModifiedAt": "2025-11-17T02:12:31Z",
+      "retrievedAt": "2026-10-15T03:37:56Z",
+      "source": "Wikidata structured entity data; English Wikipedia category membership",
+      "license": "CC0",
+      "verification": "source-reported",
+      "sourceClaims": {
+        "P31_instanceOf": [
+          "Q866133",
+          "Q3947"
+        ],
+        "P131_locatedInAdministrativeEntity": [
+          "Q1224979"
+        ],
+        "P625_coordinateStatements": [
+          {
+            "latitude": 37.97309722,
+            "longitude": 23.72679167,
+            "precisionDegrees": 2.77777777778e-06,
+            "globeEntity": "http://www.wikidata.org/entity/Q2",
+            "rank": "normal"
+          }
+        ],
+        "P856_officialWebsiteClaims": [
+          "http://www.historymuseum.uoa.gr/"
+        ]
+      },
+      "labels": {
+        "el": "Μουσείο Ιστορίας Πανεπιστημίου Αθηνών",
+        "en": "Athens University Museum"
+      },
+      "aliases": {
+        "en": [
+          "The Athens University Museum",
+          "Kleanthis Schaubert House",
+          "Kleanthes Schaubert House"
+        ],
+        "el": [
+          "Οικία Κλεάνθη - Σάουμπερτ"
+        ]
+      },
+      "officialWebsites": [
+        "http://www.historymuseum.uoa.gr/"
+      ],
+      "geography": {
+        "referenceEntityId": "Q1524",
+        "radiusKm": 6,
+        "derivedGreatCircleDistanceKm": 1.236,
+        "uniqueCoordinateAvailable": true,
+        "sourceAdministrativeEntities": [
+          "Q1224979"
+        ],
+        "recognizedDirectAthensMembership": true
+      },
+      "categoryEvidence": [
+        {
+          "source": "English Wikipedia API categorymembers",
+          "categoryTitle": "Category:Museums in Athens",
+          "categoryUrl": "https://en.wikipedia.org/wiki/Category:Museums_in_Athens",
+          "articleTitle": "Athens University Museum",
+          "articlePageId": 16811658,
+          "articleUrl": "https://en.wikipedia.org/wiki/Athens_University_Museum",
+          "retrievedAt": "2026-10-15T03:37:56Z",
+          "wikibaseItemLink": "https://www.wikidata.org/wiki/Q3555557"
+        }
+      ],
+      "wikidataTypeVerification": {
+        "targetClass": "Q33506",
+        "verified": true,
+        "P31Classes": [
+          {
+            "id": "Q866133",
+            "label": "university museum"
+          },
+          {
+            "id": "Q3947",
+            "label": "house"
+          }
+        ],
+        "verifiedP279Paths": [
+          {
+            "path": [
+              "Q866133",
+              "Q33506"
+            ],
+            "proofEdges": [
+              {
+                "childEntityId": "Q866133",
+                "parentEntityId": "Q33506",
+                "sourceClaimUrl": "https://www.wikidata.org/wiki/Q866133#P279"
+              }
+            ],
+            "proofType": "P31 start plus fetched P279 edges"
+          }
+        ],
+        "checkedClassGraphSource": "Wikidata wbgetentities batch, P279 statements; retrieval 2026-10-15",
+        "status": "verified"
+      },
+      "candidateEligibility": {
+        "eligible": true,
+        "type": "museum",
+        "reasons": []
+      }
+    },
+    {
+      "fixtureId": "wd_Q816669",
+      "sourceEntityId": "Q816669",
+      "name": "Benaki Museum",
+      "coordinates": {
+        "latitude": 37.97593889,
+        "longitude": 23.74040833,
+        "precisionDegrees": 2.77777777778e-06,
+        "globeEntity": "http://www.wikidata.org/entity/Q2"
+      },
+      "category": "attractions",
+      "cityId": "athens",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q816669",
+      "sourceRevision": "2531674167",
+      "sourceModifiedAt": "2026-08-15T13:53:13Z",
+      "retrievedAt": "2026-10-15T03:46:57Z",
+      "source": "Wikidata structured entity data plus English Wikipedia category membership",
+      "license": "CC0",
+      "verification": "source-reported",
+      "labels": {
+        "el": "Μουσείο Μπενάκη",
+        "en": "Benaki Museum"
+      },
+      "aliases": {
+        "en": [
+          "Museum of Greek culture",
+          "Benaki Museum in Kolonaki",
+          "Benaki Museum Kolonaki",
+          "Benaki Museum of Greek Culture"
+        ],
+        "el": [
+          "Ίδρυμα Μπενάκη"
+        ]
+      },
+      "officialWebsites": [
+        "https://www.benaki.org/index.php?lang=en"
+      ],
+      "sourceClaims": {
+        "P31_instanceOf": [
+          "Q207694",
+          "Q33506",
+          "Q7075"
+        ],
+        "P131_locatedInAdministrativeEntity": [
+          "Q1224979"
+        ],
+        "P625_coordinateStatements": [
+          {
+            "latitude": 37.97593889,
+            "longitude": 23.74040833,
+            "precisionDegrees": 2.77777777778e-06,
+            "globeEntity": "http://www.wikidata.org/entity/Q2",
+            "rank": "normal"
+          }
+        ],
+        "P856_officialWebsiteClaims": [
+          "https://www.benaki.org/index.php?lang=en"
+        ]
+      },
+      "categoryEvidence": [
+        {
+          "categoryTitle": "Category:Art museums and galleries in Athens",
+          "categoryUrl": "https://en.wikipedia.org/wiki/Category:Art_museums_and_galleries_in_Athens",
+          "articleTitle": "Benaki Museum",
+          "articlePageId": 1656977,
+          "articleUrl": "https://en.wikipedia.org/wiki/Benaki_Museum",
+          "wikibaseItem": "Q816669",
+          "retrievedAt": "2026-10-15T03:46:57Z"
+        }
+      ],
+      "wikidataTypeVerification": {
+        "targetClass": "Q33506",
+        "verified": true,
+        "P31Classes": [
+          {
+            "id": "Q207694",
+            "label": "art museum"
+          },
+          {
+            "id": "Q33506",
+            "label": "museum"
+          },
+          {
+            "id": "Q7075",
+            "label": "library"
+          }
+        ],
+        "verifiedP279Paths": [
+          {
+            "path": [
+              "Q207694",
+              "Q33506"
+            ],
+            "proofEdges": [
+              {
+                "childEntityId": "Q207694",
+                "parentEntityId": "Q33506",
+                "sourceClaimUrl": "https://www.wikidata.org/wiki/Q207694#P279"
+              }
+            ],
+            "proofType": "P31 start plus fetched P279 edges"
+          },
+          {
+            "path": [
+              "Q33506"
+            ],
+            "proofEdges": [],
+            "proofType": "direct P31=Q33506"
+          }
+        ],
+        "checkedClassGraphSource": "Wikidata wbgetentities batch, P279 statements; retrieval 2026-10-15",
+        "status": "verified"
+      },
+      "geography": {
+        "referenceEntityId": "Q1524",
+        "radiusKm": 6,
+        "derivedGreatCircleDistanceKm": 1.417,
+        "uniqueCoordinateAvailable": true,
+        "sourceAdministrativeEntities": [
+          "Q1224979"
+        ],
+        "recognizedDirectAthensMembership": true
+      },
+      "candidateEligibility": {
+        "eligible": true,
+        "type": "museum",
+        "reasons": []
+      }
+    },
+    {
+      "fixtureId": "wd_Q5504730",
+      "sourceEntityId": "Q5504730",
+      "name": "Frissiras Museum",
+      "coordinates": {
+        "latitude": 37.97227778,
+        "longitude": 23.73219444,
+        "precisionDegrees": 2.777777777778e-05,
+        "globeEntity": "http://www.wikidata.org/entity/Q2"
+      },
+      "category": "attractions",
+      "cityId": "athens",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q5504730",
+      "sourceRevision": "2379591485",
+      "sourceModifiedAt": "2025-07-14T18:01:52Z",
+      "retrievedAt": "2026-10-15T03:46:57Z",
+      "source": "Wikidata structured entity data plus English Wikipedia category membership",
+      "license": "CC0",
+      "verification": "source-reported",
+      "labels": {
+        "en": "Frissiras Museum",
+        "el": "Μουσείο Φρυσίρα"
+      },
+      "aliases": {
+        "en": [
+          "The Frissiras Museum",
+          "Fryssiras museum",
+          "Mouseio Phrysira",
+          "Frysiras museum",
+          "Frisiras museum"
+        ],
+        "el": []
+      },
+      "officialWebsites": [
+        "http://www.frissirasmuseum.com"
+      ],
+      "sourceClaims": {
+        "P31_instanceOf": [
+          "Q207694"
+        ],
+        "P131_locatedInAdministrativeEntity": [
+          "Q1224979"
+        ],
+        "P625_coordinateStatements": [
+          {
+            "latitude": 37.97227778,
+            "longitude": 23.73219444,
+            "precisionDegrees": 2.777777777778e-05,
+            "globeEntity": "http://www.wikidata.org/entity/Q2",
+            "rank": "normal"
+          }
+        ],
+        "P856_officialWebsiteClaims": [
+          "http://www.frissirasmuseum.com"
+        ]
+      },
+      "categoryEvidence": [
+        {
+          "categoryTitle": "Category:Art museums and galleries in Athens",
+          "categoryUrl": "https://en.wikipedia.org/wiki/Category:Art_museums_and_galleries_in_Athens",
+          "articleTitle": "Frissiras Museum",
+          "articlePageId": 16811580,
+          "articleUrl": "https://en.wikipedia.org/wiki/Frissiras_Museum",
+          "wikibaseItem": "Q5504730",
+          "retrievedAt": "2026-10-15T03:46:57Z"
+        }
+      ],
+      "wikidataTypeVerification": {
+        "targetClass": "Q33506",
+        "verified": true,
+        "P31Classes": [
+          {
+            "id": "Q207694",
+            "label": "art museum"
+          }
+        ],
+        "verifiedP279Paths": [
+          {
+            "path": [
+              "Q207694",
+              "Q33506"
+            ],
+            "proofEdges": [
+              {
+                "childEntityId": "Q207694",
+                "parentEntityId": "Q33506",
+                "sourceClaimUrl": "https://www.wikidata.org/wiki/Q207694#P279"
+              }
+            ],
+            "proofType": "P31 start plus fetched P279 edges"
+          }
+        ],
+        "checkedClassGraphSource": "Wikidata wbgetentities batch, P279 statements; retrieval 2026-10-15",
+        "status": "verified"
+      },
+      "geography": {
+        "referenceEntityId": "Q1524",
+        "radiusKm": 6,
+        "derivedGreatCircleDistanceKm": 1.371,
+        "uniqueCoordinateAvailable": true,
+        "sourceAdministrativeEntities": [
+          "Q1224979"
+        ],
+        "recognizedDirectAthensMembership": true
+      },
+      "candidateEligibility": {
+        "eligible": true,
+        "type": "museum",
+        "reasons": []
+      }
+    },
+    {
+      "fixtureId": "wd_Q16252571",
+      "sourceEntityId": "Q16252571",
+      "name": "Herakleidon Museum",
+      "coordinates": {
+        "latitude": 37.975193,
+        "longitude": 23.718582,
+        "precisionDegrees": 0.0003517543964051,
+        "globeEntity": "http://www.wikidata.org/entity/Q2"
+      },
+      "category": "attractions",
+      "cityId": "athens",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q16252571",
+      "sourceRevision": "2242255238",
+      "sourceModifiedAt": "2024-09-02T17:21:13Z",
+      "retrievedAt": "2026-10-15T03:46:57Z",
+      "source": "Wikidata structured entity data plus English Wikipedia category membership",
+      "license": "CC0",
+      "verification": "source-reported",
+      "labels": {
+        "en": "Herakleidon Museum",
+        "el": "Μουσείο Ηρακλειδών"
+      },
+      "aliases": {
+        "en": [],
+        "el": [
+          "Ηρακλειδών"
+        ]
+      },
+      "officialWebsites": [
+        "http://herakleidon-art.gr/"
+      ],
+      "sourceClaims": {
+        "P31_instanceOf": [
+          "Q33506"
+        ],
+        "P131_locatedInAdministrativeEntity": [
+          "Q1224979"
+        ],
+        "P625_coordinateStatements": [
+          {
+            "latitude": 37.975193,
+            "longitude": 23.718582,
+            "precisionDegrees": 0.0003517543964051,
+            "globeEntity": "http://www.wikidata.org/entity/Q2",
+            "rank": "normal"
+          }
+        ],
+        "P856_officialWebsiteClaims": [
+          "http://herakleidon-art.gr/"
+        ]
+      },
+      "categoryEvidence": [
+        {
+          "categoryTitle": "Category:Art museums and galleries in Athens",
+          "categoryUrl": "https://en.wikipedia.org/wiki/Category:Art_museums_and_galleries_in_Athens",
+          "articleTitle": "Herakleidon Art Museum",
+          "articlePageId": 16811628,
+          "articleUrl": "https://en.wikipedia.org/wiki/Herakleidon_Art_Museum",
+          "wikibaseItem": "Q16252571",
+          "retrievedAt": "2026-10-15T03:46:57Z"
+        }
+      ],
+      "wikidataTypeVerification": {
+        "targetClass": "Q33506",
+        "verified": true,
+        "P31Classes": [
+          {
+            "id": "Q33506",
+            "label": "museum"
+          }
+        ],
+        "verifiedP279Paths": [
+          {
+            "path": [
+              "Q33506"
+            ],
+            "proofEdges": [],
+            "proofType": "direct P31=Q33506"
+          }
+        ],
+        "checkedClassGraphSource": "Wikidata wbgetentities batch, P279 statements; retrieval 2026-10-15",
+        "status": "verified"
+      },
+      "geography": {
+        "referenceEntityId": "Q1524",
+        "radiusKm": 6,
+        "derivedGreatCircleDistanceKm": 1.298,
+        "uniqueCoordinateAvailable": true,
+        "sourceAdministrativeEntities": [
+          "Q1224979"
+        ],
+        "recognizedDirectAthensMembership": true
+      },
+      "candidateEligibility": {
+        "eligible": true,
+        "type": "museum",
+        "reasons": []
+      }
+    },
+    {
+      "fixtureId": "wd_Q2574469",
+      "sourceEntityId": "Q2574469",
+      "name": "Kerameikos Archaeological Museum",
+      "coordinates": {
+        "latitude": 37.967,
+        "longitude": 23.717,
+        "precisionDegrees": 0.01,
+        "globeEntity": "http://www.wikidata.org/entity/Q2"
+      },
+      "category": "attractions",
+      "cityId": "athens",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q2574469",
+      "sourceRevision": "2388381195",
+      "sourceModifiedAt": "2025-08-05T19:49:29Z",
+      "retrievedAt": "2026-10-15T03:46:57Z",
+      "source": "Wikidata structured entity data plus English Wikipedia category membership",
+      "license": "CC0",
+      "verification": "source-reported",
+      "labels": {
+        "el": "Αρχαιολογικό Μουσείο Κεραμεικού",
+        "en": "Kerameikos Archaeological Museum"
+      },
+      "aliases": {
+        "en": [
+          "Kerameikos Archaeological Museum (Athens)",
+          "Archaeological Museum of Keramikos",
+          "Archaeological Museum of Kerameikos"
+        ],
+        "el": [
+          "Μουσείο Κεραμεικού"
+        ]
+      },
+      "officialWebsites": [
+        "http://odysseus.culture.gr/h/1/eh151.jsp?obj_id=3443"
+      ],
+      "sourceClaims": {
+        "P31_instanceOf": [
+          "Q3329412"
+        ],
+        "P131_locatedInAdministrativeEntity": [
+          "Q1224979",
+          "Q758056"
+        ],
+        "P625_coordinateStatements": [
+          {
+            "latitude": 37.967,
+            "longitude": 23.717,
+            "precisionDegrees": 0.01,
+            "globeEntity": "http://www.wikidata.org/entity/Q2",
+            "rank": "normal"
+          }
+        ],
+        "P856_officialWebsiteClaims": [
+          "http://odysseus.culture.gr/h/1/eh151.jsp?obj_id=3443"
+        ]
+      },
+      "categoryEvidence": [
+        {
+          "categoryTitle": "Category:Archaeological museums in Athens",
+          "categoryUrl": "https://en.wikipedia.org/wiki/Category:Archaeological_museums_in_Athens",
+          "articleTitle": "Kerameikos Archaeological Museum",
+          "articlePageId": 43966339,
+          "articleUrl": "https://en.wikipedia.org/wiki/Kerameikos_Archaeological_Museum",
+          "wikibaseItem": "Q2574469",
+          "retrievedAt": "2026-10-15T03:46:57Z"
+        }
+      ],
+      "wikidataTypeVerification": {
+        "targetClass": "Q33506",
+        "verified": true,
+        "P31Classes": [
+          {
+            "id": "Q3329412",
+            "label": "archaeological museum"
+          }
+        ],
+        "verifiedP279Paths": [
+          {
+            "path": [
+              "Q3329412",
+              "Q207694",
+              "Q33506"
+            ],
+            "proofEdges": [
+              {
+                "childEntityId": "Q3329412",
+                "parentEntityId": "Q207694",
+                "sourceClaimUrl": "https://www.wikidata.org/wiki/Q3329412#P279"
+              },
+              {
+                "childEntityId": "Q207694",
+                "parentEntityId": "Q33506",
+                "sourceClaimUrl": "https://www.wikidata.org/wiki/Q207694#P279"
+              }
+            ],
+            "proofType": "P31 start plus fetched P279 edges"
+          }
+        ],
+        "checkedClassGraphSource": "Wikidata wbgetentities batch, P279 statements; retrieval 2026-10-15",
+        "status": "verified"
+      },
+      "geography": {
+        "referenceEntityId": "Q1524",
+        "radiusKm": 6,
+        "derivedGreatCircleDistanceKm": 2.141,
+        "uniqueCoordinateAvailable": true,
+        "sourceAdministrativeEntities": [
+          "Q1224979",
+          "Q758056"
+        ],
+        "recognizedDirectAthensMembership": true
+      },
+      "candidateEligibility": {
+        "eligible": true,
+        "type": "museum",
+        "reasons": []
+      }
+    },
+    {
+      "fixtureId": "wd_Q1576793",
+      "sourceEntityId": "Q1576793",
+      "name": "Municipal Gallery of Athens",
+      "coordinates": {
+        "latitude": 37.9830099,
+        "longitude": 23.7193483,
+        "precisionDegrees": 2.77777777778e-06,
+        "globeEntity": "http://www.wikidata.org/entity/Q2"
+      },
+      "category": "attractions",
+      "cityId": "athens",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q1576793",
+      "sourceRevision": "2376353051",
+      "sourceModifiedAt": "2025-07-09T00:46:33Z",
+      "retrievedAt": "2026-10-15T03:46:57Z",
+      "source": "Wikidata structured entity data plus English Wikipedia category membership",
+      "license": "CC0",
+      "verification": "source-reported",
+      "labels": {
+        "en": "Municipal Gallery of Athens",
+        "el": "Δημοτική πινακοθήκη Αθήνας"
+      },
+      "aliases": {
+        "en": [
+          "Dimotiki pinakotheke Athinas"
+        ],
+        "el": [
+          "Πινακοθήκη Δήμου Αθηναίων",
+          "Δημοτική Πινακοθήκη Αθηναίων"
+        ]
+      },
+      "officialWebsites": [],
+      "sourceClaims": {
+        "P31_instanceOf": [
+          "Q207694"
+        ],
+        "P131_locatedInAdministrativeEntity": [
+          "Q1224979"
+        ],
+        "P625_coordinateStatements": [
+          {
+            "latitude": 37.9830099,
+            "longitude": 23.7193483,
+            "precisionDegrees": 2.77777777778e-06,
+            "globeEntity": "http://www.wikidata.org/entity/Q2",
+            "rank": "normal"
+          }
+        ],
+        "P856_officialWebsiteClaims": []
+      },
+      "categoryEvidence": [
+        {
+          "categoryTitle": "Category:Art museums and galleries in Athens",
+          "categoryUrl": "https://en.wikipedia.org/wiki/Category:Art_museums_and_galleries_in_Athens",
+          "articleTitle": "Municipal Gallery of Athens",
+          "articlePageId": 16811733,
+          "articleUrl": "https://en.wikipedia.org/wiki/Municipal_Gallery_of_Athens",
+          "wikibaseItem": "Q1576793",
+          "retrievedAt": "2026-10-15T03:46:57Z"
+        }
+      ],
+      "wikidataTypeVerification": {
+        "targetClass": "Q33506",
+        "verified": true,
+        "P31Classes": [
+          {
+            "id": "Q207694",
+            "label": "art museum"
+          }
+        ],
+        "verifiedP279Paths": [
+          {
+            "path": [
+              "Q207694",
+              "Q33506"
+            ],
+            "proofEdges": [
+              {
+                "childEntityId": "Q207694",
+                "parentEntityId": "Q33506",
+                "sourceClaimUrl": "https://www.wikidata.org/wiki/Q207694#P279"
+              }
+            ],
+            "proofType": "P31 start plus fetched P279 edges"
+          }
+        ],
+        "checkedClassGraphSource": "Wikidata wbgetentities batch, P279 statements; retrieval 2026-10-15",
+        "status": "verified"
+      },
+      "geography": {
+        "referenceEntityId": "Q1524",
+        "radiusKm": 6,
+        "derivedGreatCircleDistanceKm": 0.774,
+        "uniqueCoordinateAvailable": true,
+        "sourceAdministrativeEntities": [
+          "Q1224979"
+        ],
+        "recognizedDirectAthensMembership": true
+      },
+      "candidateEligibility": {
+        "eligible": true,
+        "type": "museum",
+        "reasons": []
+      }
+    },
+    {
+      "fixtureId": "wd_Q78033066",
+      "sourceEntityId": "Q78033066",
+      "name": "Museum Alex Mylona",
+      "coordinates": {
+        "latitude": 37.97776,
+        "longitude": 23.72159,
+        "precisionDegrees": 1e-08,
+        "globeEntity": "http://www.wikidata.org/entity/Q2"
+      },
+      "category": "attractions",
+      "cityId": "athens",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q78033066",
+      "sourceRevision": "2032327572",
+      "sourceModifiedAt": "2023-12-18T17:21:21Z",
+      "retrievedAt": "2026-10-15T03:37:56Z",
+      "source": "Wikidata structured entity data; English Wikipedia category membership",
+      "license": "CC0",
+      "verification": "source-reported",
+      "sourceClaims": {
+        "P31_instanceOf": [
+          "Q207694"
+        ],
+        "P131_locatedInAdministrativeEntity": [
+          "Q1224979"
+        ],
+        "P625_coordinateStatements": [
+          {
+            "latitude": 37.97776,
+            "longitude": 23.72159,
+            "precisionDegrees": 1e-08,
+            "globeEntity": "http://www.wikidata.org/entity/Q2",
+            "rank": "normal"
+          }
+        ],
+        "P856_officialWebsiteClaims": [
+          "http://mouseioalexmylona.blogspot.com/"
+        ]
+      },
+      "labels": {
+        "en": "Museum Alex Mylona",
+        "el": "Μουσείο Άλεξ Μυλωνά"
+      },
+      "aliases": {
+        "en": [
+          "Museum of Alex Mylona",
+          "MOMus - Museum Alex Mylona"
+        ],
+        "el": [
+          "Μουσείο Σύγχρονης Τέχνης Άλεξ Μυλωνά",
+          "MOMus-Μουσείο Άλεξ Μυλωνά"
+        ]
+      },
+      "officialWebsites": [
+        "http://mouseioalexmylona.blogspot.com/"
+      ],
+      "geography": {
+        "referenceEntityId": "Q1524",
+        "radiusKm": 6,
+        "derivedGreatCircleDistanceKm": 0.91,
+        "uniqueCoordinateAvailable": true,
+        "sourceAdministrativeEntities": [
+          "Q1224979"
+        ],
+        "recognizedDirectAthensMembership": true
+      },
+      "categoryEvidence": [
+        {
+          "source": "English Wikipedia API categorymembers",
+          "categoryTitle": "Category:Museums in Athens",
+          "categoryUrl": "https://en.wikipedia.org/wiki/Category:Museums_in_Athens",
+          "articleTitle": "MOMus-Museum Alex Mylona",
+          "articlePageId": 75489170,
+          "articleUrl": "https://en.wikipedia.org/wiki/MOMus-Museum_Alex_Mylona",
+          "retrievedAt": "2026-10-15T03:37:56Z",
+          "wikibaseItemLink": "https://www.wikidata.org/wiki/Q78033066"
+        }
+      ],
+      "wikidataTypeVerification": {
+        "targetClass": "Q33506",
+        "verified": true,
+        "P31Classes": [
+          {
+            "id": "Q207694",
+            "label": "art museum"
+          }
+        ],
+        "verifiedP279Paths": [
+          {
+            "path": [
+              "Q207694",
+              "Q33506"
+            ],
+            "proofEdges": [
+              {
+                "childEntityId": "Q207694",
+                "parentEntityId": "Q33506",
+                "sourceClaimUrl": "https://www.wikidata.org/wiki/Q207694#P279"
+              }
+            ],
+            "proofType": "P31 start plus fetched P279 edges"
+          }
+        ],
+        "checkedClassGraphSource": "Wikidata wbgetentities batch, P279 statements; retrieval 2026-10-15",
+        "status": "verified"
+      },
+      "candidateEligibility": {
+        "eligible": true,
+        "type": "museum",
+        "reasons": []
+      }
+    },
+    {
+      "fixtureId": "wd_Q1230253",
+      "sourceEntityId": "Q1230253",
+      "name": "Museum of Cycladic Art",
+      "coordinates": {
+        "latitude": 37.9757,
+        "longitude": 23.74227,
+        "precisionDegrees": 1e-06,
+        "globeEntity": "http://www.wikidata.org/entity/Q2"
+      },
+      "category": "attractions",
+      "cityId": "athens",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q1230253",
+      "sourceRevision": "2549931377",
+      "sourceModifiedAt": "2026-09-27T08:09:39Z",
+      "retrievedAt": "2026-10-15T03:46:57Z",
+      "source": "Wikidata structured entity data plus English Wikipedia category membership",
+      "license": "CC0",
+      "verification": "source-reported",
+      "labels": {
+        "en": "Museum of Cycladic Art",
+        "el": "Μουσείο Κυκλαδικής Τέχνης"
+      },
+      "aliases": {
+        "en": [
+          "Cycladic art museum",
+          "The Nicholas P. Goulandris Foundation, Cycladic Art Museum",
+          "Goulandris Foundation",
+          "Goulandris Museum of Cycladic Art"
+        ],
+        "el": []
+      },
+      "officialWebsites": [
+        "http://www.cycladic.gr/en"
+      ],
+      "sourceClaims": {
+        "P31_instanceOf": [
+          "Q207694",
+          "Q3329412"
+        ],
+        "P131_locatedInAdministrativeEntity": [
+          "Q1224979"
+        ],
+        "P625_coordinateStatements": [
+          {
+            "latitude": 37.9757,
+            "longitude": 23.74227,
+            "precisionDegrees": 1e-06,
+            "globeEntity": "http://www.wikidata.org/entity/Q2",
+            "rank": "normal"
+          }
+        ],
+        "P856_officialWebsiteClaims": [
+          "http://www.cycladic.gr/en"
+        ]
+      },
+      "categoryEvidence": [
+        {
+          "categoryTitle": "Category:Archaeological museums in Athens",
+          "categoryUrl": "https://en.wikipedia.org/wiki/Category:Archaeological_museums_in_Athens",
+          "articleTitle": "Goulandris Museum of Cycladic Art",
+          "articlePageId": 12379700,
+          "articleUrl": "https://en.wikipedia.org/wiki/Goulandris_Museum_of_Cycladic_Art",
+          "wikibaseItem": "Q1230253",
+          "retrievedAt": "2026-10-15T03:46:57Z"
+        }
+      ],
+      "wikidataTypeVerification": {
+        "targetClass": "Q33506",
+        "verified": true,
+        "P31Classes": [
+          {
+            "id": "Q207694",
+            "label": "art museum"
+          },
+          {
+            "id": "Q3329412",
+            "label": "archaeological museum"
+          }
+        ],
+        "verifiedP279Paths": [
+          {
+            "path": [
+              "Q207694",
+              "Q33506"
+            ],
+            "proofEdges": [
+              {
+                "childEntityId": "Q207694",
+                "parentEntityId": "Q33506",
+                "sourceClaimUrl": "https://www.wikidata.org/wiki/Q207694#P279"
+              }
+            ],
+            "proofType": "P31 start plus fetched P279 edges"
+          },
+          {
+            "path": [
+              "Q3329412",
+              "Q207694",
+              "Q33506"
+            ],
+            "proofEdges": [
+              {
+                "childEntityId": "Q3329412",
+                "parentEntityId": "Q207694",
+                "sourceClaimUrl": "https://www.wikidata.org/wiki/Q3329412#P279"
+              },
+              {
+                "childEntityId": "Q207694",
+                "parentEntityId": "Q33506",
+                "sourceClaimUrl": "https://www.wikidata.org/wiki/Q207694#P279"
+              }
+            ],
+            "proofType": "P31 start plus fetched P279 edges"
+          }
+        ],
+        "checkedClassGraphSource": "Wikidata wbgetentities batch, P279 statements; retrieval 2026-10-15",
+        "status": "verified"
+      },
+      "geography": {
+        "referenceEntityId": "Q1524",
+        "radiusKm": 6,
+        "derivedGreatCircleDistanceKm": 1.562,
+        "uniqueCoordinateAvailable": true,
+        "sourceAdministrativeEntities": [
+          "Q1224979"
+        ],
+        "recognizedDirectAthensMembership": true
+      },
+      "candidateEligibility": {
+        "eligible": true,
+        "type": "museum",
+        "reasons": []
+      }
+    },
+    {
+      "fixtureId": "wd_Q4306259",
+      "sourceEntityId": "Q4306259",
+      "name": "Museum of Greek Folk Art",
+      "coordinates": {
+        "latitude": 37.97253333,
+        "longitude": 23.73230833,
+        "precisionDegrees": 2.77777777778e-06,
+        "globeEntity": "http://www.wikidata.org/entity/Q2"
+      },
+      "category": "attractions",
+      "cityId": "athens",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q4306259",
+      "sourceRevision": "2522324021",
+      "sourceModifiedAt": "2026-07-24T23:15:45Z",
+      "retrievedAt": "2026-10-15T03:46:57Z",
+      "source": "Wikidata structured entity data plus English Wikipedia category membership",
+      "license": "CC0",
+      "verification": "source-reported",
+      "labels": {
+        "en": "Museum of Greek Folk Art",
+        "el": "Μουσείο Ελληνικής Λαϊκής Τέχνης"
+      },
+      "aliases": {
+        "en": [
+          "The Museum of Greek Folk Art"
+        ],
+        "el": []
+      },
+      "officialWebsites": [
+        "http://www.mnep.gr/"
+      ],
+      "sourceClaims": {
+        "P31_instanceOf": [
+          "Q207694"
+        ],
+        "P131_locatedInAdministrativeEntity": [
+          "Q1224979"
+        ],
+        "P625_coordinateStatements": [
+          {
+            "latitude": 37.97253333,
+            "longitude": 23.73230833,
+            "precisionDegrees": 2.77777777778e-06,
+            "globeEntity": "http://www.wikidata.org/entity/Q2",
+            "rank": "normal"
+          }
+        ],
+        "P856_officialWebsiteClaims": [
+          "http://www.mnep.gr/"
+        ]
+      },
+      "categoryEvidence": [
+        {
+          "categoryTitle": "Category:Art museums and galleries in Athens",
+          "categoryUrl": "https://en.wikipedia.org/wiki/Category:Art_museums_and_galleries_in_Athens",
+          "articleTitle": "Museum of Greek Folk Art",
+          "articlePageId": 16811869,
+          "articleUrl": "https://en.wikipedia.org/wiki/Museum_of_Greek_Folk_Art",
+          "wikibaseItem": "Q4306259",
+          "retrievedAt": "2026-10-15T03:46:57Z"
+        }
+      ],
+      "wikidataTypeVerification": {
+        "targetClass": "Q33506",
+        "verified": true,
+        "P31Classes": [
+          {
+            "id": "Q207694",
+            "label": "art museum"
+          }
+        ],
+        "verifiedP279Paths": [
+          {
+            "path": [
+              "Q207694",
+              "Q33506"
+            ],
+            "proofEdges": [
+              {
+                "childEntityId": "Q207694",
+                "parentEntityId": "Q33506",
+                "sourceClaimUrl": "https://www.wikidata.org/wiki/Q207694#P279"
+              }
+            ],
+            "proofType": "P31 start plus fetched P279 edges"
+          }
+        ],
+        "checkedClassGraphSource": "Wikidata wbgetentities batch, P279 statements; retrieval 2026-10-15",
+        "status": "verified"
+      },
+      "geography": {
+        "referenceEntityId": "Q1524",
+        "radiusKm": 6,
+        "derivedGreatCircleDistanceKm": 1.346,
+        "uniqueCoordinateAvailable": true,
+        "sourceAdministrativeEntities": [
+          "Q1224979"
+        ],
+        "recognizedDirectAthensMembership": true
+      },
+      "candidateEligibility": {
+        "eligible": true,
+        "type": "museum",
+        "reasons": []
+      }
+    },
+    {
+      "fixtureId": "wd_Q637187",
+      "sourceEntityId": "Q637187",
+      "name": "National Archaeological Museum of Athens",
+      "coordinates": {
+        "latitude": 37.98916666666667,
+        "longitude": 23.732222222222223,
+        "precisionDegrees": 0.0002777777777777778,
+        "globeEntity": "http://www.wikidata.org/entity/Q2"
+      },
+      "category": "attractions",
+      "cityId": "athens",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q637187",
+      "sourceRevision": "2555985565",
+      "sourceModifiedAt": "2026-10-11T20:22:23Z",
+      "retrievedAt": "2026-10-15T03:46:57Z",
+      "source": "Wikidata structured entity data plus English Wikipedia category membership",
+      "license": "CC0",
+      "verification": "source-reported",
+      "labels": {
+        "el": "Εθνικό Αρχαιολογικό Μουσείο Αθηνών",
+        "en": "National Archaeological Museum of Athens"
+      },
+      "aliases": {
+        "en": [
+          "National Archaeological Museum, Athens",
+          "Archaeological Museum of Athens",
+          "NAMA"
+        ],
+        "el": [
+          "Εθνικό Αρχαιολογικό Μουσείο της Αθήνας"
+        ]
+      },
+      "officialWebsites": [
+        "https://www.namuseum.gr/",
+        "https://www.namuseum.gr/en/"
+      ],
+      "sourceClaims": {
+        "P31_instanceOf": [
+          "Q17431399",
+          "Q3329412"
+        ],
+        "P131_locatedInAdministrativeEntity": [
+          "Q1224979"
+        ],
+        "P625_coordinateStatements": [
+          {
+            "latitude": 37.98916666666667,
+            "longitude": 23.732222222222223,
+            "precisionDegrees": 0.0002777777777777778,
+            "globeEntity": "http://www.wikidata.org/entity/Q2",
+            "rank": "normal"
+          }
+        ],
+        "P856_officialWebsiteClaims": [
+          "https://www.namuseum.gr/",
+          "https://www.namuseum.gr/en/"
+        ]
+      },
+      "categoryEvidence": [
+        {
+          "categoryTitle": "Category:Archaeological museums in Athens",
+          "categoryUrl": "https://en.wikipedia.org/wiki/Category:Archaeological_museums_in_Athens",
+          "articleTitle": "National Archaeological Museum, Athens",
+          "articlePageId": 2983991,
+          "articleUrl": "https://en.wikipedia.org/wiki/National_Archaeological_Museum,_Athens",
+          "wikibaseItem": "Q637187",
+          "retrievedAt": "2026-10-15T03:46:57Z"
+        },
+        {
+          "categoryTitle": "Category:Art museums and galleries in Athens",
+          "categoryUrl": "https://en.wikipedia.org/wiki/Category:Art_museums_and_galleries_in_Athens",
+          "articleTitle": "National Archaeological Museum, Athens",
+          "articlePageId": 2983991,
+          "articleUrl": "https://en.wikipedia.org/wiki/National_Archaeological_Museum,_Athens",
+          "wikibaseItem": "Q637187",
+          "retrievedAt": "2026-10-15T03:46:57Z"
+        }
+      ],
+      "wikidataTypeVerification": {
+        "targetClass": "Q33506",
+        "verified": true,
+        "P31Classes": [
+          {
+            "id": "Q17431399",
+            "label": "national museum"
+          },
+          {
+            "id": "Q3329412",
+            "label": "archaeological museum"
+          }
+        ],
+        "verifiedP279Paths": [
+          {
+            "path": [
+              "Q17431399",
+              "Q33506"
+            ],
+            "proofEdges": [
+              {
+                "childEntityId": "Q17431399",
+                "parentEntityId": "Q33506",
+                "sourceClaimUrl": "https://www.wikidata.org/wiki/Q17431399#P279"
+              }
+            ],
+            "proofType": "P31 start plus fetched P279 edges"
+          },
+          {
+            "path": [
+              "Q3329412",
+              "Q207694",
+              "Q33506"
+            ],
+            "proofEdges": [
+              {
+                "childEntityId": "Q3329412",
+                "parentEntityId": "Q207694",
+                "sourceClaimUrl": "https://www.wikidata.org/wiki/Q3329412#P279"
+              },
+              {
+                "childEntityId": "Q207694",
+                "parentEntityId": "Q33506",
+                "sourceClaimUrl": "https://www.wikidata.org/wiki/Q207694#P279"
+              }
+            ],
+            "proofType": "P31 start plus fetched P279 edges"
+          }
+        ],
+        "checkedClassGraphSource": "Wikidata wbgetentities batch, P279 statements; retrieval 2026-10-15",
+        "status": "verified"
+      },
+      "geography": {
+        "referenceEntityId": "Q1524",
+        "radiusKm": 6,
+        "derivedGreatCircleDistanceKm": 0.665,
+        "uniqueCoordinateAvailable": true,
+        "sourceAdministrativeEntities": [
+          "Q1224979"
+        ],
+        "recognizedDirectAthensMembership": true
+      },
+      "candidateEligibility": {
+        "eligible": true,
+        "type": "museum",
+        "reasons": []
+      }
+    },
+    {
+      "fixtureId": "wd_Q1167467",
+      "sourceEntityId": "Q1167467",
+      "name": "National Gallery of Athens",
+      "coordinates": {
+        "latitude": 37.986722222222,
+        "longitude": 23.77825,
+        "precisionDegrees": 2.7777777777778e-05,
+        "globeEntity": "http://www.wikidata.org/entity/Q2"
+      },
+      "category": "attractions",
+      "cityId": "athens",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q1167467",
+      "sourceRevision": "2547032528",
+      "sourceModifiedAt": "2026-09-17T13:23:15Z",
+      "retrievedAt": "2026-10-15T03:46:57Z",
+      "source": "Wikidata structured entity data plus English Wikipedia category membership",
+      "license": "CC0",
+      "verification": "source-reported",
+      "labels": {
+        "el": "Εθνική Πινακοθήκη της Ελλάδος",
+        "en": "National Gallery of Athens"
+      },
+      "aliases": {
+        "en": [
+          "National Gallery - Alexandros Soutzos Museum",
+          "National Gallery-Alexandros Soutzos Museum",
+          "Euripides Koutlides foundation",
+          "National Gallery of Greece",
+          "Ethniki Pinakothiki Alexander Soutzos Museum",
+          "Ethniki Pinakothiki-Mouseio Alexandrou Soutzou",
+          "Nationale Pinakotheek en Alexander Soutzos Museum"
+        ],
+        "el": [
+          "Ίδρυμα Ευριπίδη Κουτλίδη",
+          "Εθνική Πινακοθήκη Αθηνών",
+          "Εθνική Πινακοθήκη-Μουσείο Αλεξάνδρου Σούτσου",
+          "Εθνική Πινακοθήκη της Αθήνας"
+        ]
+      },
+      "officialWebsites": [
+        "http://www.nationalgallery.gr"
+      ],
+      "sourceClaims": {
+        "P31_instanceOf": [
+          "Q3196771",
+          "Q17431399",
+          "Q740437"
+        ],
+        "P131_locatedInAdministrativeEntity": [
+          "Q1224979"
+        ],
+        "P625_coordinateStatements": [
+          {
+            "latitude": 37.986722222222,
+            "longitude": 23.77825,
+            "precisionDegrees": 2.7777777777778e-05,
+            "globeEntity": "http://www.wikidata.org/entity/Q2",
+            "rank": "normal"
+          }
+        ],
+        "P856_officialWebsiteClaims": [
+          "http://www.nationalgallery.gr"
+        ]
+      },
+      "categoryEvidence": [
+        {
+          "categoryTitle": "Category:Art museums and galleries in Athens",
+          "categoryUrl": "https://en.wikipedia.org/wiki/Category:Art_museums_and_galleries_in_Athens",
+          "articleTitle": "National Gallery (Athens)",
+          "articlePageId": 12124192,
+          "articleUrl": "https://en.wikipedia.org/wiki/National_Gallery_(Athens)",
+          "wikibaseItem": "Q1167467",
+          "retrievedAt": "2026-10-15T03:46:57Z"
+        }
+      ],
+      "wikidataTypeVerification": {
+        "targetClass": "Q33506",
+        "verified": true,
+        "P31Classes": [
+          {
+            "id": "Q3196771",
+            "label": "art museum"
+          },
+          {
+            "id": "Q17431399",
+            "label": "national museum"
+          },
+          {
+            "id": "Q740437",
+            "label": "pinacotheca"
+          }
+        ],
+        "verifiedP279Paths": [
+          {
+            "path": [
+              "Q17431399",
+              "Q33506"
+            ],
+            "proofEdges": [
+              {
+                "childEntityId": "Q17431399",
+                "parentEntityId": "Q33506",
+                "sourceClaimUrl": "https://www.wikidata.org/wiki/Q17431399#P279"
+              }
+            ],
+            "proofType": "P31 start plus fetched P279 edges"
+          }
+        ],
+        "checkedClassGraphSource": "Wikidata wbgetentities batch, P279 statements; retrieval 2026-10-15",
+        "status": "verified"
+      },
+      "geography": {
+        "referenceEntityId": "Q1524",
+        "radiusKm": 6,
+        "derivedGreatCircleDistanceKm": 4.408,
+        "uniqueCoordinateAvailable": true,
+        "sourceAdministrativeEntities": [
+          "Q1224979"
+        ],
+        "recognizedDirectAthensMembership": true
+      },
+      "candidateEligibility": {
+        "eligible": true,
+        "type": "museum",
+        "reasons": []
+      }
+    },
+    {
+      "fixtureId": "wd_Q6972907",
+      "sourceEntityId": "Q6972907",
+      "name": "National Glyptotheque",
+      "coordinates": {
+        "latitude": 37.98691111,
+        "longitude": 23.77843611,
+        "precisionDegrees": 2.77777777778e-06,
+        "globeEntity": "http://www.wikidata.org/entity/Q2"
+      },
+      "category": "attractions",
+      "cityId": "athens",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q6972907",
+      "sourceRevision": "2488432404",
+      "sourceModifiedAt": "2026-05-07T06:08:51Z",
+      "retrievedAt": "2026-10-15T03:46:57Z",
+      "source": "Wikidata structured entity data plus English Wikipedia category membership",
+      "license": "CC0",
+      "verification": "source-reported",
+      "labels": {
+        "en": "National Glyptotheque",
+        "el": "Εθνική Γλυπτοθήκη"
+      },
+      "aliases": {
+        "en": [
+          "Ethnike Glyptotheke"
+        ],
+        "el": []
+      },
+      "officialWebsites": [
+        "http://www.nationalgallery.gr/"
+      ],
+      "sourceClaims": {
+        "P31_instanceOf": [
+          "Q957433",
+          "Q17431399"
+        ],
+        "P131_locatedInAdministrativeEntity": [
+          "Q1224979"
+        ],
+        "P625_coordinateStatements": [
+          {
+            "latitude": 37.98691111,
+            "longitude": 23.77843611,
+            "precisionDegrees": 2.77777777778e-06,
+            "globeEntity": "http://www.wikidata.org/entity/Q2",
+            "rank": "normal"
+          }
+        ],
+        "P856_officialWebsiteClaims": [
+          "http://www.nationalgallery.gr/"
+        ]
+      },
+      "categoryEvidence": [
+        {
+          "categoryTitle": "Category:Art museums and galleries in Athens",
+          "categoryUrl": "https://en.wikipedia.org/wiki/Category:Art_museums_and_galleries_in_Athens",
+          "articleTitle": "National Glyptotheque",
+          "articlePageId": 22980200,
+          "articleUrl": "https://en.wikipedia.org/wiki/National_Glyptotheque",
+          "wikibaseItem": "Q6972907",
+          "retrievedAt": "2026-10-15T03:46:57Z"
+        }
+      ],
+      "wikidataTypeVerification": {
+        "targetClass": "Q33506",
+        "verified": true,
+        "P31Classes": [
+          {
+            "id": "Q957433",
+            "label": "glyptotheque"
+          },
+          {
+            "id": "Q17431399",
+            "label": "national museum"
+          }
+        ],
+        "verifiedP279Paths": [
+          {
+            "path": [
+              "Q17431399",
+              "Q33506"
+            ],
+            "proofEdges": [
+              {
+                "childEntityId": "Q17431399",
+                "parentEntityId": "Q33506",
+                "sourceClaimUrl": "https://www.wikidata.org/wiki/Q17431399#P279"
+              }
+            ],
+            "proofType": "P31 start plus fetched P279 edges"
+          }
+        ],
+        "checkedClassGraphSource": "Wikidata wbgetentities batch, P279 statements; retrieval 2026-10-15",
+        "status": "verified"
+      },
+      "geography": {
+        "referenceEntityId": "Q1524",
+        "radiusKm": 6,
+        "derivedGreatCircleDistanceKm": 4.426,
+        "uniqueCoordinateAvailable": true,
+        "sourceAdministrativeEntities": [
+          "Q1224979"
+        ],
+        "recognizedDirectAthensMembership": true
+      },
+      "candidateEligibility": {
+        "eligible": true,
+        "type": "museum",
+        "reasons": []
+      }
+    },
+    {
+      "fixtureId": "wd_Q15263731",
+      "sourceEntityId": "Q15263731",
+      "name": "Old Acropolis Museum",
+      "coordinates": {
+        "latitude": 37.971,
+        "longitude": 23.728,
+        "precisionDegrees": 2.777777777778e-05,
+        "globeEntity": "http://www.wikidata.org/entity/Q2"
+      },
+      "category": "attractions",
+      "cityId": "athens",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q15263731",
+      "sourceRevision": "2291206323",
+      "sourceModifiedAt": "2024-12-25T07:00:13Z",
+      "retrievedAt": "2026-10-15T03:46:57Z",
+      "source": "Wikidata structured entity data plus English Wikipedia category membership",
+      "license": "CC0",
+      "verification": "source-reported",
+      "labels": {
+        "en": "Old Acropolis Museum",
+        "el": "Παλαιό Μουσείο Ακρόπολης"
+      },
+      "aliases": {
+        "en": [
+          "The Acropolis Museum"
+        ],
+        "el": []
+      },
+      "officialWebsites": [],
+      "sourceClaims": {
+        "P31_instanceOf": [
+          "Q33506"
+        ],
+        "P131_locatedInAdministrativeEntity": [
+          "Q1524"
+        ],
+        "P625_coordinateStatements": [
+          {
+            "latitude": 37.971,
+            "longitude": 23.728,
+            "precisionDegrees": 2.777777777778e-05,
+            "globeEntity": "http://www.wikidata.org/entity/Q2",
+            "rank": "normal"
+          }
+        ],
+        "P856_officialWebsiteClaims": []
+      },
+      "categoryEvidence": [
+        {
+          "categoryTitle": "Category:Archaeological museums in Athens",
+          "categoryUrl": "https://en.wikipedia.org/wiki/Category:Archaeological_museums_in_Athens",
+          "articleTitle": "Old Acropolis Museum",
+          "articlePageId": 7972275,
+          "articleUrl": "https://en.wikipedia.org/wiki/Old_Acropolis_Museum",
+          "wikibaseItem": "Q15263731",
+          "retrievedAt": "2026-10-15T03:46:57Z"
+        }
+      ],
+      "wikidataTypeVerification": {
+        "targetClass": "Q33506",
+        "verified": true,
+        "P31Classes": [
+          {
+            "id": "Q33506",
+            "label": "museum"
+          }
+        ],
+        "verifiedP279Paths": [
+          {
+            "path": [
+              "Q33506"
+            ],
+            "proofEdges": [],
+            "proofType": "direct P31=Q33506"
+          }
+        ],
+        "checkedClassGraphSource": "Wikidata wbgetentities batch, P279 statements; retrieval 2026-10-15",
+        "status": "verified"
+      },
+      "geography": {
+        "referenceEntityId": "Q1524",
+        "radiusKm": 6,
+        "derivedGreatCircleDistanceKm": 1.464,
+        "uniqueCoordinateAvailable": true,
+        "sourceAdministrativeEntities": [
+          "Q1524"
+        ],
+        "recognizedDirectAthensMembership": true
+      },
+      "candidateEligibility": {
+        "eligible": true,
+        "type": "museum",
+        "reasons": []
+      }
+    },
+    {
+      "fixtureId": "wd_Q4306141",
+      "sourceEntityId": "Q4306141",
+      "name": "Paul and Alexandra Canellopoulos Museum",
+      "coordinates": {
+        "latitude": 37.97286111,
+        "longitude": 23.72588889,
+        "precisionDegrees": 2.777777777778e-05,
+        "globeEntity": "http://www.wikidata.org/entity/Q2"
+      },
+      "category": "attractions",
+      "cityId": "athens",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q4306141",
+      "sourceRevision": "2533001170",
+      "sourceModifiedAt": "2026-08-19T02:39:57Z",
+      "retrievedAt": "2026-10-15T03:46:57Z",
+      "source": "Wikidata structured entity data plus English Wikipedia category membership",
+      "license": "CC0",
+      "verification": "source-reported",
+      "labels": {
+        "en": "Paul and Alexandra Canellopoulos Museum",
+        "el": "Μουσείο Παύλου και Aλεξάνδρας Κανελλοπούλου"
+      },
+      "aliases": {
+        "en": [
+          "The Museum of Pavlos and Alexandra Kanellopoulou",
+          "Kanellopoulos museum",
+          "Canellopoulos Museum",
+          "Pavlos and Alexandra Κanellopoulos Museum"
+        ],
+        "el": []
+      },
+      "officialWebsites": [
+        "https://pacf.gr/en/"
+      ],
+      "sourceClaims": {
+        "P31_instanceOf": [
+          "Q33506"
+        ],
+        "P131_locatedInAdministrativeEntity": [
+          "Q1224979"
+        ],
+        "P625_coordinateStatements": [
+          {
+            "latitude": 37.97286111,
+            "longitude": 23.72588889,
+            "precisionDegrees": 2.777777777778e-05,
+            "globeEntity": "http://www.wikidata.org/entity/Q2",
+            "rank": "normal"
+          }
+        ],
+        "P856_officialWebsiteClaims": [
+          "https://pacf.gr/en/"
+        ]
+      },
+      "categoryEvidence": [
+        {
+          "categoryTitle": "Category:Archaeological museums in Athens",
+          "categoryUrl": "https://en.wikipedia.org/wiki/Category:Archaeological_museums_in_Athens",
+          "articleTitle": "Museum of Pavlos and Alexandra Kanellopoulou",
+          "articlePageId": 16811674,
+          "articleUrl": "https://en.wikipedia.org/wiki/Museum_of_Pavlos_and_Alexandra_Kanellopoulou",
+          "wikibaseItem": "Q4306141",
+          "retrievedAt": "2026-10-15T03:46:57Z"
+        }
+      ],
+      "wikidataTypeVerification": {
+        "targetClass": "Q33506",
+        "verified": true,
+        "P31Classes": [
+          {
+            "id": "Q33506",
+            "label": "museum"
+          }
+        ],
+        "verifiedP279Paths": [
+          {
+            "path": [
+              "Q33506"
+            ],
+            "proofEdges": [],
+            "proofType": "direct P31=Q33506"
+          }
+        ],
+        "checkedClassGraphSource": "Wikidata wbgetentities batch, P279 statements; retrieval 2026-10-15",
+        "status": "verified"
+      },
+      "geography": {
+        "referenceEntityId": "Q1524",
+        "radiusKm": 6,
+        "derivedGreatCircleDistanceKm": 1.271,
+        "uniqueCoordinateAvailable": true,
+        "sourceAdministrativeEntities": [
+          "Q1224979"
+        ],
+        "recognizedDirectAthensMembership": true
+      },
+      "candidateEligibility": {
+        "eligible": true,
+        "type": "museum",
+        "reasons": []
+      }
+    },
+    {
+      "fixtureId": "wd_Q7191890",
+      "sourceEntityId": "Q7191890",
+      "name": "Pieridis museum",
+      "coordinates": {
+        "latitude": 37.98344444,
+        "longitude": 23.71094444,
+        "precisionDegrees": 2.777777777778e-05,
+        "globeEntity": "http://www.wikidata.org/entity/Q2"
+      },
+      "category": "attractions",
+      "cityId": "athens",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q7191890",
+      "sourceRevision": "1727439749",
+      "sourceModifiedAt": "2022-09-13T01:16:39Z",
+      "retrievedAt": "2026-10-15T03:46:57Z",
+      "source": "Wikidata structured entity data plus English Wikipedia category membership",
+      "license": "CC0",
+      "verification": "source-reported",
+      "labels": {
+        "en": "Pieridis museum",
+        "el": "Μουσείο Πιερίδη"
+      },
+      "aliases": {
+        "en": [
+          "Pieridi museum",
+          "Museum of ancient Cypriot art"
+        ],
+        "el": [
+          "Μουσείο αρχαίας Κυπριακής τέχνης"
+        ]
+      },
+      "officialWebsites": [],
+      "sourceClaims": {
+        "P31_instanceOf": [
+          "Q207694"
+        ],
+        "P131_locatedInAdministrativeEntity": [
+          "Q1224979"
+        ],
+        "P625_coordinateStatements": [
+          {
+            "latitude": 37.98344444,
+            "longitude": 23.71094444,
+            "precisionDegrees": 2.777777777778e-05,
+            "globeEntity": "http://www.wikidata.org/entity/Q2",
+            "rank": "normal"
+          }
+        ],
+        "P856_officialWebsiteClaims": []
+      },
+      "categoryEvidence": [
+        {
+          "categoryTitle": "Category:Archaeological museums in Athens",
+          "categoryUrl": "https://en.wikipedia.org/wiki/Category:Archaeological_museums_in_Athens",
+          "articleTitle": "Pieridis Museum",
+          "articlePageId": 16811600,
+          "articleUrl": "https://en.wikipedia.org/wiki/Pieridis_Museum",
+          "wikibaseItem": "Q7191890",
+          "retrievedAt": "2026-10-15T03:46:57Z"
+        }
+      ],
+      "wikidataTypeVerification": {
+        "targetClass": "Q33506",
+        "verified": true,
+        "P31Classes": [
+          {
+            "id": "Q207694",
+            "label": "art museum"
+          }
+        ],
+        "verifiedP279Paths": [
+          {
+            "path": [
+              "Q207694",
+              "Q33506"
+            ],
+            "proofEdges": [
+              {
+                "childEntityId": "Q207694",
+                "parentEntityId": "Q33506",
+                "sourceClaimUrl": "https://www.wikidata.org/wiki/Q207694#P279"
+              }
+            ],
+            "proofType": "P31 start plus fetched P279 edges"
+          }
+        ],
+        "checkedClassGraphSource": "Wikidata wbgetentities batch, P279 statements; retrieval 2026-10-15",
+        "status": "verified"
+      },
+      "geography": {
+        "referenceEntityId": "Q1524",
+        "radiusKm": 6,
+        "derivedGreatCircleDistanceKm": 1.502,
+        "uniqueCoordinateAvailable": true,
+        "sourceAdministrativeEntities": [
+          "Q1224979"
+        ],
+        "recognizedDirectAthensMembership": true
+      },
+      "candidateEligibility": {
+        "eligible": true,
+        "type": "museum",
+        "reasons": []
+      }
+    },
+    {
+      "fixtureId": "wd_Q7662661",
+      "sourceEntityId": "Q7662661",
+      "name": "Syntagma Metro Station Archaeological Collection",
+      "coordinates": {
+        "latitude": 37.9755,
+        "longitude": 23.7351,
+        "precisionDegrees": 0.011395978433127,
+        "globeEntity": "http://www.wikidata.org/entity/Q2"
+      },
+      "category": "attractions",
+      "cityId": "athens",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q7662661",
+      "sourceRevision": "1846531891",
+      "sourceModifiedAt": "2023-03-07T12:04:15Z",
+      "retrievedAt": "2026-10-15T03:46:57Z",
+      "source": "Wikidata structured entity data plus English Wikipedia category membership",
+      "license": "CC0",
+      "verification": "source-reported",
+      "labels": {
+        "en": "Syntagma Metro Station Archaeological Collection",
+        "el": "Αρχαιολογική Έκθεση στο σταθμό μετρό \"Ακρόπολις\""
+      },
+      "aliases": {
+        "en": [
+          "The Syntagma Metro Station Archaeological Collection"
+        ],
+        "el": [
+          "Αρχαιολογική Έκθεση στο σταθμό Μετρό Συντάγματος"
+        ]
+      },
+      "officialWebsites": [
+        "http://www.greekmuseums.gr/en/thelist/thematical/95-The-Syntagma-Metro-Station-Archaeological-Collection.html"
+      ],
+      "sourceClaims": {
+        "P31_instanceOf": [
+          "Q33506",
+          "Q3329412"
+        ],
+        "P131_locatedInAdministrativeEntity": [
+          "Q1524"
+        ],
+        "P625_coordinateStatements": [
+          {
+            "latitude": 37.9755,
+            "longitude": 23.7351,
+            "precisionDegrees": 0.011395978433127,
+            "globeEntity": "http://www.wikidata.org/entity/Q2",
+            "rank": "normal"
+          }
+        ],
+        "P856_officialWebsiteClaims": [
+          "http://www.greekmuseums.gr/en/thelist/thematical/95-The-Syntagma-Metro-Station-Archaeological-Collection.html"
+        ]
+      },
+      "categoryEvidence": [
+        {
+          "categoryTitle": "Category:Archaeological museums in Athens",
+          "categoryUrl": "https://en.wikipedia.org/wiki/Category:Archaeological_museums_in_Athens",
+          "articleTitle": "Syntagma Metro Station Archaeological Collection",
+          "articlePageId": 16811893,
+          "articleUrl": "https://en.wikipedia.org/wiki/Syntagma_Metro_Station_Archaeological_Collection",
+          "wikibaseItem": "Q7662661",
+          "retrievedAt": "2026-10-15T03:46:57Z"
+        }
+      ],
+      "wikidataTypeVerification": {
+        "targetClass": "Q33506",
+        "verified": true,
+        "P31Classes": [
+          {
+            "id": "Q33506",
+            "label": "museum"
+          },
+          {
+            "id": "Q3329412",
+            "label": "archaeological museum"
+          }
+        ],
+        "verifiedP279Paths": [
+          {
+            "path": [
+              "Q33506"
+            ],
+            "proofEdges": [],
+            "proofType": "direct P31=Q33506"
+          },
+          {
+            "path": [
+              "Q3329412",
+              "Q207694",
+              "Q33506"
+            ],
+            "proofEdges": [
+              {
+                "childEntityId": "Q3329412",
+                "parentEntityId": "Q207694",
+                "sourceClaimUrl": "https://www.wikidata.org/wiki/Q3329412#P279"
+              },
+              {
+                "childEntityId": "Q207694",
+                "parentEntityId": "Q33506",
+                "sourceClaimUrl": "https://www.wikidata.org/wiki/Q207694#P279"
+              }
+            ],
+            "proofType": "P31 start plus fetched P279 edges"
+          }
+        ],
+        "checkedClassGraphSource": "Wikidata wbgetentities batch, P279 statements; retrieval 2026-10-15",
+        "status": "verified"
+      },
+      "geography": {
+        "referenceEntityId": "Q1524",
+        "radiusKm": 6,
+        "derivedGreatCircleDistanceKm": 1.145,
+        "uniqueCoordinateAvailable": true,
+        "sourceAdministrativeEntities": [
+          "Q1524"
+        ],
+        "recognizedDirectAthensMembership": true
+      },
+      "candidateEligibility": {
+        "eligible": true,
+        "type": "museum",
+        "reasons": []
+      }
+    },
+    {
+      "fixtureId": "wd_Q7674145",
+      "sourceEntityId": "Q7674145",
+      "name": "Tactual Museum of Athens",
+      "coordinates": {
+        "latitude": 37.9454,
+        "longitude": 23.7001,
+        "precisionDegrees": 0.011391308632852,
+        "globeEntity": "http://www.wikidata.org/entity/Q2"
+      },
+      "category": "attractions",
+      "cityId": "athens",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q7674145",
+      "sourceRevision": "1636801798",
+      "sourceModifiedAt": "2022-05-11T19:53:41Z",
+      "retrievedAt": "2026-10-15T03:46:57Z",
+      "source": "Wikidata structured entity data plus English Wikipedia category membership",
+      "license": "CC0",
+      "verification": "source-reported",
+      "labels": {
+        "el": "Μουσείο Αφής",
+        "en": "Tactual Museum of Athens"
+      },
+      "aliases": {
+        "en": [
+          "Museum of Touch, Athens"
+        ],
+        "el": []
+      },
+      "officialWebsites": [
+        "http://www.tactualmuseum.gr"
+      ],
+      "sourceClaims": {
+        "P31_instanceOf": [
+          "Q207694"
+        ],
+        "P131_locatedInAdministrativeEntity": [
+          "Q1524"
+        ],
+        "P625_coordinateStatements": [
+          {
+            "latitude": 37.9454,
+            "longitude": 23.7001,
+            "precisionDegrees": 0.011391308632852,
+            "globeEntity": "http://www.wikidata.org/entity/Q2",
+            "rank": "normal"
+          }
+        ],
+        "P856_officialWebsiteClaims": [
+          "http://www.tactualmuseum.gr"
+        ]
+      },
+      "categoryEvidence": [
+        {
+          "categoryTitle": "Category:Art museums and galleries in Athens",
+          "categoryUrl": "https://en.wikipedia.org/wiki/Category:Art_museums_and_galleries_in_Athens",
+          "articleTitle": "Tactual Museum of Athens",
+          "articlePageId": 12386881,
+          "articleUrl": "https://en.wikipedia.org/wiki/Tactual_Museum_of_Athens",
+          "wikibaseItem": "Q7674145",
+          "retrievedAt": "2026-10-15T03:46:57Z"
+        }
+      ],
+      "wikidataTypeVerification": {
+        "targetClass": "Q33506",
+        "verified": true,
+        "P31Classes": [
+          {
+            "id": "Q207694",
+            "label": "art museum"
+          }
+        ],
+        "verifiedP279Paths": [
+          {
+            "path": [
+              "Q207694",
+              "Q33506"
+            ],
+            "proofEdges": [
+              {
+                "childEntityId": "Q207694",
+                "parentEntityId": "Q33506",
+                "sourceClaimUrl": "https://www.wikidata.org/wiki/Q207694#P279"
+              }
+            ],
+            "proofType": "P31 start plus fetched P279 edges"
+          }
+        ],
+        "checkedClassGraphSource": "Wikidata wbgetentities batch, P279 statements; retrieval 2026-10-15",
+        "status": "verified"
+      },
+      "geography": {
+        "referenceEntityId": "Q1524",
+        "radiusKm": 6,
+        "derivedGreatCircleDistanceKm": 4.959,
+        "uniqueCoordinateAvailable": true,
+        "sourceAdministrativeEntities": [
+          "Q1524"
+        ],
+        "recognizedDirectAthensMembership": true
+      },
+      "candidateEligibility": {
+        "eligible": true,
+        "type": "museum",
+        "reasons": []
+      }
+    },
+    {
+      "fixtureId": "wd_Q104527429",
+      "sourceEntityId": "Q104527429",
+      "name": "Theocharakis Foundation",
+      "coordinates": {
+        "latitude": 37.9762,
+        "longitude": 23.73828,
+        "precisionDegrees": 1e-05,
+        "globeEntity": "http://www.wikidata.org/entity/Q2"
+      },
+      "category": "attractions",
+      "cityId": "athens",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q104527429",
+      "sourceRevision": "2455230866",
+      "sourceModifiedAt": "2026-01-15T21:45:57Z",
+      "retrievedAt": "2026-10-15T03:46:57Z",
+      "source": "Wikidata structured entity data plus English Wikipedia category membership",
+      "license": "CC0",
+      "verification": "source-reported",
+      "labels": {
+        "el": "Ίδρυμα Θεοχαράκη",
+        "en": "Theocharakis Foundation"
+      },
+      "aliases": {
+        "en": [
+          "Theocharakes Foundation",
+          "B. & M. Theocharakis Foundation"
+        ],
+        "el": [
+          "Ίδρυμα Εικαστικών Τεχνών & Μουσικής Β. & Μ. Θεοχαράκη",
+          "Ίδρυμα Βασίλη και Μαρίνας Θεοχαράκη"
+        ]
+      },
+      "officialWebsites": [
+        "https://thf.gr/en/"
+      ],
+      "sourceClaims": {
+        "P31_instanceOf": [
+          "Q157031",
+          "Q33506"
+        ],
+        "P131_locatedInAdministrativeEntity": [
+          "Q1224979"
+        ],
+        "P625_coordinateStatements": [
+          {
+            "latitude": 37.9762,
+            "longitude": 23.73828,
+            "precisionDegrees": 1e-05,
+            "globeEntity": "http://www.wikidata.org/entity/Q2",
+            "rank": "normal"
+          }
+        ],
+        "P856_officialWebsiteClaims": [
+          "https://thf.gr/en/"
+        ]
+      },
+      "categoryEvidence": [
+        {
+          "categoryTitle": "Category:Art museums and galleries in Athens",
+          "categoryUrl": "https://en.wikipedia.org/wiki/Category:Art_museums_and_galleries_in_Athens",
+          "articleTitle": "B. & M. Theocharakis Foundation",
+          "articlePageId": 74859570,
+          "articleUrl": "https://en.wikipedia.org/wiki/B._&_M._Theocharakis_Foundation",
+          "wikibaseItem": "Q104527429",
+          "retrievedAt": "2026-10-15T03:46:57Z"
+        }
+      ],
+      "wikidataTypeVerification": {
+        "targetClass": "Q33506",
+        "verified": true,
+        "P31Classes": [
+          {
+            "id": "Q157031",
+            "label": "foundation"
+          },
+          {
+            "id": "Q33506",
+            "label": "museum"
+          }
+        ],
+        "verifiedP279Paths": [
+          {
+            "path": [
+              "Q33506"
+            ],
+            "proofEdges": [],
+            "proofType": "direct P31=Q33506"
+          }
+        ],
+        "checkedClassGraphSource": "Wikidata wbgetentities batch, P279 statements; retrieval 2026-10-15",
+        "status": "verified"
+      },
+      "geography": {
+        "referenceEntityId": "Q1524",
+        "radiusKm": 6,
+        "derivedGreatCircleDistanceKm": 1.26,
+        "uniqueCoordinateAvailable": true,
+        "sourceAdministrativeEntities": [
+          "Q1224979"
+        ],
+        "recognizedDirectAthensMembership": true
+      },
+      "candidateEligibility": {
+        "eligible": true,
+        "type": "museum",
+        "reasons": []
+      }
     }
   ]
 }

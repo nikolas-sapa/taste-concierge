@@ -1,0 +1,1016 @@
+{
+  "source": "Wikidata public MediaWiki API wbgetentities",
+  "endpoint": "https://www.wikidata.org/w/api.php",
+  "request": {
+    "action": "wbgetentities",
+    "entityIds": [
+      "Q17431399",
+      "Q207694",
+      "Q3329412",
+      "Q33506",
+      "Q866133"
+    ],
+    "properties": [
+      "info",
+      "labels",
+      "claims"
+    ],
+    "timeoutSeconds": 10,
+    "responseLimitBytes": 2097152,
+    "attempts": 1
+  },
+  "retrievedAt": "2026-10-15T07:07:26Z",
+  "targetClassEntityId": "Q33506",
+  "classes": [
+    {
+      "entityId": "Q17431399",
+      "label": "national museum",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q17431399",
+      "sourceRevision": 2549744159,
+      "sourceModifiedAt": "2026-09-26T18:30:04Z",
+      "P279NonDeprecatedClaims": [
+        {
+          "parentEntityId": "Q33506",
+          "rank": "normal",
+          "statementId": "Q17431399$14577a84-4920-c9e0-be44-1a7e4846ed03"
+        }
+      ]
+    },
+    {
+      "entityId": "Q207694",
+      "label": "art museum",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q207694",
+      "sourceRevision": 2547757955,
+      "sourceModifiedAt": "2026-09-19T15:27:34Z",
+      "P279NonDeprecatedClaims": [
+        {
+          "parentEntityId": "Q24699794",
+          "rank": "normal",
+          "statementId": "Q207694$f6113543-483b-f894-9c7d-3c17666913c4"
+        },
+        {
+          "parentEntityId": "Q33506",
+          "rank": "normal",
+          "statementId": "Q207694$1967af89-416e-2b85-b336-2a60039f963b"
+        }
+      ]
+    },
+    {
+      "entityId": "Q3329412",
+      "label": "archaeological museum",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q3329412",
+      "sourceRevision": 2555173193,
+      "sourceModifiedAt": "2026-10-09T00:08:02Z",
+      "P279NonDeprecatedClaims": [
+        {
+          "parentEntityId": "Q16735822",
+          "rank": "normal",
+          "statementId": "Q3329412$e84ee752-4443-a2eb-8cec-d4682bf44d7b"
+        },
+        {
+          "parentEntityId": "Q207694",
+          "rank": "normal",
+          "statementId": "Q3329412$1e517e39-4f84-ce57-47ac-620e3ddc13ef"
+        }
+      ]
+    },
+    {
+      "entityId": "Q33506",
+      "label": "museum",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q33506",
+      "sourceRevision": 2547756369,
+      "sourceModifiedAt": "2026-09-19T15:18:00Z",
+      "P279NonDeprecatedClaims": [
+        {
+          "parentEntityId": "Q1030034",
+          "rank": "normal",
+          "statementId": "Q33506$6baa08a0-4bb8-25f5-5900-e74ac4ce7a37"
+        },
+        {
+          "parentEntityId": "Q178706",
+          "rank": "normal",
+          "statementId": "Q33506$1c91a17f-47cf-c627-5e46-09ffc0109e4c"
+        },
+        {
+          "parentEntityId": "Q17350442",
+          "rank": "normal",
+          "statementId": "Q33506$f4ea93ae-4b86-c2fd-4faa-9a19b15bb819"
+        },
+        {
+          "parentEntityId": "Q1554231",
+          "rank": "normal",
+          "statementId": "Q33506$efe514c0-4933-0136-dfa3-ae98fceeb4ff"
+        }
+      ]
+    },
+    {
+      "entityId": "Q866133",
+      "label": "university museum",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q866133",
+      "sourceRevision": 2552137808,
+      "sourceModifiedAt": "2026-10-02T11:39:34Z",
+      "P279NonDeprecatedClaims": [
+        {
+          "parentEntityId": "Q33506",
+          "rank": "normal",
+          "statementId": "q866133$2e0e059c-485b-cf92-cfea-cb12a3225b10"
+        },
+        {
+          "parentEntityId": "Q23005223",
+          "rank": "normal",
+          "statementId": "Q866133$0e2dd7cf-43fe-8bab-9d41-6868ffca81b1"
+        }
+      ]
+    }
+  ],
+  "candidatePathProofs": [
+    {
+      "candidateEntityId": "Q421084",
+      "P31ClaimsUsed": [
+        "Q3329412",
+        "Q33506"
+      ],
+      "verifiedPaths": [
+        {
+          "path": [
+            "Q3329412",
+            "Q207694",
+            "Q33506"
+          ],
+          "proofEdges": [
+            {
+              "childEntityId": "Q3329412",
+              "parentEntityId": "Q207694",
+              "sourceClaimUrl": "https://www.wikidata.org/wiki/Q3329412#P279"
+            },
+            {
+              "childEntityId": "Q207694",
+              "parentEntityId": "Q33506",
+              "sourceClaimUrl": "https://www.wikidata.org/wiki/Q207694#P279"
+            }
+          ],
+          "proofType": "P31 start plus fetched P279 edges"
+        },
+        {
+          "path": [
+            "Q33506"
+          ],
+          "proofEdges": [],
+          "proofType": "direct P31=Q33506"
+        }
+      ],
+      "verified": true
+    },
+    {
+      "candidateEntityId": "Q131350761",
+      "P31ClaimsUsed": [
+        "Q33506"
+      ],
+      "verifiedPaths": [
+        {
+          "path": [
+            "Q33506"
+          ],
+          "proofEdges": [],
+          "proofType": "direct P31=Q33506"
+        }
+      ],
+      "verified": true
+    },
+    {
+      "candidateEntityId": "Q3555557",
+      "P31ClaimsUsed": [
+        "Q866133",
+        "Q3947"
+      ],
+      "verifiedPaths": [
+        {
+          "path": [
+            "Q866133",
+            "Q33506"
+          ],
+          "proofEdges": [
+            {
+              "childEntityId": "Q866133",
+              "parentEntityId": "Q33506",
+              "sourceClaimUrl": "https://www.wikidata.org/wiki/Q866133#P279"
+            }
+          ],
+          "proofType": "P31 start plus fetched P279 edges"
+        }
+      ],
+      "verified": true
+    },
+    {
+      "candidateEntityId": "Q4813664",
+      "P31ClaimsUsed": [
+        "Q1329623"
+      ],
+      "verifiedPaths": [],
+      "verified": false
+    },
+    {
+      "candidateEntityId": "Q33119180",
+      "P31ClaimsUsed": [
+        "Q207694",
+        "Q24699794",
+        "Q33506"
+      ],
+      "verifiedPaths": [
+        {
+          "path": [
+            "Q207694",
+            "Q33506"
+          ],
+          "proofEdges": [
+            {
+              "childEntityId": "Q207694",
+              "parentEntityId": "Q33506",
+              "sourceClaimUrl": "https://www.wikidata.org/wiki/Q207694#P279"
+            }
+          ],
+          "proofType": "P31 start plus fetched P279 edges"
+        },
+        {
+          "path": [
+            "Q33506"
+          ],
+          "proofEdges": [],
+          "proofType": "direct P31=Q33506"
+        }
+      ],
+      "verified": true
+    },
+    {
+      "candidateEntityId": "Q816669",
+      "P31ClaimsUsed": [
+        "Q207694",
+        "Q33506",
+        "Q7075"
+      ],
+      "verifiedPaths": [
+        {
+          "path": [
+            "Q207694",
+            "Q33506"
+          ],
+          "proofEdges": [
+            {
+              "childEntityId": "Q207694",
+              "parentEntityId": "Q33506",
+              "sourceClaimUrl": "https://www.wikidata.org/wiki/Q207694#P279"
+            }
+          ],
+          "proofType": "P31 start plus fetched P279 edges"
+        },
+        {
+          "path": [
+            "Q33506"
+          ],
+          "proofEdges": [],
+          "proofType": "direct P31=Q33506"
+        }
+      ],
+      "verified": true
+    },
+    {
+      "candidateEntityId": "Q1018775",
+      "P31ClaimsUsed": [
+        "Q33506"
+      ],
+      "verifiedPaths": [
+        {
+          "path": [
+            "Q33506"
+          ],
+          "proofEdges": [],
+          "proofType": "direct P31=Q33506"
+        }
+      ],
+      "verified": true
+    },
+    {
+      "candidateEntityId": "Q5123569",
+      "P31ClaimsUsed": [
+        "Q1329623"
+      ],
+      "verifiedPaths": [],
+      "verified": false
+    },
+    {
+      "candidateEntityId": "Q63561393",
+      "P31ClaimsUsed": [
+        "Q33506"
+      ],
+      "verifiedPaths": [
+        {
+          "path": [
+            "Q33506"
+          ],
+          "proofEdges": [],
+          "proofType": "direct P31=Q33506"
+        }
+      ],
+      "verified": true
+    },
+    {
+      "candidateEntityId": "Q1153041",
+      "P31ClaimsUsed": [
+        "Q207694"
+      ],
+      "verifiedPaths": [
+        {
+          "path": [
+            "Q207694",
+            "Q33506"
+          ],
+          "proofEdges": [
+            {
+              "childEntityId": "Q207694",
+              "parentEntityId": "Q33506",
+              "sourceClaimUrl": "https://www.wikidata.org/wiki/Q207694#P279"
+            }
+          ],
+          "proofType": "P31 start plus fetched P279 edges"
+        }
+      ],
+      "verified": true
+    },
+    {
+      "candidateEntityId": "Q5373978",
+      "P31ClaimsUsed": [
+        "Q207694"
+      ],
+      "verifiedPaths": [
+        {
+          "path": [
+            "Q207694",
+            "Q33506"
+          ],
+          "proofEdges": [
+            {
+              "childEntityId": "Q207694",
+              "parentEntityId": "Q33506",
+              "sourceClaimUrl": "https://www.wikidata.org/wiki/Q207694#P279"
+            }
+          ],
+          "proofType": "P31 start plus fetched P279 edges"
+        }
+      ],
+      "verified": true
+    },
+    {
+      "candidateEntityId": "Q2732854",
+      "P31ClaimsUsed": [
+        "Q33506",
+        "Q3329412"
+      ],
+      "verifiedPaths": [
+        {
+          "path": [
+            "Q33506"
+          ],
+          "proofEdges": [],
+          "proofType": "direct P31=Q33506"
+        },
+        {
+          "path": [
+            "Q3329412",
+            "Q207694",
+            "Q33506"
+          ],
+          "proofEdges": [
+            {
+              "childEntityId": "Q3329412",
+              "parentEntityId": "Q207694",
+              "sourceClaimUrl": "https://www.wikidata.org/wiki/Q3329412#P279"
+            },
+            {
+              "childEntityId": "Q207694",
+              "parentEntityId": "Q33506",
+              "sourceClaimUrl": "https://www.wikidata.org/wiki/Q207694#P279"
+            }
+          ],
+          "proofType": "P31 start plus fetched P279 edges"
+        }
+      ],
+      "verified": true
+    },
+    {
+      "candidateEntityId": "Q5504730",
+      "P31ClaimsUsed": [
+        "Q207694"
+      ],
+      "verifiedPaths": [
+        {
+          "path": [
+            "Q207694",
+            "Q33506"
+          ],
+          "proofEdges": [
+            {
+              "childEntityId": "Q207694",
+              "parentEntityId": "Q33506",
+              "sourceClaimUrl": "https://www.wikidata.org/wiki/Q207694#P279"
+            }
+          ],
+          "proofType": "P31 start plus fetched P279 edges"
+        }
+      ],
+      "verified": true
+    },
+    {
+      "candidateEntityId": "Q5588347",
+      "P31ClaimsUsed": [
+        "Q207694"
+      ],
+      "verifiedPaths": [
+        {
+          "path": [
+            "Q207694",
+            "Q33506"
+          ],
+          "proofEdges": [
+            {
+              "childEntityId": "Q207694",
+              "parentEntityId": "Q33506",
+              "sourceClaimUrl": "https://www.wikidata.org/wiki/Q207694#P279"
+            }
+          ],
+          "proofType": "P31 start plus fetched P279 edges"
+        }
+      ],
+      "verified": true
+    },
+    {
+      "candidateEntityId": "Q4159473",
+      "P31ClaimsUsed": [
+        "Q842478"
+      ],
+      "verifiedPaths": [],
+      "verified": false
+    },
+    {
+      "candidateEntityId": "Q1163632",
+      "P31ClaimsUsed": [
+        "Q33506"
+      ],
+      "verifiedPaths": [
+        {
+          "path": [
+            "Q33506"
+          ],
+          "proofEdges": [],
+          "proofType": "direct P31=Q33506"
+        }
+      ],
+      "verified": true
+    },
+    {
+      "candidateEntityId": "Q16252571",
+      "P31ClaimsUsed": [
+        "Q33506"
+      ],
+      "verifiedPaths": [
+        {
+          "path": [
+            "Q33506"
+          ],
+          "proofEdges": [],
+          "proofType": "direct P31=Q33506"
+        }
+      ],
+      "verified": true
+    },
+    {
+      "candidateEntityId": "Q15051919",
+      "P31ClaimsUsed": [
+        "Q33506"
+      ],
+      "verifiedPaths": [
+        {
+          "path": [
+            "Q33506"
+          ],
+          "proofEdges": [],
+          "proofType": "direct P31=Q33506"
+        }
+      ],
+      "verified": true
+    },
+    {
+      "candidateEntityId": "Q930891",
+      "P31ClaimsUsed": [
+        "Q1307560"
+      ],
+      "verifiedPaths": [],
+      "verified": false
+    },
+    {
+      "candidateEntityId": "Q2574469",
+      "P31ClaimsUsed": [
+        "Q3329412"
+      ],
+      "verifiedPaths": [
+        {
+          "path": [
+            "Q3329412",
+            "Q207694",
+            "Q33506"
+          ],
+          "proofEdges": [
+            {
+              "childEntityId": "Q3329412",
+              "parentEntityId": "Q207694",
+              "sourceClaimUrl": "https://www.wikidata.org/wiki/Q3329412#P279"
+            },
+            {
+              "childEntityId": "Q207694",
+              "parentEntityId": "Q33506",
+              "sourceClaimUrl": "https://www.wikidata.org/wiki/Q207694#P279"
+            }
+          ],
+          "proofType": "P31 start plus fetched P279 edges"
+        }
+      ],
+      "verified": true
+    },
+    {
+      "candidateEntityId": "Q123193468",
+      "P31ClaimsUsed": [
+        "Q10624527",
+        "Q811979"
+      ],
+      "verifiedPaths": [],
+      "verified": false
+    },
+    {
+      "candidateEntityId": "Q6812430",
+      "P31ClaimsUsed": [
+        "Q1329623"
+      ],
+      "verifiedPaths": [],
+      "verified": false
+    },
+    {
+      "candidateEntityId": "Q1576793",
+      "P31ClaimsUsed": [
+        "Q207694"
+      ],
+      "verifiedPaths": [
+        {
+          "path": [
+            "Q207694",
+            "Q33506"
+          ],
+          "proofEdges": [
+            {
+              "childEntityId": "Q207694",
+              "parentEntityId": "Q33506",
+              "sourceClaimUrl": "https://www.wikidata.org/wiki/Q207694#P279"
+            }
+          ],
+          "proofType": "P31 start plus fetched P279 edges"
+        }
+      ],
+      "verified": true
+    },
+    {
+      "candidateEntityId": "Q78033066",
+      "P31ClaimsUsed": [
+        "Q207694"
+      ],
+      "verifiedPaths": [
+        {
+          "path": [
+            "Q207694",
+            "Q33506"
+          ],
+          "proofEdges": [
+            {
+              "childEntityId": "Q207694",
+              "parentEntityId": "Q33506",
+              "sourceClaimUrl": "https://www.wikidata.org/wiki/Q207694#P279"
+            }
+          ],
+          "proofType": "P31 start plus fetched P279 edges"
+        }
+      ],
+      "verified": true
+    },
+    {
+      "candidateEntityId": "Q6940738",
+      "P31ClaimsUsed": [
+        "Q33506"
+      ],
+      "verifiedPaths": [
+        {
+          "path": [
+            "Q33506"
+          ],
+          "proofEdges": [],
+          "proofType": "direct P31=Q33506"
+        }
+      ],
+      "verified": true
+    },
+    {
+      "candidateEntityId": "Q1230253",
+      "P31ClaimsUsed": [
+        "Q207694",
+        "Q3329412"
+      ],
+      "verifiedPaths": [
+        {
+          "path": [
+            "Q207694",
+            "Q33506"
+          ],
+          "proofEdges": [
+            {
+              "childEntityId": "Q207694",
+              "parentEntityId": "Q33506",
+              "sourceClaimUrl": "https://www.wikidata.org/wiki/Q207694#P279"
+            }
+          ],
+          "proofType": "P31 start plus fetched P279 edges"
+        },
+        {
+          "path": [
+            "Q3329412",
+            "Q207694",
+            "Q33506"
+          ],
+          "proofEdges": [
+            {
+              "childEntityId": "Q3329412",
+              "parentEntityId": "Q207694",
+              "sourceClaimUrl": "https://www.wikidata.org/wiki/Q3329412#P279"
+            },
+            {
+              "childEntityId": "Q207694",
+              "parentEntityId": "Q33506",
+              "sourceClaimUrl": "https://www.wikidata.org/wiki/Q207694#P279"
+            }
+          ],
+          "proofType": "P31 start plus fetched P279 edges"
+        }
+      ],
+      "verified": true
+    },
+    {
+      "candidateEntityId": "Q4306259",
+      "P31ClaimsUsed": [
+        "Q207694"
+      ],
+      "verifiedPaths": [
+        {
+          "path": [
+            "Q207694",
+            "Q33506"
+          ],
+          "proofEdges": [
+            {
+              "childEntityId": "Q207694",
+              "parentEntityId": "Q33506",
+              "sourceClaimUrl": "https://www.wikidata.org/wiki/Q207694#P279"
+            }
+          ],
+          "proofType": "P31 start plus fetched P279 edges"
+        }
+      ],
+      "verified": true
+    },
+    {
+      "candidateEntityId": "Q6941076",
+      "P31ClaimsUsed": [
+        "Q33506",
+        "Q3947"
+      ],
+      "verifiedPaths": [
+        {
+          "path": [
+            "Q33506"
+          ],
+          "proofEdges": [],
+          "proofType": "direct P31=Q33506"
+        }
+      ],
+      "verified": true
+    },
+    {
+      "candidateEntityId": "Q637187",
+      "P31ClaimsUsed": [
+        "Q17431399",
+        "Q3329412"
+      ],
+      "verifiedPaths": [
+        {
+          "path": [
+            "Q17431399",
+            "Q33506"
+          ],
+          "proofEdges": [
+            {
+              "childEntityId": "Q17431399",
+              "parentEntityId": "Q33506",
+              "sourceClaimUrl": "https://www.wikidata.org/wiki/Q17431399#P279"
+            }
+          ],
+          "proofType": "P31 start plus fetched P279 edges"
+        },
+        {
+          "path": [
+            "Q3329412",
+            "Q207694",
+            "Q33506"
+          ],
+          "proofEdges": [
+            {
+              "childEntityId": "Q3329412",
+              "parentEntityId": "Q207694",
+              "sourceClaimUrl": "https://www.wikidata.org/wiki/Q3329412#P279"
+            },
+            {
+              "childEntityId": "Q207694",
+              "parentEntityId": "Q33506",
+              "sourceClaimUrl": "https://www.wikidata.org/wiki/Q207694#P279"
+            }
+          ],
+          "proofType": "P31 start plus fetched P279 edges"
+        }
+      ],
+      "verified": true
+    },
+    {
+      "candidateEntityId": "Q1167467",
+      "P31ClaimsUsed": [
+        "Q3196771",
+        "Q17431399",
+        "Q740437"
+      ],
+      "verifiedPaths": [
+        {
+          "path": [
+            "Q17431399",
+            "Q33506"
+          ],
+          "proofEdges": [
+            {
+              "childEntityId": "Q17431399",
+              "parentEntityId": "Q33506",
+              "sourceClaimUrl": "https://www.wikidata.org/wiki/Q17431399#P279"
+            }
+          ],
+          "proofType": "P31 start plus fetched P279 edges"
+        }
+      ],
+      "verified": true
+    },
+    {
+      "candidateEntityId": "Q6972907",
+      "P31ClaimsUsed": [
+        "Q957433",
+        "Q17431399"
+      ],
+      "verifiedPaths": [
+        {
+          "path": [
+            "Q17431399",
+            "Q33506"
+          ],
+          "proofEdges": [
+            {
+              "childEntityId": "Q17431399",
+              "parentEntityId": "Q33506",
+              "sourceClaimUrl": "https://www.wikidata.org/wiki/Q17431399#P279"
+            }
+          ],
+          "proofType": "P31 start plus fetched P279 edges"
+        }
+      ],
+      "verified": true
+    },
+    {
+      "candidateEntityId": "Q3038298",
+      "P31ClaimsUsed": [
+        "Q207694",
+        "Q33506"
+      ],
+      "verifiedPaths": [
+        {
+          "path": [
+            "Q207694",
+            "Q33506"
+          ],
+          "proofEdges": [
+            {
+              "childEntityId": "Q207694",
+              "parentEntityId": "Q33506",
+              "sourceClaimUrl": "https://www.wikidata.org/wiki/Q207694#P279"
+            }
+          ],
+          "proofType": "P31 start plus fetched P279 edges"
+        },
+        {
+          "path": [
+            "Q33506"
+          ],
+          "proofEdges": [],
+          "proofType": "direct P31=Q33506"
+        }
+      ],
+      "verified": true
+    },
+    {
+      "candidateEntityId": "Q15263731",
+      "P31ClaimsUsed": [
+        "Q33506"
+      ],
+      "verifiedPaths": [
+        {
+          "path": [
+            "Q33506"
+          ],
+          "proofEdges": [],
+          "proofType": "direct P31=Q33506"
+        }
+      ],
+      "verified": true
+    },
+    {
+      "candidateEntityId": "Q4306141",
+      "P31ClaimsUsed": [
+        "Q33506"
+      ],
+      "verifiedPaths": [
+        {
+          "path": [
+            "Q33506"
+          ],
+          "proofEdges": [],
+          "proofType": "direct P31=Q33506"
+        }
+      ],
+      "verified": true
+    },
+    {
+      "candidateEntityId": "Q7191890",
+      "P31ClaimsUsed": [
+        "Q207694"
+      ],
+      "verifiedPaths": [
+        {
+          "path": [
+            "Q207694",
+            "Q33506"
+          ],
+          "proofEdges": [
+            {
+              "childEntityId": "Q207694",
+              "parentEntityId": "Q33506",
+              "sourceClaimUrl": "https://www.wikidata.org/wiki/Q207694#P279"
+            }
+          ],
+          "proofType": "P31 start plus fetched P279 edges"
+        }
+      ],
+      "verified": true
+    },
+    {
+      "candidateEntityId": "Q1263335",
+      "P31ClaimsUsed": [
+        "Q327328"
+      ],
+      "verifiedPaths": [],
+      "verified": false
+    },
+    {
+      "candidateEntityId": "Q7662661",
+      "P31ClaimsUsed": [
+        "Q33506",
+        "Q3329412"
+      ],
+      "verifiedPaths": [
+        {
+          "path": [
+            "Q33506"
+          ],
+          "proofEdges": [],
+          "proofType": "direct P31=Q33506"
+        },
+        {
+          "path": [
+            "Q3329412",
+            "Q207694",
+            "Q33506"
+          ],
+          "proofEdges": [
+            {
+              "childEntityId": "Q3329412",
+              "parentEntityId": "Q207694",
+              "sourceClaimUrl": "https://www.wikidata.org/wiki/Q3329412#P279"
+            },
+            {
+              "childEntityId": "Q207694",
+              "parentEntityId": "Q33506",
+              "sourceClaimUrl": "https://www.wikidata.org/wiki/Q207694#P279"
+            }
+          ],
+          "proofType": "P31 start plus fetched P279 edges"
+        }
+      ],
+      "verified": true
+    },
+    {
+      "candidateEntityId": "Q7674145",
+      "P31ClaimsUsed": [
+        "Q207694"
+      ],
+      "verifiedPaths": [
+        {
+          "path": [
+            "Q207694",
+            "Q33506"
+          ],
+          "proofEdges": [
+            {
+              "childEntityId": "Q207694",
+              "parentEntityId": "Q33506",
+              "sourceClaimUrl": "https://www.wikidata.org/wiki/Q207694#P279"
+            }
+          ],
+          "proofType": "P31 start plus fetched P279 edges"
+        }
+      ],
+      "verified": true
+    },
+    {
+      "candidateEntityId": "Q104527429",
+      "P31ClaimsUsed": [
+        "Q157031",
+        "Q33506"
+      ],
+      "verifiedPaths": [
+        {
+          "path": [
+            "Q33506"
+          ],
+          "proofEdges": [],
+          "proofType": "direct P31=Q33506"
+        }
+      ],
+      "verified": true
+    },
+    {
+      "candidateEntityId": "Q8053498",
+      "P31ClaimsUsed": [
+        "Q207694",
+        "Q157031"
+      ],
+      "verifiedPaths": [
+        {
+          "path": [
+            "Q207694",
+            "Q33506"
+          ],
+          "proofEdges": [
+            {
+              "childEntityId": "Q207694",
+              "parentEntityId": "Q33506",
+              "sourceClaimUrl": "https://www.wikidata.org/wiki/Q207694#P279"
+            }
+          ],
+          "proofType": "P31 start plus fetched P279 edges"
+        }
+      ],
+      "verified": true
+    }
+  ],
+  "verifiedEligibleMuseumCount": 28,
+  "directP31MuseumCount": 11,
+  "verifiedP279SubclassPathCount": 17,
+  "downgradedCandidateEntityIds": [],
+  "verificationRule": "A candidate path starts with a source-record P31 class. Every subsequent edge must match a non-deprecated P279 claim in the class entity returned in this single batch and the path must end at Q33506. A one-node path requires source P31=Q33506.",
+  "batchRetrievedAt": "2026-10-15T03:51:34Z",
+  "metadataRepair": {
+    "retrievedAt": "2026-10-15T07:07:26Z",
+    "sourceUrls": [
+      "https://www.wikidata.org/wiki/Special:EntityData/Q17431399.json",
+      "https://www.wikidata.org/wiki/Special:EntityData/Q207694.json",
+      "https://www.wikidata.org/wiki/Special:EntityData/Q3329412.json",
+      "https://www.wikidata.org/wiki/Special:EntityData/Q33506.json",
+      "https://www.wikidata.org/wiki/Special:EntityData/Q866133.json"
+    ],
+    "request": {
+      "timeoutSeconds": 10,
+      "responseLimitBytes": 2097152,
+      "attempts": 1,
+      "maxConcurrentRequests": 3
+    },
+    "result": "success",
+    "entitiesRead": 5,
+    "classClaimsRefreshed": 5,
+    "candidatePathEdgesRevalidated": true
+  }
+}

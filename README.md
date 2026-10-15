@@ -2,7 +2,7 @@
 
 An Athens concierge for boutique hotels and small travel businesses. Guests supply cultural tastes and preferences; genuine Qloo results are checked against an independent practical-source pool before presentation.
 
-Development build. Qloo authentication, response shapes and three two-category coverage probes were verified separately. Those probes are preparation evidence, not successful application journeys. Current independent fixture bindings: **zero**. Provider numeric quota policy is unknown. Anonymous upstream admission therefore stays closed; the application shows an explicit unavailable state. No successful hackathon acceptance target is claimed.
+Development build. Qloo authentication, response shapes and three two-category coverage probes were verified separately. Those probes are preparation evidence, not successful application journeys. Private venue identity bindings remain incomplete. Provider numeric quota policy is unknown. Anonymous upstream admission therefore stays closed; the application shows an explicit unavailable state. No successful hackathon acceptance target is claimed.
 
 Verification: 90 unit/integration-boundary checks pass, one paid live check is intentionally skipped; 15 browser checks pass, including explicitly synthetic states. Next production build/typecheck pass, independent code/security reviews approve the implemented boundaries, and the public-source/client export audit found zero credential/provider-ID leaks. Six actual local production smoke checks cover the unconfigured path, not successful Qloo journeys.
 
@@ -24,7 +24,7 @@ Copy `.env.example` to ignored `.env.local` for approved local configuration. Se
 
 ## Data and limitations
 
-The independent pool contains 20 CC0 Wikidata records: four dining and sixteen attractions. Six additional museum records retain direct Wikidata museum classification, city membership and coordinate provenance. One original conflicting coordinate stays unknown. Classification and city membership are source-reported metadata, not proof of current operation or municipal boundaries. Qloo's first supported category filters cover restaurants and museums. Distances are straight-line distances from the documented Athens reference point, not walking routes.
+The independent pool contains 39 CC0 Wikidata records: four dining and thirty-five attractions. Added museum records retain direct or verified subclass museum classification, city membership and coordinate provenance; retained class evidence records the actual subclass links. One original conflicting coordinate stays unknown. Classification and city membership are source-reported metadata, not proof of current operation or municipal boundaries. Qloo's first supported category filters cover restaurants and museums. Distances are straight-line distances from the documented Athens reference point, not walking routes.
 
 Budget and opening-time requirements return unsupported. No booking, availability, accessibility, allergy or dietary-safety assurance. Raw Qloo responses, returned identifiers, scores and private identity bindings are excluded from public source and assets.
 
