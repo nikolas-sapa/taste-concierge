@@ -6,6 +6,7 @@ import { createHash, randomBytes } from 'node:crypto';
 import { neon } from '@neondatabase/serverless';
 import { migrationStatements } from '../../scripts/migrate-runtime';
 import { importRuntimeEvidence } from '../../scripts/import-runtime';
+import { initializeAllowance } from '../../scripts/initialize-allowance';
 import { ProviderRepository } from '../../src/server/persistence/provider';
 import { createCloudQlooClient, loadCloudBindings, withCloudOperation } from '../../src/server/persistence/cloud';
 import { QlooError } from '../../src/server/qloo/errors';
@@ -33,7 +34,7 @@ describe.skipIf(!databaseUrl || !runtimeDatabaseUrl)('actual PostgreSQL provider
   beforeAll(async () => {
     await query(`create schema ${schema}`);
     await query(`grant usage on schema ${schema} to taste_runtime_app`);
-    for (const migration of ['001-runtime.sql', '002-provider.sql']) {
+    for (const migration of ['001-runtime.sql', '002-provider.sql', '003-application-allowance.sql']) {
       const source = (await readFile(new URL(`../../migrations/${migration}`, import.meta.url), 'utf8')).replace(/\btaste_runtime\b/g, schema);
       await transaction(migrationStatements(source).map(statement => query(statement)));
     }
@@ -63,6 +64,117 @@ describe.skipIf(!databaseUrl || !runtimeDatabaseUrl)('actual PostgreSQL provider
         origin: { latitude: 37.98, longitude: 23.72 }, athensCityNames: ['Athens'] } };
     await query(`update ${schema}.provider_state set policy=$1::jsonb where id=1`, [JSON.stringify(policy)]);
   }
+
+  function allowance(ceiling = 27) {
+    const now = Date.now();
+    return { version: 2, authority: 'application-allowance', providerUsageUnknown: true, providerQuotaUnknown: true,
+      eventHost: 'https://hackathon.api.qloo.com', credentialSha256: createHash('sha256').update('synthetic-key').digest('hex'),
+      source: 'synthetic evidence, no real entitlement', financialBasis: 'event-no-disclosed-fee', checkedAt: now - 1000,
+      expiresAt: Math.min(now + 600_000, Date.parse('2026-11-17T04:45:00Z')), minIntervalMs: 5000,
+      allowance: { id: 'synthetic-lifetime', ceiling, knownBeforeLedger: 12 },
+      payload: { categoryTagIds: { dining: 'synthetic-dining', attractions: 'synthetic-attractions' },
+        origin: { latitude: 37.98, longitude: 23.72 }, athensCityNames: ['Athens'] } };
+  }
+  const initializeApplication = (policy = allowance()) => initializeAllowance({ databaseUrl: databaseUrl!, databaseSchema: schema, policy });
+  const cloud = (keySource = async () => 'synthetic-key', transport = vi.fn<typeof fetch>()) =>
+    createCloudQlooClient({ databaseUrl: runtimeDatabaseUrl!, databaseSchema: schema, keySource }, transport);
+
+  it('A02 twenty reservations across two repositories admit exactly three, lifetime 27 admits zero after relabeling', async () => {
+    await initializeApplication();
+    const instances = [repository(), repository()]; await Promise.all(instances.map(r => r.initialize()));
+    const outcomes = await Promise.allSettled(Array.from({ length: 20 }, (_, i) => instances[i % 2].reserve(5)));
+    expect(outcomes.filter(o => o.status === 'fulfilled')).toHaveLength(3);
+    for (const outcome of outcomes) if (outcome.status === 'fulfilled') await instances[0].release(outcome.value);
+    await query(`insert into ${schema}.provider_attempts(id,reservation,charged_at,window_ids,state)
+      select lpad(to_hex(n),64,'0'),'synthetic',clock_timestamp(),'["old-unrelated-id"]','complete' from generate_series(1,15) n`);
+    await query(`update ${schema}.provider_state set policy=jsonb_set(jsonb_set(policy,'{source}','"renamed source"'),'{allowance,id}','"renamed lifetime"')`);
+    const restarted = [repository(), repository()]; await Promise.all(restarted.map(r => r.initialize()));
+    const denied = await Promise.allSettled(Array.from({ length: 20 }, (_, i) => restarted[i % 2].reserve(5)));
+    expect(denied.filter(o => o.status === 'fulfilled')).toHaveLength(0);
+  }, 20000);
+
+  it('A06 initializer preserves history and halted state, rejects repeat and runtime writes', async () => {
+    await query(`insert into ${schema}.provider_attempts(id,reservation,charged_at,window_ids,state)
+      values($1,'synthetic',clock_timestamp(),'["prior"]','complete')`, ['c'.repeat(64)]);
+    await query(`update ${schema}.provider_state set halted=true,last_completed=clock_timestamp()`);
+    await initializeApplication();
+    await expect(initializeApplication()).rejects.toThrow();
+    const rows = await query(`select halted,last_completed is not null as retained,(select count(*)::int from ${schema}.provider_attempts) as attempts from ${schema}.provider_state`);
+    expect(rows[0]).toEqual({ halted: true, retained: true, attempts: 1 });
+    await expect(initializeAllowance({ databaseUrl: runtimeDatabaseUrl!, databaseSchema: schema, policy: allowance() })).rejects.toThrow();
+    await expect(runtimeSql.query(`update ${schema}.provider_state set policy=null`)).rejects.toMatchObject({ code: '42501' });
+  });
+
+  it('A06 two racing initializers commit exactly one policy, no second allowance', async () => {
+    const outcomes = await Promise.allSettled([initializeApplication(), initializeApplication()]);
+    expect(outcomes.filter(o => o.status === 'fulfilled')).toHaveLength(1);
+  });
+
+  it('A02 lifetime budget is independently rechecked at charge, including unrelated prior IDs', async () => {
+    await initializeApplication(); const a = repository(); await a.initialize(); const reservation = await a.reserve(5);
+    await query(`insert into ${schema}.provider_attempts(id,reservation,charged_at,window_ids,state)
+      select lpad(to_hex(n),64,'0'),'synthetic',clock_timestamp(),'["other-id"]','complete' from generate_series(1,11) n`);
+    await expect(a.charge(reservation)).rejects.toMatchObject({ reason: 'rate-limit' });
+    expect((await query(`select count(*)::int as count from ${schema}.provider_attempts`))[0].count).toBe(11);
+  });
+
+  it('A05 two clients racing twenty sends keep max one in flight and at least 5000ms completion gap', async () => {
+    await initializeApplication(allowance(100));
+    await query(`update ${schema}.sessions set lease_until=clock_timestamp()+interval '3 minutes'`);
+    let inFlight = 0; let maximum = 0;
+    const timing: { start: number; complete: number }[] = [];
+    const transport = vi.fn<typeof fetch>(async () => {
+      maximum = Math.max(maximum, ++inFlight);
+      const sample = { start: Date.now(), complete: 0 }; timing.push(sample);
+      await new Promise(resolve => setTimeout(resolve, 20));
+      sample.complete = Date.now(); inFlight--;
+      return new Response('{"results":[]}');
+    });
+    const clients = [cloud(async () => 'synthetic-key', transport), cloud(async () => 'synthetic-key', transport)];
+    await Promise.all(clients.map(client => (async () => {
+      for (let i = 0; i < 10; i++) await withCloudOperation(operation, () => client.runOperation(() => client.search({ kind: 'movie', text: 'Synthetic' })));
+    })()));
+    expect(transport).toHaveBeenCalledTimes(20); expect(maximum).toBe(1);
+    for (let i = 1; i < timing.length; i++) expect(timing[i].start - timing[i - 1].complete).toBeGreaterThanOrEqual(5000);
+  }, 150000);
+
+  it.each(['reservation', 'intent', 'uncertain', 'send-owner'])('A06 initializer rejects existing %s', async state => {
+    if (state === 'reservation') await query(`insert into ${schema}.provider_reservations values($1,5,clock_timestamp()+interval '1 minute',decode($2,'hex'),$3,0)`, ['c'.repeat(64), privateOperation.tokenHash, operation.fence]);
+    else if (state === 'send-owner') await query(`update ${schema}.provider_state set send_id=$1,send_until=clock_timestamp()+interval '1 minute'`, ['c'.repeat(64)]);
+    else await query(`insert into ${schema}.provider_attempts(id,reservation,charged_at,window_ids,state) values($1,'synthetic',clock_timestamp(),'[]',$2)`, ['c'.repeat(64), state]);
+    await expect(initializeApplication()).rejects.toThrow();
+  });
+
+  it.each([401, 403, 429, 'quota', 'zero', 'uncertain'] as const)('A04 V2 synthetic %s durably stops ten reconstructed clients', async fault => {
+    await initializeApplication();
+    const transport = vi.fn<typeof fetch>(async () => {
+      if (fault === 'uncertain') throw new Error('synthetic network uncertainty');
+      return new Response(JSON.stringify(fault === 'quota' ? { error: 'credential expired quota' } : {}),
+        { status: typeof fault === 'number' ? fault : 200, headers: fault === 'zero' ? { 'x-ratelimit-remaining': '0' } : {} });
+    });
+    const client = cloud(async () => 'synthetic-key', transport);
+    await expect(withCloudOperation(operation, () => client.runOperation(() => client.search({ kind: 'movie', text: 'Synthetic' })))).rejects.toBeDefined();
+    for (let i = 0; i < 10; i++) {
+      const next = cloud(async () => 'synthetic-key', transport);
+      await expect(withCloudOperation(operation, () => next.runOperation(() => next.search({ kind: 'movie', text: 'Synthetic' })))).rejects.toBeDefined();
+    }
+    expect(transport).toHaveBeenCalledTimes(1);
+    expect((await query(`select halted,(select count(*)::int from ${schema}.provider_attempts) as attempts from ${schema}.provider_state`))[0]).toEqual({ halted: true, attempts: 1 });
+  }, 20000);
+
+  it('A01/A03/A07 malformed policies read zero credentials; rotation performs zero transports', async () => {
+    const keySource = vi.fn(async () => 'synthetic-key'); const transport = vi.fn<typeof fetch>();
+    for (const change of [{ verified: true }, { priorUsageKnown: true }, { windows: [] }, { authority: 'provider' },
+      { financialBasis: 'paid' }, { checkedAt: Date.now() + 600_000 }, { expiresAt: 1 }, { eventHost: 'https://api.qloo.com' },
+      { credentialSha256: 'INVALID' }, { providerUsageUnknown: false }]) {
+      await query(`update ${schema}.provider_state set policy=$1::jsonb`, [JSON.stringify({ ...allowance(), ...change })]);
+      expect(await cloud(keySource, transport).isReady()).toBe(false);
+    }
+    expect(keySource).toHaveBeenCalledTimes(0); expect(transport).toHaveBeenCalledTimes(0);
+    await query(`update ${schema}.provider_state set policy=$1::jsonb`, [JSON.stringify(allowance())]);
+    expect(await cloud(async () => 'rotated-synthetic-key', transport).isReady()).toBe(false);
+    expect(transport).toHaveBeenCalledTimes(0);
+  }, 20000);
 
   it('missing policy reads zero credentials and performs zero sends', async () => {
     const keySource = vi.fn(async () => 'synthetic-key');

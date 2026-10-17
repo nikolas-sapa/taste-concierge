@@ -23,8 +23,10 @@ export function createCloudQlooClient(config: CloudQlooConfig, transport: typeof
     initialize: async () => ({ policy: await repository.initialize(), ledger: repository }),
     readPolicy: () => repository.readPolicy(),
     key: async () => {
+      const policy = await repository.readPolicy();
       const key = (await config.keySource()).trim();
       if (!key || Buffer.byteLength(key) > 4096 || /[\r\n]/.test(key)) throw new QlooError('configuration');
+      if (policy.version === 2 && createHash('sha256').update(key).digest('hex') !== policy.credentialSha256) throw new QlooError('configuration');
       return key;
     },
     saveEvidence: (data, attemptId) => repository.saveEvidence(data, attemptId),

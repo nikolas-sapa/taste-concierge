@@ -4,7 +4,8 @@ import { readFile, realpath, stat } from 'node:fs/promises';
 import { dirname, isAbsolute, join, relative, sep } from 'node:path';
 import type { Category, Seed } from '../../contracts/concierge';
 import type { EvidenceRef, ResolvedInputs } from '../../contracts/server';
-import { AdmissionLedger, validatePolicy, type ProviderPolicy, type PayloadPolicy } from '../admission/ledger';
+import { AdmissionLedger, validatePolicy, type PayloadPolicy } from '../admission/ledger';
+import type { ExecutionPolicy } from '../admission/application-policy';
 import { QlooError } from './errors';
 import { readPrivateJson, saveEvidence, verifyPrivateDirectory } from './evidence';
 import { seedType } from './normalize';
@@ -28,8 +29,8 @@ export interface QlooAdmission {
 }
 export type CaptureData = Parameters<typeof saveEvidence>[2];
 export interface QlooBackend {
-  initialize(): Promise<{ policy: ProviderPolicy; ledger: QlooAdmission }>;
-  readPolicy(): Promise<ProviderPolicy>;
+  initialize(): Promise<{ policy: ExecutionPolicy; ledger: QlooAdmission }>;
+  readPolicy(): Promise<ExecutionPolicy>;
   key(): Promise<string>;
   saveEvidence(data: CaptureData, attemptId: string): Promise<EvidenceRef>;
 }
@@ -48,7 +49,7 @@ async function waitAbortable(promise: Promise<void>, signal: AbortSignal): Promi
 }
 
 class NativeQlooClient implements QlooClient {
-  private policy?: ProviderPolicy;
+  private policy?: ExecutionPolicy;
   private ledger?: QlooAdmission;
   private initializing?: Promise<void>;
   private readonly operations = new AsyncLocalStorage<Operation>();
@@ -109,7 +110,7 @@ class NativeQlooClient implements QlooClient {
     return structuredClone(this.policy.payload);
   }
 
-  private async readPolicy(): Promise<ProviderPolicy> {
+  private async readPolicy(): Promise<ExecutionPolicy> {
     return this.config.backend ? this.config.backend.readPolicy()
       : validatePolicy(await readPrivateJson(this.config.policyFile, this.config.projectRoot));
   }
@@ -180,7 +181,7 @@ class NativeQlooClient implements QlooClient {
         const headers = Object.fromEntries(response.headers);
         const zeroRemaining = Object.entries(headers).some(([name, value]) =>
           /(?:quota|ratelimit|rate-limit).*remaining|remaining.*quota/i.test(name) && /^0(?:\.0+)?$/.test(value.trim()));
-        if (response.status === 429 || response.status === 403 || zeroRemaining) await this.ledger!.halt();
+        if (response.status === 401 || response.status === 429 || response.status === 403 || zeroRemaining) await this.ledger!.halt();
         const chunks: Uint8Array[] = [];
         let bytes = 0;
         if (!response.body) throw new QlooError('upstream');

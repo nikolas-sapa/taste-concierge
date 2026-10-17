@@ -59,7 +59,7 @@ test.each([[401, 'authentication'], [403, 'authentication'], [429, 'rate-limit']
       const disk = JSON.parse(await readFile(join(directory, 'app-admission.json'), 'utf8'));
       expect(disk.charges).toHaveLength(1);
       expect(Object.keys(disk.reservations)).toHaveLength(0);
-      if (status === 403 || status === 429) expect(await client.isReady()).toBe(false);
+      if (status === 401 || status === 403 || status === 429) expect(await client.isReady()).toBe(false);
     } finally { await rm(directory, { recursive: true, force: true }); }
   });
 
