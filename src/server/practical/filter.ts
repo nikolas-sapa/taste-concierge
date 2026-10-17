@@ -7,7 +7,8 @@ import type {
   RecommendationBatch,
 } from '../../contracts/server';
 import { ATHENS_ORIGIN } from './origin';
-import { distanceMeters, isValidCoordinate } from './geometry';
+import { distanceMeters } from './geometry';
+import { resolvePracticalOption } from './resolve';
 
 const CATEGORIES: Category[] = ['dining', 'attractions'];
 
@@ -15,37 +16,10 @@ function none(...reasons: string[]): ConstraintDecision {
   return { status: 'none', reasons };
 }
 
-function isHttpSourceUrl(value: string): boolean {
-  try {
-    const url = new URL(value);
-    return url.protocol === 'https:' || url.protocol === 'http:';
-  } catch {
-    return false;
-  }
-}
-
-function hasSourceProvenance(fixture: PracticalFixture): boolean {
-  if (typeof fixture.sourceEntityId !== 'string' || !fixture.sourceEntityId.trim()) return false;
-  if (typeof fixture.name !== 'string' || !fixture.name.trim()) return false;
-  if (typeof fixture.sourceUrl !== 'string' || !isHttpSourceUrl(fixture.sourceUrl)) return false;
-  if (typeof fixture.sourceRevision !== 'string' || !fixture.sourceRevision.trim()) return false;
-  if (typeof fixture.retrievedAt !== 'string' || !fixture.retrievedAt.trim()) return false;
-  if (!Number.isFinite(Date.parse(fixture.retrievedAt))) return false;
-  if (fixture.license !== 'CC0' && fixture.license !== 'ODbL-1.0') return false;
-  return true;
-}
-
-function isUsableFixture(fixture: PracticalFixture, category: Category): boolean {
-  return fixture.verification === 'source-reported'
-    && fixture.cityId === 'athens'
-    && fixture.category === category
-    && isValidCoordinate(fixture.coordinates)
-    && hasSourceProvenance(fixture);
-}
-
 /**
- * Filter private Qloo candidates through independent practical-source facts.
- * Candidate identity is admitted only by exact fixtureId linkage; names and proximity never bind.
+ * Filter private Qloo candidates through source-labeled practical facts.
+ * Known independent identities require exact fixtureId linkage; unbound records require complete Qloo facts.
+ * Names and proximity never create identity bindings.
  * Exclusions must be resolved against session state by the orchestrator before this pure function.
  */
 export function filterPractical(
@@ -69,14 +43,6 @@ export function filterPractical(
   }
   if (!ATHENS_ORIGIN) return none('missing-origin');
 
-  const byFixtureId = new Map<string, PracticalFixture>();
-  const duplicateIds = new Set<string>();
-  for (const fixture of fixtures) {
-    if (byFixtureId.has(fixture.fixtureId)) duplicateIds.add(fixture.fixtureId);
-    else byFixtureId.set(fixture.fixtureId, fixture);
-  }
-  for (const duplicate of duplicateIds) byFixtureId.delete(duplicate);
-
   const filtered = {} as Record<Category, InternalCandidate[]>;
   const missingCategory: Category[] = [];
   const noPracticalMatch: Category[] = [];
@@ -91,10 +57,10 @@ export function filterPractical(
 
     const kept: InternalCandidate[] = [];
     for (const candidate of candidates) {
-      if (candidate.category !== category || typeof candidate.fixtureId !== 'string') continue;
-      const fixture = byFixtureId.get(candidate.fixtureId);
-      if (!fixture || !isUsableFixture(fixture, category)) continue;
-      const distance = distanceMeters(ATHENS_ORIGIN, fixture.coordinates);
+      if (candidate.category !== category) continue;
+      const option = resolvePracticalOption(candidate, fixtures, 'predicate-only');
+      if (!option) continue;
+      const distance = distanceMeters(ATHENS_ORIGIN, option.coordinates);
       if (distance === null || distance > radiusMeters) continue;
       kept.push(candidate);
     }

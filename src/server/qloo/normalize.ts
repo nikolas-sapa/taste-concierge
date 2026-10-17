@@ -3,6 +3,7 @@ import type { Category, SeedKind } from '../../contracts/concierge';
 import type { EvidenceRef, InternalCandidate, ResolvedSeed } from '../../contracts/server';
 import type { PayloadPolicy } from '../admission/ledger';
 import { QlooError } from './errors';
+import { validCaptureEvidence } from '../practical/resolve';
 
 export type FixtureBinding = { qlooEntityId: string; fixtureId: string; verified: true; evidenceRef: string };
 export type SearchCandidate = ResolvedSeed & { disambiguation: string | null };
@@ -41,6 +42,7 @@ function distance(a: { latitude: number; longitude: number }, b: { latitude: num
 export function normalizeRecommendations(payload: unknown, category: Category, radiusMeters: number,
   config: PayloadPolicy, evidence: EvidenceRef, bindings: readonly FixtureBinding[]): InternalCandidate[] {
   if (!record(payload) || !record(payload.results) || !Array.isArray(payload.results.entities)) throw new QlooError('upstream');
+  if (!validCaptureEvidence(evidence) || !Number.isFinite(radiusMeters) || radiusMeters < 0) return [];
   const result: InternalCandidate[] = [];
   for (const [index, row] of payload.results.entities.entries()) {
     if (!record(row) || !text(row.entity_id) || !text(row.name) || row.subtype !== 'urn:entity:place' ||
@@ -51,12 +53,18 @@ export function normalizeRecommendations(payload: unknown, category: Category, r
       row.properties.geocode.country_code !== 'GR') continue;
     const locality = record(row.properties.locality) ? row.properties.locality : {};
     const localityCity = record(locality.city) ? locality.city.name : undefined;
-    const cityMatches = [row.properties.geocode.city, row.properties.geocode.name, localityCity]
-      .some(v => typeof v === 'string' && config.athensCityNames.some(name => normalizeName(name) === normalizeName(v)));
+    const explicitCities = [row.properties.geocode.city, localityCity]
+      .filter((value): value is string => typeof value === 'string' && value.trim().length > 0);
+    const isAthens = (value: unknown) => typeof value === 'string' &&
+      config.athensCityNames.some(name => normalizeName(name) === normalizeName(value));
+    const cityMatches = explicitCities.length > 0
+      ? explicitCities.every(isAthens) : isAthens(row.properties.geocode.name);
     if (!cityMatches || distance(config.origin, { latitude: row.location.lat, longitude: row.location.lon }) > radiusMeters) continue;
-    const matches = bindings.filter(b => b.verified === true && b.evidenceRef.length > 0 && b.qlooEntityId === row.entity_id);
+    const matches = bindings.filter(b => b.qlooEntityId === row.entity_id);
+    if (matches.length > 1 || matches.some(b => b.verified !== true || !b.evidenceRef?.trim() || !b.fixtureId?.trim())) continue;
     result.push({ qlooEntityId: row.entity_id, name: row.name, category, evidence,
-      fixtureId: matches.length === 1 ? matches[0].fixtureId : null, qlooRank: index + 1 });
+      fixtureId: matches.length === 1 ? matches[0].fixtureId : null, qlooRank: index + 1,
+      qlooReported: { cityId: 'athens', category, coordinates: { latitude: row.location.lat, longitude: row.location.lon } } });
   }
   return [...new Map(result.map(r => [r.qlooEntityId, r])).values()];
 }

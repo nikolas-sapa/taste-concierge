@@ -126,3 +126,20 @@ test('health becomes unconfigured when already-open durable ledger is corrupt', 
     expect(await client.isReady()).toBe(false);
   } finally { await rm(directory, { recursive: true, force: true }); }
 });
+
+test('Q10 recommends take exactly 10 with unchanged endpoint/type/tag/country/radius', async () => {
+  let calls = 0;
+  const { directory, client } = await prepared((async (input) => {
+    calls++; const url = new URL(String(input));
+    expect(url.origin).toBe('https://hackathon.api.qloo.com');
+    expect(url.pathname).toBe('/v2/insights');
+    expect(Object.fromEntries(url.searchParams)).toEqual({ 'filter.type': 'urn:entity:place',
+      'signal.interests.entities': 'synthetic-seed', 'filter.tags': 'unit-dining',
+      'filter.location': 'POINT(0 0)', 'filter.location.radius': '3000', 'filter.geocode.country_code': 'GR', take: '10' });
+    return new Response('{"results":{"entities":[]}}');
+  }) as typeof fetch);
+  try {
+    await client.runOperation(() => client.recommend({ entities: [{ seedIndex: 0, kind: 'movie', qlooEntityId: 'synthetic-seed', name: 'Synthetic', evidence: { privateRef: 'unit', digest: 'unit', retrievedAt: '2026-10-17T00:00:00Z' } }] }, 'dining', 3000));
+    expect(calls).toBe(1);
+  } finally { await rm(directory, { recursive: true, force: true }); }
+});

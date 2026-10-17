@@ -38,7 +38,7 @@ function dependencies(owner: string) {
   const model: ModelService = {
     isReady: async () => true,
     interpretTreatment: async (_brief, pool) => {
-      expect(pool.every(fixture => fixture.fixtureId.startsWith(`${owner}-`))).toBe(true);
+      expect(pool.every(option => option.name.startsWith(`${owner} `) && /^[a-f0-9]{64}$/.test(option.fixtureRef))).toBe(true);
       counters.treatment++;
       return { status: 'unavailable', reason: 'model-unavailable' };
     },

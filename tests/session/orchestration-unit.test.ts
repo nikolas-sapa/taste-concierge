@@ -46,11 +46,14 @@ const updatePreferences = createUpdatePreferences(concierge);
 const brief = (): Brief => ({ cityId: 'athens', seeds: [{ kind: 'movie', text: 'Unit Film' }],
   diningPreference: 'quiet', attractionPreference: 'history', constraints: { radiusMeters: 3000, excludedVenueRefs: [] } });
 
-test('unbound genuine-shape candidates yield no-practical-match, zero fabricated cards', async () => {
+test('unbound genuine-shape candidates yield explicitly Qloo-reported practical facts', async () => {
   mode = 'unbound';
   const state = new SessionStore().create()!.state;
-  expect(await assembleConcierge(brief(), state)).toMatchObject({ state: 'no-valid-result', reasons: ['no-practical-match'] });
-  expect(state.venues.size).toBe(0);
+  const result = await assembleConcierge(brief(), state);
+  expect(result.state).toBe('ready');
+  if (result.state !== 'ready') throw new Error('ready');
+  for (const item of Object.values(result.items)) expect(item.primary.practicalFacts.every(f => f.source === 'qloo' && f.sourceRevision === null)).toBe(true);
+  expect(state.venues.size).toBe(4);
 });
 
 test('dining edit refreshes only dining and preserves attraction timestamp/ref and constraints', async () => {

@@ -9,7 +9,7 @@ export function baselineCards(selections: readonly ModelSelection[], fixtures: r
     const fixture = fixtures.find(f => f.fixtureId === selection.fixtureRef)!;
     return { ref: randomBytes(32).toString('hex'), name: fixture.name, category: selection.category, source: 'generic-llm',
       interpretation: renderModelInterpretation(selection.reasonCodes, 'generic-llm'), retrievedAt,
-      practicalFacts: (['city', 'category', 'coordinates'] as const).map(field => ({ field,
+      practicalFacts: (['city', 'category', 'coordinates'] as const).map(field => ({ field, source: 'independent',
         value: field === 'city' ? fixture.cityId : field === 'category' ? fixture.category : fixture.coordinates,
         sourceUrl: fixture.sourceUrl, sourceRevision: fixture.sourceRevision, retrievedAt: fixture.retrievedAt,
         status: fixture.verification })),

@@ -1,3 +1,4 @@
+import { fixtureOption } from '../../src/server/practical/resolve';
 import { createHash } from 'node:crypto';
 import { mkdtemp, readFile, readdir, rm, symlink, unlink, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
@@ -164,7 +165,7 @@ test('treatment selection stays on ranked bound refs, baseline input strips any 
   }) as typeof fetch);
   try {
     const ranked = fixtures.map((f, index) => ({ fixtureRef: f.fixtureId, category: f.category!, rank: index + 1 }));
-    const result = await service.interpretTreatment(brief, fixtures, ranked);
+    const result = await service.interpretTreatment(brief, fixtures.map(fixtureOption), ranked);
     expect(result.status).toBe('ready');
     if (result.status !== 'ready') throw new Error('synthetic readiness');
     expect(result.items.every(item => ranked.some(r => r.fixtureRef === item.fixtureRef))).toBe(true);

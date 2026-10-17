@@ -24,7 +24,8 @@ function executor(databaseUrl: string) {
     } catch { throw new PostgresPersistenceError(); }
   };
 }
-export function createPostgresSessionRepository(databaseUrl: string): SessionRepository {
+export function createPostgresSessionRepository(databaseUrl: string, schema = 'taste_runtime'): SessionRepository {
+  if (!/^taste_runtime(?:_test_[a-f0-9]+)?$/.test(schema)) throw new PostgresPersistenceError();
   const execute = executor(databaseUrl);
   async function outcome(statement: string, params: unknown[]): Promise<Record<string, unknown>> {
     const value = await execute(statement, params);
@@ -36,14 +37,14 @@ export function createPostgresSessionRepository(databaseUrl: string): SessionRep
       const ref = token();
       const initial: SessionState = { revision: 0, brief: null, resolved: null, pending: new Map(),
         venues: new Map(), result: null, expiresAt: 1, operationFence: null };
-      const value = await outcome('SELECT taste_runtime.session_create($1::bytea,$2::jsonb) AS value', [hash(ref), encodeSessionEnvelope(initial)]);
+      const value = await outcome(`SELECT ${schema}.session_create($1::bytea,$2::jsonb) AS value`, [hash(ref), encodeSessionEnvelope(initial)]);
       if (value.status === 'capacity') return null;
       if (value.status !== 'created') throw new PostgresPersistenceError();
       return { ref, state: decodeSessionEnvelope(value.envelope) };
     },
     async get(ref) {
       if (!isToken(ref)) return null;
-      const value = await outcome('SELECT taste_runtime.session_get($1::bytea) AS value', [hash(ref)]);
+      const value = await outcome(`SELECT ${schema}.session_get($1::bytea) AS value`, [hash(ref)]);
       if (value.status === 'missing') return null;
       if (value.status !== 'found') throw new PostgresPersistenceError();
       return decodeSessionEnvelope(value.envelope);
@@ -52,7 +53,7 @@ export function createPostgresSessionRepository(databaseUrl: string): SessionRep
       if (!isToken(ref)) return { status: 'missing' };
       if (!isRevision(revision)) return { status: 'stale' };
       if (!Number.isSafeInteger(leaseMs) || leaseMs < 1 || leaseMs > 90_000) throw new PostgresPersistenceError();
-      const value = await outcome('SELECT taste_runtime.session_begin($1::bytea,$2::bigint,$3::text,$4::text,$5::integer) AS value', [hash(ref), revision, mode, token(), leaseMs]);
+      const value = await outcome(`SELECT ${schema}.session_begin($1::bytea,$2::bigint,$3::text,$4::text,$5::integer) AS value`, [hash(ref), revision, mode, token(), leaseMs]);
       if (value.status === 'admitted' && typeof value.fence === 'string' && isToken(value.fence)) {
         return { status: 'admitted', fence: value.fence, state: decodeSessionEnvelope(value.envelope) };
       }
@@ -61,14 +62,14 @@ export function createPostgresSessionRepository(databaseUrl: string): SessionRep
     },
     async commit(ref, fence, expectedRevision, next) {
       if (!isToken(ref) || !isToken(fence) || !isRevision(expectedRevision) || next.operationFence !== fence) return false;
-      const result = await execute('SELECT taste_runtime.session_commit($1::bytea,$2::text,$3::bigint,$4::jsonb) AS value',
+      const result = await execute(`SELECT ${schema}.session_commit($1::bytea,$2::text,$3::bigint,$4::jsonb) AS value`,
         [hash(ref), fence, expectedRevision, encodeSessionEnvelope(next)]);
       if (typeof result !== 'boolean') throw new PostgresPersistenceError();
       return result;
     },
     async finish(ref, fence) {
       if (!isToken(ref) || !isToken(fence)) return;
-      await execute('SELECT taste_runtime.session_finish($1::bytea,$2::text) AS value', [hash(ref), fence]);
+      await execute(`SELECT ${schema}.session_finish($1::bytea,$2::text) AS value`, [hash(ref), fence]);
     },
   };
 }
