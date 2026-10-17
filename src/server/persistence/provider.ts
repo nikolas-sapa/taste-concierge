@@ -1,7 +1,7 @@
 import 'server-only';
 import { createHash, randomBytes } from 'node:crypto';
 import { neon } from '@neondatabase/serverless';
-import { validatePolicy, type ProviderPolicy } from '../admission/ledger';
+import { validateCloudPolicy, type ExecutionPolicy } from '../admission/application-policy';
 import type { CaptureData, QlooAdmission } from '../qloo/client';
 import type { EvidenceRef } from '../../contracts/server';
 import { QlooError } from '../qloo/errors';
@@ -30,14 +30,14 @@ export class ProviderRepository implements QlooAdmission {
     } catch { throw configuration(); }
   }
 
-  async readPolicy(): Promise<ProviderPolicy> {
+  async readPolicy(): Promise<ExecutionPolicy> {
     const result = await this.rpc('read');
     if (result.status !== 'ok') throw configuration();
     // Keep exact policy for change detection. SQL independently enforces the stricter local 5s gap.
-    return validatePolicy(result.policy);
+    return validateCloudPolicy(result.policy);
   }
 
-  async initialize(): Promise<ProviderPolicy> {
+  async initialize(): Promise<ExecutionPolicy> {
     const policy = await this.readPolicy();
     this.expectedPolicy = JSON.stringify(policy);
     return policy;
