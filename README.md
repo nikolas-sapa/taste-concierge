@@ -4,11 +4,11 @@ An Athens concierge for boutique hotels and small travel businesses. Guests supp
 
 Development build. Qloo authentication, response shapes and three two-category coverage probes were verified separately. Those probes are preparation evidence, not successful application journeys. Private venue identity bindings remain incomplete. Provider numeric quota policy is unknown. Anonymous upstream admission therefore stays closed; the application shows an explicit unavailable state. No successful hackathon acceptance target is claimed.
 
-Verification: 90 unit/integration-boundary checks pass, one paid live check is intentionally skipped; 15 browser checks pass, including explicitly synthetic states. Next production build/typecheck pass, independent code/security reviews approve the implemented boundaries, and the public-source/client export audit found zero credential/provider-ID leaks. Six actual local production smoke checks cover the unconfigured path, not successful Qloo journeys.
+Tests distinguish synthetic provider behavior, actual PostgreSQL persistence and genuine external acceptance. A passing offline suite or database canary does not establish a successful Qloo itinerary or model comparison. Paid live inference remains disabled.
 
 ## Local development
 
-Installed/pinned packages and a lockfile support reproducible builds. Tested local runtime is Node 25.8.1; an actual Node 22 release runtime remains to be verified.
+Use Node 24 and npm. Packages and the lockfile are pinned. The deployment runtime is Node 24; local Node 24.21.0 is available for verification.
 
 ```sh
 npm ci
@@ -20,7 +20,17 @@ npm run test:browser
 npm run evaluate
 ```
 
-Copy `.env.example` to ignored `.env.local` for approved local configuration. Secrets are supplied by private file paths, never pasted into browser fields or public source. Missing Qloo policy, ledger, credential or private evidence configuration denies upstream traffic. `APP_ORIGIN` must exactly match the browser origin. Production has no origin default. One Node instance only; this in-memory session design cannot be deployed across replicas.
+Copy `.env.example` to ignored `.env.local` for approved local configuration. `RUNTIME_STORAGE=filesystem` supports one local Node process with private file credentials and evidence. Missing Qloo policy, ledger, credential or evidence configuration denies upstream traffic. `APP_ORIGIN` must exactly match the browser origin. Production has no origin or storage default.
+
+## Vercel deployment
+
+Hosted instances use `RUNTIME_STORAGE=postgres`, a restricted runtime-role `DATABASE_URL`, and the exact HTTPS `APP_ORIGIN`. PostgreSQL coordinates session expiry, revision fences, request leases, provider admission and private evidence. Vercel rejects the filesystem mode. Long operations have a 90-second application deadline and a 100-second function limit. Region `fra1` is configured alongside the Frankfurt database.
+
+Use a separate migration credential locally to apply `migrations/001-runtime.sql` through `scripts/migrate-runtime.ts`, then `migrations/002-provider.sql` through `scripts/import-runtime.ts`. These operator scripts never run at startup or build. Bindings are imported explicitly with `--bindings` and a private `PRIVATE_EVIDENCE_DIR`; original capture integrity and approved membership are checked. Importing evidence does not initialize a provider allowance. Neither scripts nor runtime invent unknown provider limits or prior usage.
+
+Only the restricted role belongs in Production and Preview. Keep database-owner credentials and all credential aliases out of those environments. Preview has no Qloo key; live provider traffic stays closed there. A preview origin must be configured explicitly before interactive testing. Production uses a public stable domain; deployment URLs and previews retain Vercel Authentication.
+
+Real persistence tests require explicit test configuration, private operator/runtime credentials, and an unused test database. Never point fixture-control tests at an active guest database. Ordinary `npm test` does not prove database acceptance when those tests are skipped. Private captured provider data and bindings stay outside public source and browser assets.
 
 ## Data and limitations
 
@@ -28,7 +38,7 @@ The independent pool contains 39 CC0 Wikidata records: four dining and thirty-fi
 
 Budget and opening-time requirements return unsupported. No booking, availability, accessibility, allergy or dietary-safety assurance. Raw Qloo responses, returned identifiers, scores and private identity bindings are excluded from public source and assets.
 
-Generic model comparison and treatment interpretation are implemented with a pinned OpenAI Responses model, strict fixture whitelists and durable spend admission. They require separately authorized API access and a concrete spend ceiling. Default spend is zero. Unavailable inference cannot be represented as a successful comparison.
+The local model adapter uses a pinned OpenAI Responses model, strict fixture whitelists and durable spend admission. It requires separately authorized API access and a concrete spend ceiling. Default spend is zero. The hosted model adapter remains disabled until free inference access and its financial boundary are verified. Unavailable inference cannot be represented as a successful comparison.
 
 ## Architecture
 

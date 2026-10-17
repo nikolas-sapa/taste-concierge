@@ -22,7 +22,7 @@ async function readWithinRoot(file: string, root: string, projectRoot: string, m
   return JSON.parse(bytes.toString('utf8')) as unknown;
 }
 
-function captureMembership(capture: unknown, entityId: string): boolean {
+export function captureMembership(capture: unknown, entityId: string): boolean {
   if (!object(capture)) return false;
   let body: unknown = capture.body;
   if (typeof capture.rawBody === 'string' && capture.rawEncoding === 'base64') {

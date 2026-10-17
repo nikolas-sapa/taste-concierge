@@ -13,27 +13,6 @@ import { renderModelInterpretation } from '../model/interpretation';
 
 export type ConciergeDependencies = { client: QlooClient; fixtures: readonly PracticalFixture[];
   bindings: readonly FixtureBinding[]; model?: ModelService };
-const configurationKey = Symbol.for('taste-concierge.dependencies');
-const shared = globalThis as unknown as Record<symbol, ConciergeDependencies | undefined>;
-
-export function configureConcierge(deps: ConciergeDependencies): void {
-  if (shared[configurationKey]) throw new Error('Concierge already configured');
-  shared[configurationKey] = { client: deps.client, fixtures: structuredClone([...deps.fixtures]), bindings: structuredClone([...deps.bindings]), model: deps.model };
-}
-
-function dependencies(): ConciergeDependencies {
-  const configured = shared[configurationKey];
-  if (!configured) throw new QlooError('configuration');
-  return configured;
-}
-
-export function resolveSeeds(brief: Brief, session: SessionState): Promise<ConciergeResult | ResolvedInputs> {
-  return resolveWithClient(brief, session, dependencies().client);
-}
-export function retrieveRecommendations(inputs: ResolvedInputs, brief: Brief): Promise<RecommendationBatch> {
-  const deps = dependencies();
-  return recommendWithClient(inputs, brief, deps.client, deps.bindings);
-}
 
 export function validateExclusions(brief: Brief, session: SessionState): boolean {
   return brief.constraints.excludedVenueRefs.every(ref => session.venues.has(ref));
@@ -55,16 +34,16 @@ function card(candidate: InternalCandidate, fixture: PracticalFixture, session: 
     retrievedAt: candidate.evidence.retrievedAt };
 }
 
-async function execute(brief: Brief, session: SessionState, categories: readonly Category[] = ['dining', 'attractions'], signal?: AbortSignal): Promise<ConciergeResult> {
+async function execute(deps: ConciergeDependencies, brief: Brief, session: SessionState,
+  categories: readonly Category[] = ['dining', 'attractions'], signal?: AbortSignal): Promise<ConciergeResult> {
   const fields: ('maxBudgetEur' | 'localOpeningTime')[] = [];
   if (brief.constraints.maxBudgetEur !== undefined) fields.push('maxBudgetEur');
   if (brief.constraints.localOpeningTime !== undefined) fields.push('localOpeningTime');
   if (fields.length) return { state: 'unsupported-constraint', revision: session.revision + 1, fields };
   if (!validateExclusions(brief, session)) return { state: 'invalid-input', revision: session.revision + 1, fields: ['excludedVenueRefs'] };
-  const deps = dependencies();
   let accepted: RecommendationBatch | null = null;
   const result = await deps.client.runOperation<ConciergeResult>(async () => {
-    const resolved = await resolveSeeds(brief, session);
+    const resolved = await resolveWithClient(brief, session, deps.client);
     if ('state' in resolved) return resolved;
     const batch = await recommendWithClient(resolved, brief, deps.client, deps.bindings, categories);
     const previousReady = session.result?.state === 'ready' ? session.result : null;
@@ -150,49 +129,67 @@ async function execute(brief: Brief, session: SessionState, categories: readonly
   return result;
 }
 
-export async function assembleConcierge(brief: Brief, session: SessionState, signal?: AbortSignal): Promise<ConciergeResult> {
-  try {
-    // Callers supply an isolated store snapshot and hold its operation fence through commit.
-    session.brief = structuredClone(brief);
-    session.resolved = null;
+export function createConcierge(dependencies: ConciergeDependencies) {
+  const deps: ConciergeDependencies = { client: dependencies.client,
+    fixtures: structuredClone([...dependencies.fixtures]), bindings: structuredClone([...dependencies.bindings]),
+    model: dependencies.model };
+  const resolveSeeds = (brief: Brief, session: SessionState): Promise<ConciergeResult | ResolvedInputs> =>
+    resolveWithClient(brief, session, deps.client);
+  const retrieveRecommendations = (inputs: ResolvedInputs, brief: Brief): Promise<RecommendationBatch> =>
+    recommendWithClient(inputs, brief, deps.client, deps.bindings);
+
+  const assembleConcierge = async (brief: Brief, session: SessionState, signal?: AbortSignal): Promise<ConciergeResult> => {
+    try {
+      // Callers supply an isolated store snapshot and hold its operation fence through commit.
+      session.brief = structuredClone(brief);
+      session.resolved = null;
+      session.pending.clear();
+      const result = await execute(deps, brief, session, undefined, signal);
+      session.result = result;
+      return result;
+    } catch (error) {
+      const reason = error instanceof QlooError ? error.reason : 'upstream';
+      const result: ConciergeResult = { state: 'service-unavailable', revision: session.revision + 1,
+        reason, retryable: reason === 'network' || reason === 'timeout' || reason === 'upstream' };
+      session.result = result;
+      return result;
+    }
+  };
+
+  const continueConcierge = async (brief: Brief, session: SessionState,
+    categories: readonly Category[] = ['dining', 'attractions'], signal?: AbortSignal): Promise<ConciergeResult> => {
+    try {
+      const result = await execute(deps, brief, session, categories, signal);
+      session.brief = structuredClone(brief);
+      session.result = result;
+      return result;
+    } catch (error) {
+      const reason = error instanceof QlooError ? error.reason : 'upstream';
+      const result: ConciergeResult = { state: 'service-unavailable', revision: session.revision + 1,
+        reason, retryable: reason === 'network' || reason === 'timeout' || reason === 'upstream' };
+      session.result = result;
+      return result;
+    }
+  };
+
+  const selectSeeds = async (selections: Selection[], revision: number, session: SessionState,
+    signal?: AbortSignal): Promise<ConciergeResult> => {
+    if (revision !== session.revision || session.result?.state !== 'needs-disambiguation' || !session.brief ||
+      !selections.length || new Set(selections.map(s => s.seedIndex)).size !== selections.length) {
+      return { state: 'invalid-input', revision: session.revision + 1, fields: ['selections'] };
+    }
+    const required = session.result.unresolved;
+    if (selections.length !== required.length || selections.some(selection => {
+      const pending = session.pending.get(selection.candidateRef);
+      return !pending || pending.seedIndex !== selection.seedIndex ||
+        !required.some(r => r.seedIndex === selection.seedIndex && r.options.some(o => o.ref === selection.candidateRef));
+    })) return { state: 'invalid-input', revision: session.revision + 1, fields: ['selections'] };
+    const entities = [...(session.resolved?.entities ?? [])];
+    for (const selection of selections) entities.push(session.pending.get(selection.candidateRef)!.seed);
+    session.resolved = { entities };
     session.pending.clear();
-    const result = await execute(brief, session, undefined, signal);
-    session.result = result;
-    return result;
-  } catch (error) {
-    const reason = error instanceof QlooError ? error.reason : 'upstream';
-    const result: ConciergeResult = { state: 'service-unavailable', revision: session.revision + 1,
-      reason, retryable: reason === 'network' || reason === 'timeout' || reason === 'upstream' };
-    session.result = result;
-    return result;
-  }
-}
+    return continueConcierge(session.brief, session, undefined, signal);
+  };
 
-export async function continueConcierge(brief: Brief, session: SessionState,
-  categories: readonly Category[] = ['dining', 'attractions'], signal?: AbortSignal): Promise<ConciergeResult> {
-  try { const result = await execute(brief, session, categories, signal); session.brief = structuredClone(brief); session.result = result; return result; }
-  catch (error) {
-    const reason = error instanceof QlooError ? error.reason : 'upstream';
-    const result: ConciergeResult = { state: 'service-unavailable', revision: session.revision + 1,
-      reason, retryable: reason === 'network' || reason === 'timeout' || reason === 'upstream' };
-    session.result = result; return result;
-  }
-}
-
-export async function selectSeeds(selections: Selection[], revision: number, session: SessionState, signal?: AbortSignal): Promise<ConciergeResult> {
-  if (revision !== session.revision || session.result?.state !== 'needs-disambiguation' || !session.brief ||
-    !selections.length || new Set(selections.map(s => s.seedIndex)).size !== selections.length) {
-    return { state: 'invalid-input', revision: session.revision + 1, fields: ['selections'] };
-  }
-  const required = session.result.unresolved;
-  if (selections.length !== required.length || selections.some(selection => {
-    const pending = session.pending.get(selection.candidateRef);
-    return !pending || pending.seedIndex !== selection.seedIndex ||
-      !required.some(r => r.seedIndex === selection.seedIndex && r.options.some(o => o.ref === selection.candidateRef));
-  })) return { state: 'invalid-input', revision: session.revision + 1, fields: ['selections'] };
-  const entities = [...(session.resolved?.entities ?? [])];
-  for (const selection of selections) entities.push(session.pending.get(selection.candidateRef)!.seed);
-  session.resolved = { entities };
-  session.pending.clear();
-  return continueConcierge(session.brief, session, undefined, signal);
+  return { assembleConcierge, continueConcierge, selectSeeds, resolveSeeds, retrieveRecommendations };
 }

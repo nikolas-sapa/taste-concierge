@@ -3,19 +3,37 @@ export type BodyResult = { ok: true; value: unknown } | { ok: false; error: Body
 class BodyFailure extends Error {
   constructor(readonly reason: BodyError) { super(reason); }
 }
+export interface BodyLimiter {
+  acquire(): Promise<string | null>;
+  release(id: string): Promise<void>;
+}
 
-export async function readJsonBody(request: Request): Promise<BodyResult> {
+export async function readJsonBody(request: Request, limiter?: BodyLimiter): Promise<BodyResult> {
+  const started = performance.now();
   const key = Symbol.for('taste-concierge.pending-bodies');
   const shared = globalThis as unknown as Record<symbol, number | undefined>;
   if (request.signal.aborted) return { ok: false, error: 'request-aborted' };
   if ((shared[key] ?? 0) >= 20) return { ok: false, error: 'body-capacity' };
   shared[key] = (shared[key] ?? 0) + 1;
-  try { return await readBoundedBody(request); }
-  catch { return { ok: false, error: 'invalid-json' }; }
-  finally { shared[key] = (shared[key] ?? 1) - 1; }
+  let lease: string | null = null;
+  try {
+    if (limiter) {
+      lease = await limiter.acquire();
+      if (!lease) return { ok: false, error: 'body-capacity' };
+    }
+    const remaining = 5000 - (performance.now() - started);
+    if (remaining <= 0) return { ok: false, error: 'body-timeout' };
+    return await readBoundedBody(request, remaining);
+  } finally {
+    shared[key] = (shared[key] ?? 1) - 1;
+    if (lease && limiter) {
+      try { await limiter.release(lease); }
+      catch { console.warn('[runtime] body-lease-cleanup-unavailable'); }
+    }
+  }
 }
 
-async function readBoundedBody(request: Request): Promise<BodyResult> {
+async function readBoundedBody(request: Request, timeoutMs: number): Promise<BodyResult> {
   if (request.signal.aborted) return { ok: false, error: 'request-aborted' };
   if (!request.body) return { ok: false, error: 'invalid-json' };
   const reader = request.body.getReader();
@@ -30,7 +48,7 @@ async function readBoundedBody(request: Request): Promise<BodyResult> {
     };
     onAbort = () => stop('request-aborted');
     request.signal.addEventListener('abort', onAbort, { once: true });
-    timer = setTimeout(() => stop('body-timeout'), 5000);
+    timer = setTimeout(() => stop('body-timeout'), timeoutMs);
   });
   try {
     while (true) {
