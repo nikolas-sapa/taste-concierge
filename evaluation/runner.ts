@@ -86,9 +86,9 @@ export function buildBlockedSummary(): PublicSummary {
   });
   const targets = [
     target('T1', profiles.profileCount, 'Missing verified live Qloo profile receipts and private response linkage.'),
-    target('T2', cases.constraints.length, 'Missing frozen real-response candidate bindings and expected/actual private decisions.'),
+    target('T2', cases.constraints.length, 'Missing frozen real-response source provenance and expected/actual private decisions.'),
     target('T3', cases.realJourneys.length, 'Missing real application journey receipts for both categories.'),
-    target('T4', cases.ablation.profiles.length, 'Missing paired treatment/baseline outputs, shared-pool proof, and independent human ratings.'),
+    target('T4', cases.ablation.profiles.length, 'Missing paired treatment/baseline outputs, declared pool/source evidence, and independent human ratings.'),
     target('T5', cases.preferenceEdits.length, 'Missing before/after application state and dependency receipts.'),
     target('T6', cases.anonymousJourneys.length, 'Missing frozen published release and anonymous browser-session receipts.'),
     target('T7', cases.outages.length, 'Missing labeled fault-injection receipts and safe-output assertions.'),

@@ -77,7 +77,7 @@ test('synthetic ready state separates sourced itinerary from unavailable compari
   await installSession(page, { revision: 0, brief: null, result: null });
   const venue = (ref: string, category: 'dining' | 'attractions', name: string) => ({
     ref, category, name, source: 'qloo', interpretation: 'Synthetic test display only.',
-    practicalFacts: [{ field: 'city', value: 'Athens', sourceUrl: 'https://www.wikidata.org/', sourceRevision: 'test', retrievedAt: '2026-10-13T00:00:00Z', status: 'source-reported' }],
+    practicalFacts: [{ field: 'city', value: 'Athens', source: 'independent', sourceUrl: 'https://www.wikidata.org/', sourceRevision: 'test', retrievedAt: '2026-10-13T00:00:00Z', status: 'source-reported' }],
     limitations: ['Synthetic browser fixture; not a real recommendation.'], retrievedAt: '2026-10-13T00:00:00Z',
   });
   await page.route('**/api/concierge', (route) => route.fulfill({ json: {
@@ -92,6 +92,54 @@ test('synthetic ready state separates sourced itinerary from unavailable compari
   await expect(page.getByRole('heading', { name: 'Synthetic Taverna' })).toBeVisible();
   await expect(page.getByText(/generic ai comparison/i)).toBeVisible();
   await expect(page.getByText(/comparison is currently unavailable/i)).toBeVisible();
+});
+
+test('synthetic mixed-source results label every fact and disclose unequal comparison pools', async ({ page }) => {
+  await installHealth(page);
+  await installSession(page, { revision: 0, brief: null, result: null });
+  const retrievedAt = '2026-10-13T00:00:00Z';
+  const venue = (ref: string, category: 'dining' | 'attractions', name: string, source: 'independent' | 'qloo') => ({
+    ref, category, name, source: 'qloo' as const, interpretation: 'Synthetic test display only.',
+    practicalFacts: (['city', 'category', 'coordinates'] as const).map((field) => ({
+      field,
+      value: source === 'qloo' && field === 'city' ? 'Athens' : null,
+      source,
+      sourceUrl: source === 'independent' ? 'https://www.wikidata.org/' : null,
+      sourceRevision: source === 'independent' ? 'synthetic-revision' : null,
+      retrievedAt,
+      status: source === 'qloo' && field === 'city' ? 'source-reported' as const : 'unknown' as const,
+    })),
+    limitations: ['Hours, prices, allergy safety, availability and current operation are unknown.'],
+    retrievedAt,
+  });
+  const qlooVenue = (ref: string, category: 'dining' | 'attractions', name: string) => ({ ...venue(ref, category, name, 'qloo'), source: 'qloo' as const });
+  const independentVenue = (ref: string, category: 'dining' | 'attractions', name: string) => ({ ...venue(ref, category, name, 'independent'), source: 'generic-llm' as const });
+  await page.route('**/api/concierge', (route) => route.fulfill({ json: {
+    state: 'ready', revision: 1,
+    items: {
+      dining: { primary: qlooVenue('qloo-dining', 'dining', 'Synthetic Qloo Dining'), alternative: independentVenue('ind-dining', 'dining', 'Synthetic Independent Dining') },
+      attractions: { primary: independentVenue('ind-attraction', 'attractions', 'Synthetic Independent Attraction'), alternative: qlooVenue('qloo-attraction', 'attractions', 'Synthetic Qloo Attraction') },
+    },
+    baseline: { status: 'ready', model: 'Synthetic model', items: [{ ...independentVenue('ind-baseline', 'dining', 'Synthetic Baseline'), limitations: [] }] },
+  } }));
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('/');
+  await expect(page.getByRole('heading', { name: 'Synthetic Qloo Dining' })).toBeVisible();
+  await expect(page.getByText('Qloo-reported, not independently verified')).toHaveCount(6);
+  await expect(page.getByText('Independently sourced', { exact: true })).toHaveCount(6);
+  await expect(page.getByText(/revision synthetic-revision/)).toHaveCount(6);
+  await expect(page.getByRole('link', { name: 'Source ↗' })).toHaveCount(6);
+  await expect(page.locator('.tc-facts time')).toHaveCount(12);
+  await expect(page.getByText(/Generic AI selects from 39 independently sourced venues\. Taste match additionally uses Qloo candidates and Qloo-reported location and category\. Candidate pools differ; this comparison does not isolate affinity ranking\./i)).toBeVisible();
+  await expect(page.getByText(/Hours, prices, allergy safety, availability and current operation are unknown\./i)).toHaveCount(4);
+  await page.screenshot({ path: 'test-results/reported-facts-mixed-source-desktop.png', fullPage: true, style: 'nextjs-portal { display: none !important; }' });
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.reload();
+  await expect(page.getByText('Qloo-reported, not independently verified')).toHaveCount(6);
+  await expect(page.getByText('Independently sourced', { exact: true })).toHaveCount(6);
+  await expect(page.getByText(/Candidate pools differ; this comparison does not isolate affinity ranking\./i)).toBeVisible();
+  await page.screenshot({ path: 'test-results/reported-facts-mixed-source-mobile.png', fullPage: true, style: 'nextjs-portal { display: none !important; }' });
 });
 
 test('synthetic initial transport failures retry through concierge at revision zero', async ({ page }) => {

@@ -29,7 +29,7 @@ describe('bounded versioned session codec', () => {
     expect(decoded.pending).toBeInstanceOf(Map);
     expect(decoded.pending).not.toBe(state.pending);
     const envelope = JSON.parse(encodeSessionEnvelope(state));
-    const invalid = [null, '{', { ...envelope, version: 2 }, { ...envelope, unknown: true },
+    const invalid = [null, '{', { ...envelope, version: 3 }, { ...envelope, unknown: true },
       { ...envelope, state: { ...envelope.state, pending: [['same', {}], ['same', {}]] } },
       { ...envelope, state: { ...envelope.state, venues: {} } },
       { ...envelope, state: { ...envelope.state, revision: -1 } },

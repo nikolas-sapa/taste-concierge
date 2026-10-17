@@ -1,4 +1,4 @@
-import type { Brief, Category, ConciergeResult, Coordinate, SeedKind } from './concierge';
+import type { Brief, Category, ConciergeResult, Coordinate, PracticalFact, SeedKind } from './concierge';
 export type EvidenceRef = { privateRef: string; digest: string; retrievedAt: string };
 export type ResolvedSeed = { seedIndex: number; kind: SeedKind;
   qlooEntityId: string; name: string; evidence: EvidenceRef };
@@ -10,9 +10,15 @@ export type PracticalFixture = {
   retrievedAt: string | null; license: 'CC0' | 'ODbL-1.0';
   verification: 'source-reported' | 'unknown' | 'conflicting';
 };
+export type QlooReportedPractical = { cityId: 'athens'; category: Category; coordinates: Coordinate };
+export type PracticalOption = {
+  fixtureRef: string; // Opaque selection reference, never provider identity.
+  name: string; category: Category; cityId: 'athens'; coordinates: Coordinate;
+  practicalFacts: PracticalFact[];
+};
 export type InternalCandidate = {
   qlooEntityId: string; name: string; category: Category;
-  evidence: EvidenceRef; fixtureId: string | null; qlooRank?: number;
+  evidence: EvidenceRef; fixtureId: string | null; qlooRank?: number; qlooReported?: QlooReportedPractical;
 };
 export type RecommendationBatch = {
   byCategory: Record<Category, InternalCandidate[]>;

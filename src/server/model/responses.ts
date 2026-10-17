@@ -4,13 +4,14 @@ import { open, realpath } from 'node:fs/promises';
 import { dirname, isAbsolute, join } from 'node:path';
 import { createHash, randomBytes } from 'node:crypto';
 import type { BaselineResult, Brief } from '../../contracts/concierge';
-import type { ModelSelection, PracticalFixture } from '../../contracts/server';
+import type { ModelSelection, PracticalFixture, PracticalOption } from '../../contracts/server';
 import { durableWrite } from '../admission/ledger';
 import { verifyPrivateDirectory } from '../qloo/evidence';
+import { fixtureOption } from '../practical/resolve';
 import { baselineCards } from './baseline';
 import { COMMON_REASONS, MODEL_SNAPSHOT, TREATMENT_REASONS } from './constants';
 import { ModelSpendGate } from './spend';
-import { eligibleFixtures, validRanks, validateSelections, type ModelArm, type RankedFixture } from './validation';
+import { eligibleFixtures, eligibleOptions, validRanks, validateSelections, type ModelArm, type RankedFixture } from './validation';
 
 export { MODEL_SNAPSHOT } from './constants';
 export type { RankedFixture } from './validation';
@@ -21,7 +22,7 @@ export interface ModelService {
   isReady(): Promise<boolean>;
   generateBaseline(brief: Brief, fixtures: readonly PracticalFixture[], signal?: AbortSignal,
     excludedFixtureIds?: readonly string[]): Promise<BaselineResult>;
-  interpretTreatment(brief: Brief, fixtures: readonly PracticalFixture[], rankedWhitelist: readonly RankedFixture[],
+  interpretTreatment(brief: Brief, fixtures: readonly PracticalOption[], rankedWhitelist: readonly RankedFixture[],
     signal?: AbortSignal, excludedFixtureIds?: readonly string[]): Promise<TreatmentResult>;
   close(): Promise<void>;
 }
@@ -31,15 +32,15 @@ const instructions = 'Select a compact itinerary from supplied fixture refs only
   + 'Never infer hours, prices, safety, availability or current operation. Return only the required structured fields; no factual text. '
   + 'If rankedWhitelist is supplied, select only those refs and consider their supplied recommendation order. No individual-probability claims.';
 
-export function buildModelRequest(brief: Brief, pool: readonly PracticalFixture[], arm: ModelArm,
+export function buildModelRequest(brief: Brief, pool: readonly PracticalOption[], arm: ModelArm,
   ranked: readonly RankedFixture[] = []) {
-  const refs = arm === 'baseline' ? pool.map(f => f.fixtureId) : ranked.map(r => r.fixtureRef);
+  const refs = arm === 'baseline' ? pool.map(f => f.fixtureRef) : ranked.map(r => r.fixtureRef);
   const reasons = arm === 'baseline' ? COMMON_REASONS : TREATMENT_REASONS;
   const data: Record<string, unknown> = { preferences: { cityId: brief.cityId,
     seeds: brief.seeds.map(s => ({ kind: s.kind, text: s.text })), diningPreference: brief.diningPreference,
     attractionPreference: brief.attractionPreference, radiusMeters: brief.constraints.radiusMeters },
-  pool: pool.map(f => ({ fixtureRef: f.fixtureId, name: f.name, category: f.category,
-    cityId: f.cityId, coordinates: f.coordinates, verification: f.verification })) };
+  pool: pool.map(f => ({ fixtureRef: f.fixtureRef, name: f.name, category: f.category,
+    cityId: f.cityId, coordinates: f.coordinates, factSources: f.practicalFacts.map(fact => ({ field: fact.field, source: fact.source, status: fact.status })) })) };
   if (arm === 'treatment') data.rankedWhitelist = ranked.map(r => ({ fixtureRef: r.fixtureRef, category: r.category, rank: r.rank }));
   return { model: MODEL_SNAPSHOT, store: false, stream: false, service_tier: 'default', tools: [],
     reasoning: { effort: 'none' }, max_output_tokens: 1024,
@@ -124,14 +125,14 @@ class NativeModelService implements ModelService {
     try { await this.initialize(); return !!this.gate && await this.gate.isReady(); } catch { return false; }
   }
 
-  private async generate(brief: Brief, fixtures: readonly PracticalFixture[], arm: ModelArm,
+  private async generate(brief: Brief, fixtures: readonly PracticalOption[], arm: ModelArm,
     ranked: readonly RankedFixture[], suppliedSignal?: AbortSignal, excludedFixtureIds?: readonly string[]): Promise<
-      { status: 'ready'; items: ModelSelection[]; pool: PracticalFixture[]; retrievedAt: string } | Unavailable> {
+      { status: 'ready'; items: ModelSelection[]; pool: PracticalOption[]; retrievedAt: string } | Unavailable> {
     if (!this.enabled()) return { status: 'unavailable', reason: 'model-unavailable' };
     const frozenBrief = structuredClone(brief);
     const frozenFixtures = structuredClone([...fixtures]);
     const frozenExclusions = excludedFixtureIds ? [...excludedFixtureIds] : undefined;
-    const pool = eligibleFixtures(frozenBrief, frozenFixtures, frozenExclusions);
+    const pool = eligibleOptions(frozenBrief, frozenFixtures, frozenExclusions);
     const frozenRanks = structuredClone([...ranked]);
     if (!pool || !pool.some(f => f.category === 'dining') || !pool.some(f => f.category === 'attractions') ||
       (arm === 'treatment' && !validRanks(frozenRanks, pool))) return { status: 'unavailable', reason: 'invalid-output' };
@@ -171,7 +172,7 @@ class NativeModelService implements ModelService {
       if (!response.ok || signal.aborted) return { status: 'unavailable', reason: 'model-unavailable' };
       try {
         const output = structuredOutput(JSON.parse(raw.toString('utf8')) as unknown);
-        const checked = eligibleFixtures(frozenBrief, frozenFixtures, frozenExclusions);
+        const checked = eligibleOptions(frozenBrief, frozenFixtures, frozenExclusions);
         if (!checked) return { status: 'unavailable', reason: 'invalid-output' };
         const items = validateSelections(output, checked, arm, frozenRanks);
         return items ? { status: 'ready', items, pool: checked, retrievedAt } : { status: 'unavailable', reason: 'invalid-output' };
@@ -186,12 +187,14 @@ class NativeModelService implements ModelService {
 
   async generateBaseline(brief: Brief, fixtures: readonly PracticalFixture[], signal?: AbortSignal,
     excludedFixtureIds?: readonly string[]): Promise<BaselineResult> {
-    const result = await this.generate(brief, fixtures, 'baseline', [], signal, excludedFixtureIds);
+    const eligible = eligibleFixtures(brief, fixtures, excludedFixtureIds);
+    if (!eligible) return { status: 'unavailable', reason: 'invalid-output' };
+    const result = await this.generate(brief, eligible.map(fixtureOption), 'baseline', [], signal, []);
     return result.status === 'ready' ? { status: 'ready', model: MODEL_SNAPSHOT,
-      items: baselineCards(result.items, result.pool, result.retrievedAt) } : result;
+      items: baselineCards(result.items, eligible, result.retrievedAt) } : result;
   }
 
-  async interpretTreatment(brief: Brief, fixtures: readonly PracticalFixture[], rankedWhitelist: readonly RankedFixture[],
+  async interpretTreatment(brief: Brief, fixtures: readonly PracticalOption[], rankedWhitelist: readonly RankedFixture[],
     signal?: AbortSignal, excludedFixtureIds?: readonly string[]): Promise<TreatmentResult> {
     const result = await this.generate(brief, fixtures, 'treatment', rankedWhitelist, signal, excludedFixtureIds);
     return result.status === 'ready' ? { status: 'ready', model: MODEL_SNAPSHOT, items: result.items } : result;

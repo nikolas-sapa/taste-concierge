@@ -1,6 +1,6 @@
 # Taste Concierge
 
-An Athens concierge for boutique hotels and small travel businesses. Guests supply cultural tastes and preferences; genuine Qloo results are checked against an independent practical-source pool before presentation.
+An Athens concierge for boutique hotels and small travel businesses. Guests supply cultural tastes and preferences; genuine Qloo results carry explicitly sourced city, category and coordinate facts. Independently bound venues retain independent evidence; genuinely unbound venues can use fields Qloo actually reports.
 
 Development build. Qloo authentication, response shapes and three two-category coverage probes were verified separately. Those probes are preparation evidence, not successful application journeys. Four private identity bindings cover one dining venue and three museums; wider profile coverage remains unverified. Provider numeric quotas and other prior provider usage remain unknown. Hosted admission supports a separate finite application allowance without claiming those limits are known. Missing allowance, credential or binding configuration returns unavailable. No successful hackathon acceptance target is claimed.
 
@@ -26,7 +26,7 @@ Copy `.env.example` to ignored `.env.local` for approved local configuration. `R
 
 Hosted instances use `RUNTIME_STORAGE=postgres`, a restricted runtime-role `DATABASE_URL`, and the exact HTTPS `APP_ORIGIN`. PostgreSQL coordinates session expiry, revision fences, request leases, provider admission and private evidence. Vercel rejects the filesystem mode. Long operations have a 90-second application deadline and a 100-second function limit. Region `fra1` is configured alongside the Frankfurt database.
 
-Use a separate migration credential locally to apply `migrations/001-runtime.sql` through `scripts/migrate-runtime.ts`, then `migrations/002-provider.sql` through `scripts/import-runtime.ts`. Apply the additive `migrations/003-application-allowance.sql` with the same operator connection before using V2 admission. These migrations never run at startup or build. Bindings are imported explicitly with `--bindings` and a private `PRIVATE_EVIDENCE_DIR`; original capture integrity and approved membership are checked. Importing evidence does not initialize a provider allowance. Neither scripts nor runtime invent unknown provider limits or prior usage.
+Use a separate migration credential locally to apply `migrations/001-runtime.sql` through `scripts/migrate-runtime.ts`, then `migrations/002-provider.sql` through `scripts/import-runtime.ts`. Apply additive `003-application-allowance.sql` before V2 admission and `004-session-envelope-v2.sql` before deploying source-labeled session envelopes. The latter preserves old v1 sessions while permitting v2; no state/counter reset. Migrations never run at startup or build. Bindings are imported explicitly with `--bindings` and a private `PRIVATE_EVIDENCE_DIR`; original capture integrity and approved membership are checked. Importing evidence does not initialize a provider allowance. Neither scripts nor runtime invent unknown provider limits or prior usage.
 
 Only the restricted role belongs in Production and Preview. Keep database-owner credentials and all credential aliases out of those environments. Preview has no Qloo key; live provider traffic stays closed there. A preview origin must be configured explicitly before interactive testing. Production uses a public stable domain; deployment URLs and previews retain Vercel Authentication.
 
@@ -40,11 +40,13 @@ Real persistence tests require explicit test configuration, private operator/run
 
 ## Data and limitations
 
-The independent pool contains 39 CC0 Wikidata records: four dining and thirty-five attractions. Added museum records retain direct or verified subclass museum classification, city membership and coordinate provenance; retained class evidence records the actual subclass links. One original conflicting coordinate stays unknown. Classification and city membership are source-reported metadata, not proof of current operation or municipal boundaries. Qloo's first supported category filters cover restaurants and museums. Distances are straight-line distances from the documented Athens reference point, not walking routes.
+The independent pool contains 39 CC0 Wikidata records: four dining and thirty-five attractions. Added museum records retain direct or verified subclass museum classification, city membership and coordinate provenance; retained class evidence records actual subclass links. One original conflicting coordinate stays unknown. Genuinely unbound candidates can use validated Qloo-reported city/category/coordinates, labeled not independently verified. Failed, ambiguous or conflicting independent bindings cannot use that fallback. Qloo facts have actual retrieval time, no invented revision or CC0 license. Classification and city membership are source-reported metadata, not proof of current operation or municipal boundaries. Category filters cover restaurants and museums. Distances are straight-line from the documented Athens reference point, not walking routes.
 
 Budget and opening-time requirements return unsupported. No booking, availability, accessibility, allergy or dietary-safety assurance. Raw Qloo responses, returned identifiers, scores and private identity bindings are excluded from public source and assets.
 
-The local model adapter uses a pinned OpenAI Responses model, strict fixture whitelists and durable spend admission. It requires separately authorized API access and a concrete spend ceiling. Default spend is zero. The hosted model adapter remains disabled until free inference access and its financial boundary are verified. Unavailable inference cannot be represented as a successful comparison.
+The local model adapter uses a pinned OpenAI Responses model, strict arm-specific option whitelists and durable spend admission. It requires separately authorized API access and a concrete spend ceiling. Default spend is zero. The hosted model adapter remains disabled until free inference access and its financial boundary are verified. Unavailable inference cannot be represented as a successful comparison.
+
+Comparison evaluates whole systems on the same ten briefs, model/settings, constraints and rubric. Generic AI gets the39independent fixtures. Treatment additionally gets Qloo candidates, ordinal and reported location/category, plus independent facts where bound. Candidate/fact pools differ; this does not isolate affinity ranking or establish general superiority. No model outputs/human scores have been generated. See `evaluation/README.md` for prospective protocol and failure reporting.
 
 ## Architecture
 
@@ -54,7 +56,7 @@ flowchart LR
   Routes --> Sessions[Atomic anonymous session fence]
   Sessions --> Admission[Private durable quota admission]
   Admission --> Qloo[Real Qloo search and insights]
-  Qloo --> Filter[Independent identity and practical filters]
+  Qloo --> Filter[Source-labeled practical filters]
   Facts[CC0 source facts] --> Filter
   Filter --> Result[Itinerary or explicit failure]
   Facts --> Model[Spend-gated generic comparison]

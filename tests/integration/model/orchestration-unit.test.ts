@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest';
 import type { Brief, Category } from '../../../src/contracts/concierge';
-import type { PracticalFixture } from '../../../src/contracts/server';
+import type { PracticalFixture, PracticalOption } from '../../../src/contracts/server';
 import type { QlooClient } from '../../../src/server/qloo/client';
 import type { ModelService, RankedFixture } from '../../../src/server/model/responses';
 import { createConcierge } from '../../../src/server/concierge/assemble';
@@ -18,7 +18,7 @@ test('model receives preferences and actual ordinals after Qloo phase; edit pres
   })));
   let inQloo = false;
   let tick = 0;
-  const calls: { arm: string; brief: Brief; pool: readonly PracticalFixture[]; ranks?: readonly RankedFixture[] }[] = [];
+  const calls: { arm: string; brief: Brief; pool: readonly PracticalFixture[] | readonly PracticalOption[]; ranks?: readonly RankedFixture[] }[] = [];
   const client: QlooClient = {
     isReady: async () => true,
     runOperation: async work => { inQloo = true; try { return await work(); } finally { inQloo = false; } },
@@ -39,7 +39,7 @@ test('model receives preferences and actual ordinals after Qloo phase; edit pres
       expect(JSON.stringify(ranks)).not.toContain('private-unit');
       calls.push({ arm: 'treatment', brief: structuredClone(brief), pool, ranks });
       return { status: 'ready', model: 'synthetic-model', items: categories.map((category, index) => ({
-        fixtureRef: `unit-${category}-2`, category, role: 'primary', order: index === 0 ? 1 : 2, reasonCodes: ['stated-preference'],
+        fixtureRef: pool.find(item => item.category === category && item.name.endsWith(" 2"))!.fixtureRef, category, role: 'primary', order: index === 0 ? 1 : 2, reasonCodes: ['stated-preference'],
       })) };
     },
     generateBaseline: async (brief, pool) => {
@@ -63,7 +63,8 @@ test('model receives preferences and actual ordinals after Qloo phase; edit pres
   if (original.state !== 'ready') throw new Error('unit ready');
   expect(original.items.dining.primary.name).toBe('Synthetic dining 2');
   expect(calls[0].ranks!.map(item => item.rank)).toEqual([2, 3, 2, 3]);
-  expect(calls[0].pool).toEqual(calls[1].pool);
+  expect(calls[0].pool.map(item => item.name)).toEqual(calls[1].pool.map(item => item.name));
+  expect(calls[0].pool.every(item => 'fixtureRef' in item && /^[a-f0-9]{64}$/.test(item.fixtureRef))).toBe(true);
   expect(calls[0].brief).toEqual(calls[1].brief);
   expect(store.commit(session.ref, begin.fence, 0, begin.state)).toBe(true);
   const editing = store.begin(session.ref, 1);

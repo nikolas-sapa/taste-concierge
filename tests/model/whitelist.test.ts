@@ -2,6 +2,7 @@ import { expect, test } from 'vitest';
 import type { Brief } from '../../src/contracts/concierge';
 import type { PracticalFixture } from '../../src/contracts/server';
 import { ATHENS_ORIGIN } from '../../src/server/practical/origin';
+import { fixtureOption } from '../../src/server/practical/resolve';
 import { eligibleFixtures, validateSelections } from '../../src/server/model/validation';
 import { buildModelRequest, MODEL_SNAPSHOT } from '../../src/server/model/responses';
 
@@ -18,15 +19,15 @@ const output = () => ({ items: fixtures.map((f, i) => ({ fixtureRef: f.fixtureId
   role: 'primary', order: i + 1, reasonCodes: ['within-radius'] })) });
 
 test('foreign ref, wrong category, arbitrary facts and more than 2 reason codes all reject', () => {
-  expect(validateSelections(output(), fixtures, 'baseline')).toHaveLength(2);
+  expect(validateSelections(output(), fixtures.map(fixtureOption), 'baseline')).toHaveLength(2);
   for (const patch of [{ fixtureRef: 'foreign' }, { category: 'attractions' }, { openingHours: '18:00' },
     { reasonCodes: ['within-radius', 'source-category', 'stated-preference'] }, { reasonCodes: ['allergy-safe'] }]) {
     const value = output(); Object.assign(value.items[0], patch);
-    expect(validateSelections(value, fixtures, 'baseline')).toBeNull();
+    expect(validateSelections(value, fixtures.map(fixtureOption), 'baseline')).toBeNull();
   }
   const value = output(); value.items[0].reasonCodes = ['qloo-rank'];
-  expect(validateSelections(value, fixtures, 'baseline')).toBeNull();
-  expect(validateSelections(value, fixtures, 'treatment', fixtures.map((f, i) => ({ fixtureRef: f.fixtureId,
+  expect(validateSelections(value, fixtures.map(fixtureOption), 'baseline')).toBeNull();
+  expect(validateSelections(value, fixtures.map(fixtureOption), 'treatment', fixtures.map((f, i) => ({ fixtureRef: f.fixtureId,
     category: f.category!, rank: i + 1 })))).toHaveLength(2);
 });
 
@@ -43,8 +44,8 @@ test('out-of-radius, unknown coordinates and unresolved opaque exclusions cannot
 
 test('paired requests share independent metadata/settings/preferences; baseline has no Qloo ranks or IDs', () => {
   const ranked = fixtures.map((f, i) => ({ fixtureRef: f.fixtureId, category: f.category!, rank: i + 1 }));
-  const baseline = buildModelRequest(brief, fixtures, 'baseline');
-  const treatment = buildModelRequest(brief, fixtures, 'treatment', ranked);
+  const baseline = buildModelRequest(brief, fixtures.map(fixtureOption), 'baseline');
+  const treatment = buildModelRequest(brief, fixtures.map(fixtureOption), 'treatment', ranked);
   expect(baseline.model).toBe(MODEL_SNAPSHOT);
   expect(treatment.model).toBe(baseline.model);
   expect(treatment.max_output_tokens).toBe(baseline.max_output_tokens);

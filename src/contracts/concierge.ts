@@ -15,6 +15,7 @@ export type Brief = {
   };
 };
 export type PracticalFact = {
+  source: 'independent' | 'qloo';
   field: 'city' | 'category' | 'coordinates';
   value: string | Coordinate | null;
   sourceUrl: string | null;

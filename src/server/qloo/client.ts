@@ -235,7 +235,7 @@ class NativeQlooClient implements QlooClient {
       'signal.interests.entities': inputs.entities.map(e => e.qlooEntityId).join(','),
       'filter.tags': payload.categoryTagIds[category],
       'filter.location': `POINT(${payload.origin.longitude} ${payload.origin.latitude})`,
-      'filter.location.radius': String(radiusMeters), 'filter.geocode.country_code': 'GR', take: '30' });
+      'filter.location.radius': String(radiusMeters), 'filter.geocode.country_code': 'GR', take: '10' });
   }
 }
 

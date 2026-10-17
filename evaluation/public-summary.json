@@ -24,7 +24,7 @@
         "failedCases": 0,
         "blockedCases": 20,
         "status": "blocked",
-        "reason": "Missing frozen real-response candidate bindings and expected/actual private decisions."
+        "reason": "Missing frozen real-response source provenance and expected/actual private decisions."
       },
       {
         "id": "T3",
@@ -44,7 +44,7 @@
         "failedCases": 0,
         "blockedCases": 10,
         "status": "blocked",
-        "reason": "Missing paired treatment/baseline outputs, shared-pool proof, and independent human ratings."
+        "reason": "Missing paired treatment/baseline outputs, declared pool/source evidence, and independent human ratings."
       },
       {
         "id": "T5",

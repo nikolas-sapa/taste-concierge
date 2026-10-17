@@ -2,7 +2,7 @@ import { expect, test } from 'vitest';
 import { normalizeRecommendations, normalizeSearch } from '../../../src/server/qloo/normalize';
 
 // Entrant-authored synthetic unit payloads. Never live Qloo evidence or acceptance proof.
-const evidence = { privateRef: 'unit', digest: 'unit', retrievedAt: 'unit' };
+const evidence = { privateRef: 'unit', digest: 'unit', retrievedAt: '2026-10-17T00:00:00Z' };
 test('observed envelopes normalize separately; wrong type/tag/coordinates excluded', () => {
   expect(normalizeSearch({ results: [{ entity_id: 'unit', name: 'Unit seed', types: ['urn:entity:movie'] }] },
     'movie', 0, evidence)).toHaveLength(1);
