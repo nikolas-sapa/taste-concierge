@@ -17,7 +17,23 @@ export interface QlooClient {
   recommend(inputs: ResolvedInputs, category: Category, radiusMeters: number): Promise<CapturedResult>;
   payloadPolicy(): PayloadPolicy;
 }
-export type QlooClientConfig = { keyFile: string; policyFile: string; evidenceDir: string; projectRoot: string };
+export interface QlooAdmission {
+  reserve(count?: number): Promise<string>;
+  charge(id: string, signal?: AbortSignal): Promise<{ id: string; chargedAt: number }>;
+  release(id: string): Promise<void>;
+  halt(): Promise<void>;
+  assertSendAllowed(id: string): void | Promise<void>;
+  isReady(): Promise<boolean>;
+  completeSend?(id: string, uncertain: boolean): Promise<void>;
+}
+export type CaptureData = Parameters<typeof saveEvidence>[2];
+export interface QlooBackend {
+  initialize(): Promise<{ policy: ProviderPolicy; ledger: QlooAdmission }>;
+  readPolicy(): Promise<ProviderPolicy>;
+  key(): Promise<string>;
+  saveEvidence(data: CaptureData, attemptId: string): Promise<EvidenceRef>;
+}
+export type QlooClientConfig = { keyFile: string; policyFile: string; evidenceDir: string; projectRoot: string; backend?: QlooBackend };
 type Operation = { reservation: string; signal: AbortSignal; attempts: number };
 
 function aborted(signal: AbortSignal): void { if (signal.aborted) throw new QlooError('timeout'); }
@@ -33,7 +49,7 @@ async function waitAbortable(promise: Promise<void>, signal: AbortSignal): Promi
 
 class NativeQlooClient implements QlooClient {
   private policy?: ProviderPolicy;
-  private ledger?: AdmissionLedger;
+  private ledger?: QlooAdmission;
   private initializing?: Promise<void>;
   private readonly operations = new AsyncLocalStorage<Operation>();
   private sendQueue: Promise<void> = Promise.resolve();
@@ -42,6 +58,7 @@ class NativeQlooClient implements QlooClient {
   constructor(private readonly config: QlooClientConfig, private readonly transport: typeof fetch) {}
 
   private async key(): Promise<string> {
+    if (this.config.backend) return this.config.backend.key();
     try {
       const { keyFile, projectRoot } = this.config;
       if (!isAbsolute(keyFile)) throw new QlooError('configuration');
@@ -61,6 +78,12 @@ class NativeQlooClient implements QlooClient {
     if (this.ledger) return;
     if (!this.initializing) {
       this.initializing = (async () => {
+        if (this.config.backend) {
+          const initialized = await this.config.backend.initialize();
+          await this.key();
+          this.policy = initialized.policy; this.ledger = initialized.ledger;
+          return;
+        }
         const root = await verifyPrivateDirectory(this.config.evidenceDir, this.config.projectRoot);
         await verifyPrivateDirectory(dirname(this.config.policyFile), this.config.projectRoot);
         // Numerical policy and reconciled prior usage are mandatory. Manual Q0 is never loaded here.
@@ -76,7 +99,7 @@ class NativeQlooClient implements QlooClient {
   async isReady(): Promise<boolean> {
     try {
       await this.initialize();
-      const current = validatePolicy(await readPrivateJson(this.config.policyFile, this.config.projectRoot));
+      const current = await this.readPolicy();
       return JSON.stringify(current) === JSON.stringify(this.policy) && !!this.ledger && await this.ledger.isReady();
     } catch { return false; }
   }
@@ -84,6 +107,11 @@ class NativeQlooClient implements QlooClient {
   payloadPolicy(): PayloadPolicy {
     if (!this.policy) throw new QlooError('configuration');
     return structuredClone(this.policy.payload);
+  }
+
+  private async readPolicy(): Promise<ProviderPolicy> {
+    return this.config.backend ? this.config.backend.readPolicy()
+      : validatePolicy(await readPrivateJson(this.config.policyFile, this.config.projectRoot));
   }
 
   async runOperation<T>(work: () => Promise<T>, requestSignal?: AbortSignal): Promise<T> {
@@ -124,7 +152,7 @@ class NativeQlooClient implements QlooClient {
     return this.serialized(operation.signal, async () => {
       aborted(operation.signal);
       if (operation.attempts >= 5) throw new QlooError('configuration');
-      const current = validatePolicy(await readPrivateJson(this.config.policyFile, this.config.projectRoot));
+      const current = await this.readPolicy();
       if (JSON.stringify(current) !== JSON.stringify(this.policy)) throw new QlooError('configuration');
       const gap = this.policy!.minIntervalMs - (Date.now() - this.lastCompletedAt);
       if (gap > 0) {
@@ -134,15 +162,19 @@ class NativeQlooClient implements QlooClient {
       }
       const credential = await this.key();
       aborted(operation.signal);
-      const charge = await this.ledger!.charge(operation.reservation);
+      const charge = await this.ledger!.charge(operation.reservation, operation.signal);
       operation.attempts++;
-      aborted(operation.signal);
-      this.ledger!.assertSendAllowed(charge.id);
-      const url = new URL(route, 'https://hackathon.api.qloo.com');
-      for (const [name, value] of Object.entries(parameters)) url.searchParams.set(name, value);
       const timeout = AbortSignal.timeout(15_000);
       const signal = AbortSignal.any([operation.signal, timeout]);
+      let completed = false;
+      let transportStarted = false;
       try {
+        aborted(signal);
+        await this.ledger!.assertSendAllowed(charge.id);
+        aborted(signal);
+        const url = new URL(route, 'https://hackathon.api.qloo.com');
+        for (const [name, value] of Object.entries(parameters)) url.searchParams.set(name, value);
+        transportStarted = true;
         const response = await this.transport(url, { method: 'GET', redirect: 'error',
           headers: { 'X-Api-Key': credential, Accept: 'application/json' }, signal });
         const headers = Object.fromEntries(response.headers);
@@ -158,13 +190,15 @@ class NativeQlooClient implements QlooClient {
             const chunk = await reader.read();
             if (chunk.done) break;
             bytes += chunk.value.byteLength;
-            if (bytes > 2_097_152) { await reader.cancel(); throw new QlooError('upstream'); }
+            if (bytes > 2_097_152) { await reader.cancel(); completed = true; throw new QlooError('upstream'); }
             chunks.push(chunk.value);
           }
         } finally { reader.releaseLock(); }
+        completed = true;
         const raw = Buffer.concat(chunks);
-        const evidence = await saveEvidence(this.config.evidenceDir, this.config.projectRoot,
-          { route, parameters, status: response.status, headers, raw, receivedAt: new Date().toISOString() });
+        const capture = { route, parameters, status: response.status, headers, raw, receivedAt: new Date().toISOString() };
+        const evidence = this.config.backend ? await this.config.backend.saveEvidence(capture, charge.id)
+          : await saveEvidence(this.config.evidenceDir, this.config.projectRoot, capture);
         if (response.status === 401 || response.status === 403) throw new QlooError('authentication');
         if (response.status === 429 || zeroRemaining) throw new QlooError('rate-limit');
         if (response.status === 404 && route === '/search') return { body: { results: [] }, evidence };
@@ -183,7 +217,10 @@ class NativeQlooClient implements QlooClient {
         if (error instanceof QlooError) throw error;
         if (signal.aborted) throw new QlooError('timeout');
         throw new QlooError('network');
-      } finally { this.lastCompletedAt = Date.now(); }
+      } finally {
+        this.lastCompletedAt = Date.now();
+        await this.ledger!.completeSend?.(charge.id, transportStarted && !completed);
+      }
     });
   }
 

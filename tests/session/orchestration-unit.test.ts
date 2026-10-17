@@ -2,8 +2,8 @@ import { expect, test } from 'vitest';
 import type { Brief, Category, Seed } from '../../src/contracts/concierge';
 import type { PracticalFixture } from '../../src/contracts/server';
 import type { QlooClient } from '../../src/server/qloo/client';
-import { assembleConcierge, configureConcierge, selectSeeds } from '../../src/server/concierge/assemble';
-import { updatePreferences } from '../../src/server/concierge/update';
+import { createConcierge } from '../../src/server/concierge/assemble';
+import { createUpdatePreferences } from '../../src/server/concierge/update';
 import { ATHENS_ORIGIN } from '../../src/server/practical/origin';
 import { SessionStore } from '../../src/server/session/store';
 
@@ -39,8 +39,10 @@ const fixtures: PracticalFixture[] = (['dining', 'attractions'] as Category[]).f
   coordinates: origin, category, cityId: 'athens' as const, sourceUrl: 'https://example.invalid/unit-source',
   sourceRevision: 'synthetic-unit-revision', retrievedAt: new Date().toISOString(), license: 'CC0' as const, verification: 'source-reported' as const,
 })));
-configureConcierge({ client, fixtures, bindings: fixtures.map(f => ({ qlooEntityId: f.fixtureId,
+const concierge = createConcierge({ client, fixtures, bindings: fixtures.map(f => ({ qlooEntityId: f.fixtureId,
   fixtureId: f.fixtureId, verified: true, evidenceRef: 'synthetic-unit-binding' })) });
+const { assembleConcierge, selectSeeds } = concierge;
+const updatePreferences = createUpdatePreferences(concierge);
 const brief = (): Brief => ({ cityId: 'athens', seeds: [{ kind: 'movie', text: 'Unit Film' }],
   diningPreference: 'quiet', attractionPreference: 'history', constraints: { radiusMeters: 3000, excludedVenueRefs: [] } });
 

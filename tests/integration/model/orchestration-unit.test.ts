@@ -3,8 +3,8 @@ import type { Brief, Category } from '../../../src/contracts/concierge';
 import type { PracticalFixture } from '../../../src/contracts/server';
 import type { QlooClient } from '../../../src/server/qloo/client';
 import type { ModelService, RankedFixture } from '../../../src/server/model/responses';
-import { configureConcierge, assembleConcierge } from '../../../src/server/concierge/assemble';
-import { updatePreferences } from '../../../src/server/concierge/update';
+import { createConcierge } from '../../../src/server/concierge/assemble';
+import { createUpdatePreferences } from '../../../src/server/concierge/update';
 import { SessionStore } from '../../../src/server/session/store';
 import { ATHENS_ORIGIN } from '../../../src/server/practical/origin';
 
@@ -49,9 +49,11 @@ test('model receives preferences and actual ordinals after Qloo phase; edit pres
       return { status: 'unavailable', reason: 'model-unavailable' };
     },
   };
-  configureConcierge({ client, model, fixtures, bindings: fixtures.map(fixture => ({
+  const concierge = createConcierge({ client, model, fixtures, bindings: fixtures.map(fixture => ({
     qlooEntityId: `private-${fixture.fixtureId}`, fixtureId: fixture.fixtureId, verified: true, evidenceRef: 'unit-binding',
   })) });
+  const { assembleConcierge } = concierge;
+  const updatePreferences = createUpdatePreferences(concierge);
   const brief: Brief = { cityId: 'athens', seeds: [{ kind: 'movie', text: 'Synthetic Film' }],
     diningPreference: 'quiet', attractionPreference: 'history', constraints: { radiusMeters: 900, excludedVenueRefs: [] } };
   const store = new SessionStore(); const session = store.create()!;

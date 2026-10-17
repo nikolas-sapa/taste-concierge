@@ -9,3 +9,4 @@ test-results/
 private-evidence/
 coverage/
 work/
+.vercel

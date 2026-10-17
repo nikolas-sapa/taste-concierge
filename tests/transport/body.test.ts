@@ -49,3 +49,18 @@ test('20 pending readers admitted, reader 21 rejected; all slots release on abor
   expect(await readJsonBody(new Request('http://localhost', { method: 'POST', body: '{}' })))
     .toEqual({ ok: true, value: {} });
 });
+
+test('distributed lease acquisition consumes the same 5s body budget', async () => {
+  vi.useFakeTimers();
+  try {
+    const limiter = { acquire: async () => {
+      await new Promise(resolve => setTimeout(resolve, 4900));
+      return 'synthetic-lease';
+    }, release: vi.fn(async () => {}) };
+    const request = new Request('http://localhost', { method: 'POST', body: new ReadableStream(), duplex: 'half' } as RequestInit);
+    const result = readJsonBody(request, limiter);
+    await vi.advanceTimersByTimeAsync(5001);
+    expect(await result).toEqual({ ok: false, error: 'body-timeout' });
+    expect(limiter.release).toHaveBeenCalledExactlyOnceWith('synthetic-lease');
+  } finally { vi.useRealTimers(); }
+});
