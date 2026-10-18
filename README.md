@@ -2,7 +2,9 @@
 
 An Athens concierge for boutique hotels and small travel businesses. Guests supply cultural tastes and preferences; genuine Qloo results carry explicitly sourced city, category and coordinate facts. Independently bound venues retain independent evidence; genuinely unbound venues can use fields Qloo actually reports.
 
-Development build. Qloo authentication, response shapes and three two-category coverage probes were verified separately. Those probes are preparation evidence, not successful application journeys. Four private identity bindings cover one dining venue and three museums; wider profile coverage remains unverified. Provider numeric quotas and other prior provider usage remain unknown. Hosted admission supports a separate finite application allowance without claiming those limits are known. Missing allowance, credential or binding configuration returns unavailable. No successful hackathon acceptance target is claimed.
+Hosted development demo: https://taste-concierge-athens.vercel.app. Evaluated application code: `305ff5b`. Nine of ten frozen profiles produced both categories, with all 36 displayed venues linked to real captured Qloo responses; the tenth needs a venue choice. Three cross-domain API journeys and five preference dependency updates passed. Nineteen constraint replay cases passed; source-field expiry remains unsupported (C16 blocked). Five controlled server outage cases passed. These results do not establish recommendation quality or a completed submission.
+
+Generic model comparison and free-text preference interpretation remain unavailable while model access is disabled. Dependency refresh may preserve the same Qloo ranking. Provider numeric quotas and other prior provider usage remain unknown. Hosted admission uses a finite application allowance without claiming those limits are known. Missing allowance, credential or binding configuration returns unavailable.
 
 Tests distinguish synthetic provider behavior, actual PostgreSQL persistence and genuine external acceptance. A passing offline suite or database canary does not establish a successful Qloo itinerary or model comparison. Paid live inference remains disabled.
 
@@ -63,7 +65,7 @@ flowchart LR
   Model --> Result
 ```
 
-Evaluation preflight reports missing evidence explicitly. Synthetic geometry/fault/unit checks are separate from live acceptance. A hosted demo, real grounded journeys, human paired ratings and anonymous release checks remain pending.
+Evaluation preflight reports missing evidence explicitly. `npm run evaluate` is an offline preparation check, separate from the dated actual observations in `evaluation/genuine-summary.json`. Retained real-response replay, controlled faults and live HTTP journeys are labeled separately. Paired model outputs, independent human ratings and the five complete anonymous browser/comparison journeys remain pending. No measured quality improvement is claimed.
 
 ## Licensing
 

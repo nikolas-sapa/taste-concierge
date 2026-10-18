@@ -1,0 +1,407 @@
+{
+  "schemaVersion": 1,
+  "mode": "measured-development-snapshot",
+  "recordedAt": "2026-10-18T11:11:00.050Z",
+  "evaluatedReleaseCommit": "305ff5ba85abff43704afa3de9fd30289c2c2958",
+  "demoUrl": "https://taste-concierge-athens.vercel.app",
+  "submissionStatus": "not-submitted",
+  "passedTargets": 3,
+  "totalTargets": 7,
+  "targets": [
+    {
+      "id": "T1",
+      "requiredCases": 10,
+      "observedCases": 10,
+      "passedCases": 9,
+      "failedCases": 1,
+      "blockedCases": 0,
+      "status": "failed",
+      "scope": "Live frozen P01-P10 HTTP journeys. P10 requires disambiguation under predeclared unique-title selection rule; failure retained."
+    },
+    {
+      "id": "T2",
+      "requiredCases": 20,
+      "observedCases": 19,
+      "passedCases": 19,
+      "failedCases": 0,
+      "blockedCases": 1,
+      "status": "incomplete",
+      "scope": "Retained actual-response constraint replay plus labeled source/state faults. C16 source expiry has no implemented contract."
+    },
+    {
+      "id": "T3",
+      "requiredCases": 3,
+      "observedCases": 3,
+      "passedCases": 3,
+      "failedCases": 0,
+      "blockedCases": 0,
+      "status": "passed",
+      "scope": "Real film, artist and combined-input API journeys; combined journey includes E05 edit. Search membership, response integrity and both-category provenance verified privately."
+    },
+    {
+      "id": "T4",
+      "requiredCases": 10,
+      "observedCases": 0,
+      "passedCases": 0,
+      "failedCases": 0,
+      "blockedCases": 10,
+      "status": "blocked",
+      "scope": "No model inference, paired outputs or independent human ratings."
+    },
+    {
+      "id": "T5",
+      "requiredCases": 5,
+      "observedCases": 5,
+      "passedCases": 5,
+      "failedCases": 0,
+      "blockedCases": 0,
+      "status": "passed",
+      "scope": "Live E01-E05 dependency refresh, preserved constraints and session restore. Free-text interpretation unavailable with model disabled."
+    },
+    {
+      "id": "T6",
+      "requiredCases": 5,
+      "observedCases": 0,
+      "passedCases": 0,
+      "failedCases": 0,
+      "blockedCases": 5,
+      "status": "blocked",
+      "scope": "Five full anonymous browser/comparison journeys remain incomplete. Separate one-session real browser canary is not substituted."
+    },
+    {
+      "id": "T7",
+      "requiredCases": 5,
+      "observedCases": 5,
+      "passedCases": 5,
+      "failedCases": 0,
+      "blockedCases": 0,
+      "status": "passed",
+      "scope": "Controlled server fault injection only:401,native15-second timeout,429,5xx,network. Not observed provider outages."
+    }
+  ],
+  "profiles": [
+    {
+      "id": "P01",
+      "status": "ready-both-categories-provenance-and-restore-passed",
+      "state": "ready",
+      "latencyMs": 14897,
+      "readyBothCategories": true,
+      "displayedCards": 4,
+      "provenancePassed": 4,
+      "restored": true,
+      "disambiguation": "not-needed"
+    },
+    {
+      "id": "P02",
+      "status": "ready-both-categories-provenance-and-restore-passed",
+      "state": "ready",
+      "latencyMs": 17845,
+      "readyBothCategories": true,
+      "displayedCards": 4,
+      "provenancePassed": 4,
+      "restored": true,
+      "disambiguation": "not-needed"
+    },
+    {
+      "id": "P03",
+      "status": "ready-both-categories-provenance-and-restore-passed",
+      "state": "ready",
+      "latencyMs": 15668,
+      "readyBothCategories": true,
+      "displayedCards": 4,
+      "provenancePassed": 4,
+      "restored": true,
+      "disambiguation": "not-needed"
+    },
+    {
+      "id": "P04",
+      "status": "ready-both-categories-provenance-and-restore-passed",
+      "state": "ready",
+      "latencyMs": 17517,
+      "readyBothCategories": true,
+      "displayedCards": 4,
+      "provenancePassed": 4,
+      "restored": true,
+      "disambiguation": "not-needed"
+    },
+    {
+      "id": "P05",
+      "status": "ready-both-categories-provenance-and-restore-passed",
+      "state": "ready",
+      "latencyMs": 15321,
+      "readyBothCategories": true,
+      "displayedCards": 4,
+      "provenancePassed": 4,
+      "restored": true,
+      "disambiguation": "not-needed"
+    },
+    {
+      "id": "P06",
+      "status": "ready-both-categories-provenance-and-restore-passed",
+      "state": "ready",
+      "latencyMs": 17267,
+      "readyBothCategories": true,
+      "displayedCards": 4,
+      "provenancePassed": 4,
+      "restored": true,
+      "disambiguation": "not-needed"
+    },
+    {
+      "id": "P07",
+      "status": "ready-both-categories-provenance-and-restore-passed",
+      "state": "ready",
+      "latencyMs": 19460,
+      "readyBothCategories": true,
+      "displayedCards": 4,
+      "provenancePassed": 4,
+      "restored": true,
+      "disambiguation": "not-needed"
+    },
+    {
+      "id": "P08",
+      "status": "ready-both-categories-provenance-and-restore-passed",
+      "state": "ready",
+      "latencyMs": 19150,
+      "readyBothCategories": true,
+      "displayedCards": 4,
+      "provenancePassed": 4,
+      "restored": true,
+      "disambiguation": "not-needed"
+    },
+    {
+      "id": "P09",
+      "status": "ready-both-categories-provenance-and-restore-passed",
+      "state": "ready",
+      "latencyMs": 27597,
+      "readyBothCategories": true,
+      "displayedCards": 4,
+      "provenancePassed": 4,
+      "restored": true,
+      "disambiguation": "not-needed"
+    },
+    {
+      "id": "P10",
+      "status": "failed",
+      "state": "needs-disambiguation",
+      "latencyMs": 6716,
+      "readyBothCategories": false,
+      "displayedCards": 0,
+      "provenancePassed": 0,
+      "restored": true,
+      "disambiguation": "unresolved-no-unique-exact-match"
+    }
+  ],
+  "profileFacts": {
+    "qlooReported": 102,
+    "independent": 6
+  },
+  "constraints": [
+    {
+      "id": "C01",
+      "status": "passed"
+    },
+    {
+      "id": "C02",
+      "status": "passed"
+    },
+    {
+      "id": "C03",
+      "status": "passed"
+    },
+    {
+      "id": "C04",
+      "status": "passed"
+    },
+    {
+      "id": "C05",
+      "status": "passed"
+    },
+    {
+      "id": "C06",
+      "status": "passed"
+    },
+    {
+      "id": "C07",
+      "status": "passed"
+    },
+    {
+      "id": "C08",
+      "status": "passed",
+      "controlledFault": "reported-coordinate-absent"
+    },
+    {
+      "id": "C09",
+      "status": "passed",
+      "controlledFault": "server-origin-null"
+    },
+    {
+      "id": "C10",
+      "status": "passed"
+    },
+    {
+      "id": "C11",
+      "status": "passed"
+    },
+    {
+      "id": "C12",
+      "status": "passed"
+    },
+    {
+      "id": "C13",
+      "status": "passed"
+    },
+    {
+      "id": "C14",
+      "status": "passed"
+    },
+    {
+      "id": "C15",
+      "status": "passed"
+    },
+    {
+      "id": "C16",
+      "status": "blocked",
+      "reason": "No source-field expiry/TTL contract or expiry clock; retrieval/session lifetime cannot substitute"
+    },
+    {
+      "id": "C17",
+      "status": "passed",
+      "controlledFault": "required-retrieval-provenance-missing"
+    },
+    {
+      "id": "C18",
+      "status": "passed",
+      "controlledFault": "independent-category-conflict-flag"
+    },
+    {
+      "id": "C19",
+      "status": "passed"
+    },
+    {
+      "id": "C20",
+      "status": "passed"
+    }
+  ],
+  "edits": [
+    {
+      "id": "E01",
+      "profile": "P01",
+      "status": "passed",
+      "affectedDependenciesRefreshed": true,
+      "unaffectedCategoriesPreserved": null,
+      "displayedCards": 4,
+      "provenancePassed": 4,
+      "restored": true
+    },
+    {
+      "id": "E02",
+      "profile": "P05",
+      "status": "passed",
+      "affectedDependenciesRefreshed": true,
+      "unaffectedCategoriesPreserved": null,
+      "displayedCards": 4,
+      "provenancePassed": 4,
+      "restored": true
+    },
+    {
+      "id": "E03",
+      "profile": "P01",
+      "status": "passed",
+      "affectedDependenciesRefreshed": true,
+      "unaffectedCategoriesPreserved": true,
+      "displayedCards": 4,
+      "provenancePassed": 4,
+      "restored": true
+    },
+    {
+      "id": "E04",
+      "profile": "P01",
+      "status": "passed",
+      "affectedDependenciesRefreshed": true,
+      "unaffectedCategoriesPreserved": true,
+      "displayedCards": 4,
+      "provenancePassed": 4,
+      "restored": true
+    },
+    {
+      "id": "E05",
+      "profile": "P08",
+      "status": "passed",
+      "affectedDependenciesRefreshed": true,
+      "unaffectedCategoriesPreserved": null,
+      "displayedCards": 4,
+      "provenancePassed": 4,
+      "restored": true
+    }
+  ],
+  "outages": [
+    {
+      "id": "O01",
+      "status": "passed",
+      "controlledFault": true,
+      "reason": "authentication",
+      "transportAttempts": 1,
+      "actualNetworkRequests": 0,
+      "nativeTimeoutRequestedMs": 15000
+    },
+    {
+      "id": "O02",
+      "status": "passed",
+      "controlledFault": true,
+      "reason": "timeout",
+      "transportAttempts": 1,
+      "actualNetworkRequests": 0,
+      "nativeTimeoutRequestedMs": 15000
+    },
+    {
+      "id": "O03",
+      "status": "passed",
+      "controlledFault": true,
+      "reason": "rate-limit",
+      "transportAttempts": 1,
+      "actualNetworkRequests": 0,
+      "nativeTimeoutRequestedMs": 15000
+    },
+    {
+      "id": "O04",
+      "status": "passed",
+      "controlledFault": true,
+      "reason": "upstream",
+      "transportAttempts": 1,
+      "actualNetworkRequests": 0,
+      "nativeTimeoutRequestedMs": 15000
+    },
+    {
+      "id": "O05",
+      "status": "passed",
+      "controlledFault": true,
+      "reason": "network",
+      "transportAttempts": 1,
+      "actualNetworkRequests": 0,
+      "nativeTimeoutRequestedMs": 15000
+    }
+  ],
+  "separateBrowserCanary": {
+    "sessions": 1,
+    "core": "passed",
+    "diningEdit": "passed",
+    "attractionsPreserved": true,
+    "reloadRestore": "passed",
+    "desktopViewportWidth": 1440,
+    "mobileViewportWidth": 390,
+    "horizontalOverflowPixels": 0,
+    "consoleErrors": 0,
+    "visualInspection": "two private screenshots, no material issues",
+    "modelComparison": "unavailable"
+  },
+  "modelInferenceCalls": 0,
+  "independentHumanRatings": 0,
+  "qualityImprovement": null,
+  "privacy": "Aggregate observations only. Raw Qloo responses, provider identifiers, digests, session state, screenshots and credentials retained privately.",
+  "limitations": [
+    "Candidate and fact pools differ between prospective treatment and generic baseline; no isolated-affinity causation claim.",
+    "No completed paired model comparison or quality improvement claim.",
+    "Hours, prices, allergy safety, availability and current operation remain unknown.",
+    "Provider quotas and prior usage remain unknown; finite application allowance is not a provider quota."
+  ]
+}
