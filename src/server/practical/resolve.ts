@@ -18,9 +18,10 @@ export function usableFixture(fixture: PracticalFixture): boolean {
   try { return ['http:', 'https:'].includes(new URL(fixture.sourceUrl).protocol); } catch { return false; }
 }
 export function fixtureOption(fixture: PracticalFixture): PracticalOption {
+  const coordinates = fixture.coordinates && { latitude: fixture.coordinates.latitude, longitude: fixture.coordinates.longitude };
   return { fixtureRef: fixture.fixtureId, name: fixture.name, category: fixture.category!, cityId: 'athens',
-    coordinates: fixture.coordinates!, practicalFacts: (['city', 'category', 'coordinates'] as const).map(field => ({
-      field, source: 'independent', value: field === 'city' ? fixture.cityId : field === 'category' ? fixture.category : fixture.coordinates,
+    coordinates: coordinates!, practicalFacts: (['city', 'category', 'coordinates'] as const).map(field => ({
+      field, source: 'independent', value: field === 'city' ? fixture.cityId : field === 'category' ? fixture.category : coordinates,
       sourceUrl: fixture.sourceUrl, sourceRevision: fixture.sourceRevision, retrievedAt: fixture.retrievedAt, status: fixture.verification })) };
 }
 /** Known independent bindings never escape their validation failures through Qloo fallback. */
