@@ -2,9 +2,10 @@ import { expect, test } from 'vitest';
 import type { Brief, Category } from '../../src/contracts/concierge';
 import type { InternalCandidate, PracticalFixture, SessionState } from '../../src/contracts/server';
 import { normalizeRecommendations } from '../../src/server/qloo/normalize';
-import { resolvePracticalOption, fixtureOption } from '../../src/server/practical/resolve';
+import { resolvePracticalOption, fixtureOption, usableFixture } from '../../src/server/practical/resolve';
 import { ATHENS_ORIGIN } from '../../src/server/practical/origin';
 import { validateSelections, eligibleFixtures } from '../../src/server/model/validation';
+import { baselineCards } from '../../src/server/model/baseline';
 import { buildModelRequest } from '../../src/server/model/responses';
 import { decodeSessionEnvelope, encodeSessionEnvelope } from '../../src/server/persistence/codec';
 import { loadPracticalFixtures } from '../../src/server/practical';
@@ -87,3 +88,52 @@ test('RF07: codec v2 mixed facts, eight invalid shapes, explicit independent-onl
 });
 
 test('RF08: independent public fixture inventory stays 39 (4 dining/35 attractions)', () => { const fixtures = loadPracticalFixtures(); expect(fixtures).toHaveLength(39); expect(fixtures.filter(f => f.category === 'dining')).toHaveLength(4); expect(fixtures.filter(f => f.category === 'attractions')).toHaveLength(35); });
+
+test('RF07: every usable real independent fixture projects coordinates and survives ready-session codec round trip', () => {
+  const realFixtures = loadPracticalFixtures().filter(usableFixture);
+  const dining = realFixtures.find(f => f.category === 'dining')!;
+  const attractions = realFixtures.find(f => f.category === 'attractions')!;
+  expect(realFixtures.some(f => Object.keys(f.coordinates!).length > 2)).toBe(true);
+  for (const real of realFixtures) {
+    const option = fixtureOption(real);
+    const card = (f: PracticalFixture) => ({ ref: `synthetic-${f.category}`, name: f.name, category: f.category!, source: 'qloo' as const,
+      interpretation: 'Synthetic codec regression using actual independent facts', practicalFacts: fixtureOption(f).practicalFacts,
+      limitations: ['Operational facts remain unknown'], retrievedAt: evidence.retrievedAt });
+    const state: SessionState = { revision: 0, brief, resolved: null, pending: new Map(), venues: new Map(),
+      result: { state: 'ready', revision: 1, items: { dining: { primary: card(real.category === 'dining' ? real : dining), alternative: null },
+        attractions: { primary: card(real.category === 'attractions' ? real : attractions), alternative: null } }, baseline: { status: 'unavailable', reason: 'model-unavailable' } },
+      expiresAt: Date.now() + 10000, operationFence: null };
+    expect(() => encodeSessionEnvelope(state)).not.toThrow();
+    expect(decodeSessionEnvelope(encodeSessionEnvelope(state))).toEqual(state);
+    expect(Object.keys(option.coordinates).sort()).toEqual(['latitude', 'longitude']);
+    expect(option.coordinates).toEqual({ latitude: real.coordinates!.latitude, longitude: real.coordinates!.longitude });
+    expect(option.practicalFacts.find(f => f.field === 'coordinates')!.value).toEqual(option.coordinates);
+    expect(option.practicalFacts.every(f => f.source === 'independent' && f.sourceRevision === real.sourceRevision && f.sourceUrl === real.sourceUrl && f.retrievedAt === real.retrievedAt)).toBe(true);
+  }
+});
+
+test('RF08: real 39-fixture inventory yields 38 usable baseline fixtures with codec-safe facts', () => {
+  const inventory = loadPracticalFixtures(); const usable = inventory.filter(usableFixture);
+  expect(inventory).toHaveLength(39); expect(usable).toHaveLength(38);
+  expect(usable.filter(f => Object.keys(f.coordinates!).length > 2)).toHaveLength(25);
+  for (const real of usable) {
+    const pair = (['dining', 'attractions'] as Category[]).map(category =>
+      real.category === category ? real : usable.find(f => f.category === category)!);
+    const cards = baselineCards(pair.map((f, index) => ({ fixtureRef: f.fixtureId, category: f.category!, role: 'primary',
+      order: index === 0 ? 1 : 2, reasonCodes: ['source-category', 'within-radius'] })), inventory, evidence.retrievedAt);
+    const state: SessionState = { revision: 0, brief, resolved: null, pending: new Map(), venues: new Map(),
+      result: { state: 'ready', revision: 1, items: { dining: { primary: { ...cards[0], source: 'qloo' }, alternative: null },
+        attractions: { primary: { ...cards[1], source: 'qloo' }, alternative: null } },
+        baseline: { status: 'ready', model: 'synthetic-renderer-regression', items: cards } },
+      expiresAt: Date.now() + 10000, operationFence: null };
+    expect(() => encodeSessionEnvelope(state)).not.toThrow();
+    expect(decodeSessionEnvelope(encodeSessionEnvelope(state))).toEqual(state);
+    cards.forEach((card, index) => {
+      const selected = pair[index];
+      expect(card.source).toBe('generic-llm');
+      expect(card.practicalFacts).toEqual(fixtureOption(selected).practicalFacts);
+      expect(card.practicalFacts.find(f => f.field === 'coordinates')!.value).toEqual({ latitude: selected.coordinates!.latitude, longitude: selected.coordinates!.longitude });
+      expect(card.practicalFacts.every(f => f.source === 'independent' && f.sourceRevision === selected.sourceRevision && f.sourceUrl === selected.sourceUrl && f.retrievedAt === selected.retrievedAt)).toBe(true);
+    });
+  }
+});
